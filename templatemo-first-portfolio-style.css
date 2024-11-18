@@ -578,8 +578,7 @@ strong {
   margin-right: 10px;
   align-items: center;
   text-align: center;
-  display: inline-block;
-  vertical-align: middle;
+  display: flex;
 }
 
 .profile-body p {
