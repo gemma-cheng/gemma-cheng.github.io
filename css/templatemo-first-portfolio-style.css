@@ -309,6 +309,12 @@ strong {
 	background-color: var(--secondary-color);
 }
 
+.conference-item .custom-btn {
+    display: inline-block; /* This is the key change */
+    margin: 10px auto; /* Centers the button with equal spacing */
+    text-align: center;
+    padding: 8px 16px; /* Matches co-authors button spacing */
+}
 
 /*---------------------------------------
   NAVIGATION              
