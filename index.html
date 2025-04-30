@@ -32,14 +32,21 @@
 .conference-item.visible {
     display: block; /* Show only selected items */
 }
-	
-.conference-item .custom-btn {
-    display: block;
-    margin: 10px auto; /* Centers the button with equal spacing */
-    text-align: center;
-    padding: 8px 16px; /* Matches co-authors button spacing */
+
+.conference-item .projects-thumb {
+    /* Optional: Add some padding or margin to the projects-thumb itself if needed for spacing */
 }
+
+.conference-item .custom-btn,
+.conference-item .custom-border-btn { /* Target both custom button types */
+    display: inline-block;
+    margin: 10px; /* Use a fixed margin instead of auto */
+    text-align: center;
+    padding: 8px 16px;
+}
+	
 </style>
+
     </head>
     
     <body>
@@ -276,6 +283,7 @@
                                     <h3 class="projects-title">GUCDS VI: Spectral Types and Properties of 51 Ultracool Dwarfs</h3>
 				</div>
                                 <a href="ui.adsabs.harvard.edu/abs/2025arXiv250308514C/" target="_blank" class="custom-btn custom-border-btn btn mt-3">View on ADS</a>
+				<p></p>
                                 <a class="image">
                                     <img src="images/gucds-vi.png" class="projects-image img-fluid" alt="">
                                 </a>
