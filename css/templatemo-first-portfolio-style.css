@@ -964,6 +964,26 @@ strong {
   color: var(--white-color);
 }
 
+.social-icon-link.my-orcid {
+    background-image: url('../images/orcid.svg');
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    line-height: 0;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
+.social-icon-link.nasa-ads {
+    background-image: url('../images/untitled.png');
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: center;
+    line-height: 0;
+    text-indent: -9999px;
+    overflow: hidden;
+}
+
 
 /*---------------------------------------
   RESPONSIVE STYLES               
