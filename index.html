@@ -26,7 +26,6 @@
     overflow-x: scroll; /* Enable horizontal scrolling */
     -webkit-overflow-scrolling: touch; /* Improves scrolling on iOS */
     padding-bottom: 20px; /* Space for consistent bottom margin (even if scrollbar is hidden) */
-    /* NO scroll-snap-type here as we removed it for smoother JS looping */
 
     /* Hide the scrollbar visually */
     scrollbar-width: none; /* Firefox */
@@ -42,27 +41,26 @@
 #conference-list {
     display: flex; /* Use Flexbox */
     flex-wrap: nowrap; /* Prevent items from wrapping to the next line */
-    gap: var(--current-carousel-gap); /* Use CSS variable for consistency */
+    gap: 30px; /* This is the *gap between columns*, not distributed. */
 }
 
 /* Individual conference item for scrolling */
 .conference-scroll-item {
     flex: 0 0 auto; /* Allow flex-basis to dictate exact width, prevent shrinking/growing */
     box-sizing: border-box; /* Includes padding in width calculation */
-    /* We handle snapping via JS for precise loop, so no scroll-snap-align needed here directly */
     min-width: 280px; /* Ensures a minimum width on smallest screens */
+    
+    /* Simulate Bootstrap column padding */
+    padding: 0 15px; 
 
     /* Default width for Desktop (mimics col-lg-4 behavior) */
-    /* Each item is 33.3333% of the container, minus a portion of the total gap space */
-    flex-basis: calc(33.3333% - (2 * var(--carousel-gap-desktop) / 3)); /* For 3 items & 2 gaps, distribute gap space */
-    max-width: calc(33.3333% - (2 * var(--carousel-gap-desktop) / 3));
+    flex-basis: 33.3333%; /* Each item takes 1/3 of the row's width before factoring in gap */
+    max-width: 33.3333%; 
 }
 
 /* Responsive adjustments */
 @media (max-width: 991.98px) { /* Tablets and smaller (mimics col-md-6 behavior) */
-    :root {
-        --current-carousel-gap: var(--carousel-gap-tablet); /* Override gap for tablets */
-    }
+    /* No change to --current-carousel-gap for now, as it's not used in flex-basis directly */
     .scroll-container-with-buttons {
         padding: 0 40px; /* Adjust padding for smaller buttons */
     }
@@ -71,15 +69,15 @@
         height: 40px;
         font-size: 1.4rem;
     }
-    /* For 2 items, there is 1 gap. */
-    flex-basis: calc(50% - (1 * var(--carousel-gap-tablet) / 2)); /* For 2 items & 1 gap, distribute gap space */
-    max-width: calc(50% - (1 * var(--carousel-gap-tablet) / 2));
+    /* For 2 items, it's 50% of the row */
+    .conference-scroll-item {
+        flex-basis: 50%;
+        max-width: 50%;
+    }
 }
 
 @media (max-width: 767.98px) { /* Mobile phones (mimics col-12 behavior) */
-    :root {
-        --current-carousel-gap: var(--carousel-gap-mobile); /* Override gap for mobile */
-    }
+    /* No change to --current-carousel-gap for now */
     .scroll-container-with-buttons {
         padding: 0 30px; /* Adjust padding for smallest screens */
     }
@@ -88,7 +86,7 @@
         height: 35px;
         font-size: 1.2rem;
     }
-    /* For 1 item, it takes the full width, no gap distribution needed */
+    /* For 1 item, it takes the full width. */
     .conference-scroll-item {
         flex-basis: 100%; /* Takes the full available width */
         max-width: 100%;
@@ -101,7 +99,7 @@
     display: flex;
     flex-direction: column;
     background-color: #ffffff; /* Explicit background for thumbs */
-    padding: 20px; /* This padding IS the internal padding of the card, just like Bootstrap column content */
+    padding: 20px; /* This is the internal padding of the card content */
     border-radius: 10px;
 }
 .conference-scroll-item .projects-info {
@@ -120,6 +118,15 @@
     padding: 8px 16px;
     flex-shrink: 0;
 }
+
+/* NEW: Center buttons within the projects-thumb, similar to original */
+/* This assumes your .projects-thumb is a flex container with column direction */
+.conference-scroll-item .projects-thumb .button-group {
+    text-align: center; /* Center inline-block buttons */
+    margin-bottom: 10px; /* Space below button group */
+}
+/* You might need to wrap your buttons in a div with this class if they aren't already grouped */
+
 
 /* Adjust spacing for the <p> tag and image within the card */
 .conference-scroll-item .projects-thumb p {
