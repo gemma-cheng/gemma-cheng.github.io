@@ -107,7 +107,6 @@
     display: flex; /* Use Flexbox */
     flex-wrap: nowrap; /* Prevent items from wrapping to the next line */
     gap: var(--current-carousel-gap); /* Use CSS variable for consistency */
-    padding-right: 15px; /* Optional: adds a little padding to the end of the scrollable list */
 }
 
 /* Individual conference item for scrolling */
@@ -712,7 +711,7 @@
         updateVisibleItems(); // Run on page load
     });
 
-document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function () {
         const scrollContainer = document.getElementById("conference-list-wrapper");
         const conferenceList = document.getElementById("conference-list");
         const scrollLeftBtn = document.querySelector(".scroll-button-left");
@@ -720,34 +719,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Basic check for existence of elements
         if (!scrollContainer || !conferenceList || !scrollLeftBtn || !scrollRightBtn) {
-            console.error("Missing one or more required DOM elements for the carousel.");
+            console.error("Missing one or more required DOM elements for the carousel. Skipping initialization.");
             return; // Stop execution if elements are not found
         }
 
         const originalItems = Array.from(conferenceList.children);
         const totalOriginalItems = originalItems.length;
 
-        // Hide buttons if there aren't enough items to scroll
+        // If there are no items, hide buttons and stop
         if (totalOriginalItems === 0) {
             scrollLeftBtn.style.display = 'none';
             scrollRightBtn.style.display = 'none';
+            console.warn("No original carousel items found. Carousel will not function.");
             return;
         }
+        
+        // --- Cloning Logic for Seamless Infinite Loop ---
+        // Strategy: Clone all original items and add them to both ends of the list.
+        // This ensures enough buffer for seamless transitions regardless of view size.
+        // Structure: [cloned_originals_from_end] + [original_items] + [cloned_originals_from_start]
 
-        // --- Determine the number of clones needed for seamless loop ---
-        // A common strategy is to clone a full set of original items to both ends.
-        // This makes the math for looping simpler.
-        const numClones = totalOriginalItems; 
-
-        // Clear existing children to re-populate with clones
-        conferenceList.innerHTML = ''; 
+        // Clear original items to re-populate precisely
+        conferenceList.innerHTML = '';
 
         // 1. Prepend clones: Add items from the END of the original list to the beginning.
+        // We iterate in reverse to maintain original order visually when prepended.
         for (let i = totalOriginalItems - 1; i >= 0; i--) {
             conferenceList.prepend(originalItems[i].cloneNode(true));
         }
         
-        // 2. Add original items: These will be the "main" visible content.
+        // 2. Add original items: These are the "main" visible content.
         originalItems.forEach(item => {
             conferenceList.appendChild(item.cloneNode(true));
         });
@@ -757,82 +758,101 @@ document.addEventListener("DOMContentLoaded", function () {
             conferenceList.appendChild(item.cloneNode(true));
         });
 
+        // The 'real' original content now starts at the index `totalOriginalItems`
+        const firstOriginalItemIndex = totalOriginalItems;
+        const lastOriginalItemIndex = firstOriginalItemIndex + totalOriginalItems - 1;
+
         // --- Helper function to get current gap value from CSS ---
         function getCurrentCssGap() {
-            // Get the computed style of the #conference-list to read the 'gap' property
             const computedStyle = window.getComputedStyle(conferenceList);
-            return parseFloat(computedStyle.gap); // Parse the pixel value
+            // Ensure gap is parsed as a number. If 'normal' or '0px', it will be 0.
+            return parseFloat(computedStyle.gap) || 0; 
         }
 
-        // --- Helper function to get the scroll step size (width of one item + its trailing gap) ---
+        // --- Helper function to get the precise scroll step size (width of one item + its trailing gap) ---
         function getItemScrollWidth() {
-            // Get the width of the first original item (now located after the prepended clones)
-            const firstRenderedOriginalItem = conferenceList.children[numClones];
-            if (!firstRenderedOriginalItem) {
-                console.error("First original item not found after cloning.");
-                return 0;
-            }
-            return firstRenderedOriginalItem.offsetWidth + getCurrentCssGap();
+            const item = conferenceList.children[firstOriginalItemIndex];
+            if (!item) return 0; // Fallback if items not ready
+            // use getBoundingClientRect().width for more accurate rendered width
+            return item.getBoundingClientRect().width + getCurrentCssGap();
         }
+
+        // --- Calculate Scroll Boundaries for the 'Real' Content ---
+        let realContentStartScroll = 0;
+        let realContentEndScroll = 0;
+
+        function calculateScrollBoundaries() {
+            let tempStartScroll = 0;
+            // Calculate sum of widths for all prepended clones + their gaps
+            for (let i = 0; i < firstOriginalItemIndex; i++) {
+                if (conferenceList.children[i]) {
+                    tempStartScroll += conferenceList.children[i].getBoundingClientRect().width + getCurrentCssGap();
+                }
+            }
+            realContentStartScroll = tempStartScroll;
+
+            // The end of the real content is its start + (total number of original items * effective width)
+            // Or sum widths of original items. This is safer.
+            let tempEndScroll = realContentStartScroll;
+            for (let i = firstOriginalItemIndex; i <= lastOriginalItemIndex; i++) {
+                 if (conferenceList.children[i]) {
+                    tempEndScroll += conferenceList.children[i].getBoundingClientRect().width + getCurrentCssGap();
+                 }
+            }
+            realContentEndScroll = tempEndScroll; // This is the point *after* the last original item
+            
+            // console.log("Boundaries Recalculated:", { realContentStartScroll, realContentEndScroll });
+        }
+        
+        // Initialize boundaries immediately after cloning
+        calculateScrollBoundaries();
 
         // --- Initial Scroll Position Setup ---
-        // Calculate the scroll position where the 'real' original content starts.
-        // It's the sum of the widths of all prepended clones plus their gaps.
-        let realContentStartScroll = 0;
-        for (let i = 0; i < numClones; i++) {
-            realContentStartScroll += conferenceList.children[i].offsetWidth;
-            if (i < numClones - 1) { // Add gap for all except the very last prepended clone
-                realContentStartScroll += getCurrentCssGap();
-            }
-        }
+        // Set the initial scroll position to the beginning of the actual original content block.
+        // This ensures the user starts viewing the "real" content, not the prepended clones.
+        scrollContainer.scrollLeft = realContentStartScroll;
         
-        scrollContainer.scrollLeft = realContentStartScroll; // Set initial scroll
-        
+        // Console logs for debugging initial state
         console.log("--- Carousel Initialized ---");
         console.log(`Original items: ${totalOriginalItems}`);
-        console.log(`Total items after cloning: ${conferenceList.children.length}`);
+        console.log(`Total DOM items after cloning: ${conferenceList.children.length}`);
         console.log(`Current CSS Gap: ${getCurrentCssGap()}px`);
-        console.log(`Calculated Item Scroll Width: ${getItemScrollWidth()}px`);
-        console.log(`Real content starts at (approx): ${realContentStartScroll}px`);
+        console.log(`Calculated Item Scroll Width (for buttons): ${getItemScrollWidth()}px`);
+        console.log(`Real content starts at (pixel): ${realContentStartScroll}px`);
+        console.log(`Real content ends at (pixel): ${realContentEndScroll}px`);
         console.log(`Initial scrollLeft set to: ${scrollContainer.scrollLeft}px`);
 
         let isProgrammaticScroll = false; // Flag to prevent re-triggering during internal scroll jumps
 
-        // --- Scroll Event Listener for Infinite Looping Logic ---
+        // --- Scroll Event Listener for Seamless Infinite Looping ---
         scrollContainer.addEventListener("scroll", function () {
             if (isProgrammaticScroll) return; // Ignore if scroll was initiated by our script
 
             const currentScrollLeft = scrollContainer.scrollLeft;
-            const scrollWidth = scrollContainer.scrollWidth;
-            const clientWidth = scrollContainer.clientWidth;
-
-            // Recalculate 'real' content boundaries on the fly, as widths might change on resize
-            const currentItemScrollWidth = getItemScrollWidth();
-            const currentRealContentStartScroll = numClones * currentItemScrollWidth;
-            // The end of the real content is its start + (total number of original items * effective width)
-            const currentRealContentEndScroll = currentRealContentStartScroll + (totalOriginalItems * currentItemScrollWidth);
-            
-            // console.log(`Current Scroll: ${currentScrollLeft}, Start: ${currentRealContentStartScroll}, End: ${currentRealContentEndScroll}`);
-
 
             // If scrolled past the end of the "real" content (into the appended clones)
-            if (currentScrollLeft >= currentRealContentEndScroll) {
-                isProgrammaticScroll = true;
-                // Jump back to the start of the "real" content, plus any overflow amount
-                scrollContainer.scrollLeft = currentRealContentStartScroll + (currentScrollLeft - currentRealContentEndScroll);
-                // console.log(`Jumped from end to start: ${scrollContainer.scrollLeft}`);
+            // currentScrollLeft will be >= realContentEndScroll
+            if (currentScrollLeft >= realContentEndScroll - (getItemScrollWidth() / 2)) { // Add a buffer for triggering earlier
+                isProgrammaticScroll = true; // Mark as programmatic scroll
+                
+                // Calculate the amount the user scrolled *past* the real content end
+                const overshoot = currentScrollLeft - realContentEndScroll;
+                // Jump back to the start of the "real" content, plus that overshoot
+                scrollContainer.scrollLeft = realContentStartScroll + overshoot;
+                
+                // console.log(`Seamless Jump: End -> Start. From ${currentScrollLeft} to ${scrollContainer.scrollLeft}`);
             }
             // If scrolled before the start of the "real" content (into the prepended clones)
-            else if (currentScrollLeft <= 0) { // This condition is often problematic, prefer < realContentStartScroll
-            // Or even better: if currentScrollLeft <= a few pixels past the prepended block
-            // However, with `scroll-snap-type`, it often snaps to exactly 0 after the last prepended item.
-            // Let's use `currentScrollLeft < currentRealContentStartScroll - (currentItemScrollWidth / 2)` as a more robust trigger.
-            // Simplified for now based on full prepended block scroll:
-            // if (currentScrollLeft < currentRealContentStartScroll) { // This could trigger too early if you're just at the start of prepended items
-                isProgrammaticScroll = true;
-                // Jump forward to the end of the "real" content, minus any overflow amount
-                scrollContainer.scrollLeft = currentRealContentEndScroll - (currentRealContentStartScroll - currentScrollLeft);
-                // console.log(`Jumped from start to end: ${scrollContainer.scrollLeft}`);
+            // currentScrollLeft will be < realContentStartScroll
+            else if (currentScrollLeft <= (getItemScrollWidth() / 2)) { // Trigger when near the beginning of prepended items
+                isProgrammaticScroll = true; // Mark as programmatic scroll
+                
+                // Calculate how much the user scrolled *before* the real content start
+                const undershoot = realContentStartScroll - currentScrollLeft;
+                // Jump forward to the end of the "real" content, minus that undershoot
+                scrollContainer.scrollLeft = realContentEndScroll - undershoot;
+                
+                // console.log(`Seamless Jump: Start -> End. From ${currentScrollLeft} to ${scrollContainer.scrollLeft}`);
             }
 
             // After a jump, reset the programmatic scroll flag after a short delay
@@ -848,7 +868,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 left: getItemScrollWidth(), // Scroll by one item's effective width
                 behavior: "smooth",
             });
-             console.log("Scrolling right. Step:", getItemScrollWidth());
+            // console.log("Scrolling right. Step:", getItemScrollWidth());
         });
 
         scrollLeftBtn.addEventListener("click", function () {
@@ -856,19 +876,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 left: -getItemScrollWidth(), // Scroll back by one item's effective width
                 behavior: "smooth",
             });
-            console.log("Scrolling left. Step:", -getItemScrollWidth());
+            // console.log("Scrolling left. Step:", -getItemScrollWidth());
         });
 
         // --- Handle Resize Events ---
         window.addEventListener('resize', function() {
-            // On resize, recalculate initial scroll position and jump there
+            // When the window is resized, item widths and scroll positions might change.
+            // We need to recalculate boundaries and jump back to the 'real' content.
             isProgrammaticScroll = true;
             scrollContainer.style.scrollBehavior = 'auto'; // Temporarily disable smooth scroll for the jump
             
-            // Recalculate start position based on new item widths
-            const newRealContentStartScroll = numClones * getItemScrollWidth();
-            scrollContainer.scrollLeft = newRealContentStartScroll;
-            console.log(`Resized: Jumped to ${scrollContainer.scrollLeft}px`);
+            // Recalculate all boundaries based on new resized widths
+            calculateScrollBoundaries();
+            scrollContainer.scrollLeft = realContentStartScroll;
+            // console.log(`Resized: Jumped to new start: ${scrollContainer.scrollLeft}px`);
 
             // Re-enable smooth scroll after a slight delay
             setTimeout(() => {
