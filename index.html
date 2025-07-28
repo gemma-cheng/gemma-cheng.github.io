@@ -31,7 +31,7 @@
 .scroll-container-with-buttons {
     position: relative;
     /* Explicitly set max-width for the entire carousel section to align it */
-    /* This should match the max-width of your main content container (.container) */
+    /* THIS IS CRUCIAL: Match the max-width of your main content container (.container) */
     max-width: 1200px; /* Adjust this to match your site's .container max-width */
     margin-left: auto;
     margin-right: auto;
@@ -40,6 +40,7 @@
     padding-left: 50px; 
     padding-right: 50px;
 }
+
 
 /* Styles for the scroll navigation buttons */
 .scroll-button {
@@ -59,7 +60,7 @@
     color: #333;
     z-index: 10;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    transition: background-color 0.3s, color 0.3s;
+    transition: all 0.3s ease; /* Use all for smoother transitions */
     outline: none;
 }
 
@@ -96,33 +97,40 @@
     flex-wrap: nowrap;
     gap: var(--current-carousel-gap); /* This is the gap between the .conference-scroll-item elements */
     
-    /* Remove any implicit padding or margins that might affect the 100% width calculation */
-    padding: 0; 
-    margin: 0;
+    /* Ensure no implicit padding/margin on the flex container itself */
+    padding: 0 !important; /* Added !important */
+    margin: 0 !important; /* Added !important */
 }
 
 /* Individual conference item for scrolling */
 .conference-scroll-item {
-    flex: 0 0 auto; /* Allow flex-basis to dictate exact width, prevent shrinking/growing */
-    box-sizing: border-box; /* Includes padding in width calculation */
-    min-width: 280px; /* Ensures a minimum width on smallest screens */
+    flex: 0 0 auto !important; /* Added !important */
+    box-sizing: border-box !important; /* Added !important */
+    min-width: 280px !important; /* Added !important */
     
-    /* The core width strategy: */
-    /* On desktop, aim for a fixed pixel width that matches your "My Papers" items.
-       Then, add the 15px Bootstrap-like column padding to this item. */
-    width: 380px; /* Example target width, you may need to fine-tune this value */
-    padding: 0 15px; /* Simulates Bootstrap's col- padding around the inner content */
+    /* The core width strategy for Desktop (3 items) */
+    /* Target a fixed pixel width that aligns with your "My Papers" cards. */
+    /* THIS IS THE MOST CRITICAL LINE FOR WIDTH */
+    width: 380px !important; /* Added !important */
+    
+    /* Simulates Bootstrap's col- padding around the inner content */
+    padding: 0 15px !important; /* Added !important */
 }
 
 /* Responsive adjustments */
-@media (max-width: 1199.98px) { /* Breakpoint before 1200px container */
-    /* Assuming a typical Bootstrap setup, this is roughly where 3-column layouts transition */
+@media (max-width: 1199.98px) {
     .conference-scroll-item {
-        width: 32%; /* About 3 items per row, allowing for gaps */
-        /* Each item takes ~33.33% of the overall content area. */
-        /* (100% - 2*gap) / 3 will be handled by the flexbox layout, but item width should be this base % */
+        /* Adjust to percentages for more fluid scaling below fixed width */
+        width: calc(33.3333% - 30px) !important; /* For 3 items & 2 gaps, simple distribution */
+        /* Each item needs to be 1/3rd of the screen MINUS its share of the gap and its own padding.
+           (100% / 3) - (30px / 3) = 33.3333% - 10px; */
+           /* (Container width - total_gap) / num_items - 2*padding_per_item */
+        /* Let's try simplifying the calc: (100% of parent width / 3) - some fixed buffer */
+        /* Or let's stick to simple % and allow flexbox to figure out gap,
+           but ensure it uses the *outer* width, not content width */
     }
 }
+
 
 @media (max-width: 991.98px) { /* Tablets and smaller (mimics col-md-6 behavior) */
     :root {
@@ -137,10 +145,9 @@
         height: 40px;
         font-size: 1.4rem;
     }
-    /* For 2 items, it's 50% of the row */
-    .conference-scroll-item {
-        width: 49%; /* About 2 items per row, allowing for gap */
-    }
+    /* Tablet: 2 items visible */
+    width: calc(50% - 25px) !important; /* For 2 items & 1 gap */
+    /* (100% / 2) - (25px / 2) = 50% - 12.5px */
 }
 
 @media (max-width: 767.98px) { /* Mobile phones (mimics col-12 behavior) */
@@ -157,70 +164,70 @@
         font-size: 1.2rem;
     }
     /* Mobile: 1 item visible */
-    .conference-scroll-item {
-        width: 100%; /* Takes the full available width */
-    }
+    width: calc(100% - 20px) !important; /* Full width minus its own side padding */
 }
 
 /* Styles for the project cards inside the scroll items */
 .conference-scroll-item .projects-thumb {
-    height: 100%; /* Important for consistent height across items */
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffff;
-    padding: 20px; /* This is the INTERNAL padding of the card content */
-    border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
+    height: 100% !important; /* Added !important */
+    display: flex !important; /* Added !important */
+    flex-direction: column !important; /* Added !important */
+    background-color: #ffffff !important; /* Added !important */
+    padding: 20px !important; /* Added !important */
+    border-radius: 10px !important; /* Added !important */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05) !important; /* Added !important */
 }
 .conference-scroll-item .projects-info {
-    flex-shrink: 0;
-    margin-bottom: 10px;
+    flex-shrink: 0 !important; /* Added !important */
+    margin-bottom: 10px !important; /* Added !important */
 }
 .conference-scroll-item .projects-info .projects-title {
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.8rem !important; /* Added !important */
+    margin-bottom: 0.5rem !important; /* Added !important */
 }
+
 
 /* Adjust button layout for scroll items within the card */
 .conference-scroll-item .projects-thumb .button-group {
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    flex-shrink: 0;
+    text-align: center !important; /* Added !important */
+    margin-top: 10px !important; /* Added !important */
+    margin-bottom: 20px !important; /* Added !important */
+    flex-shrink: 0 !important; /* Added !important */
 }
 
 .conference-scroll-item .custom-btn,
 .conference-scroll-item .custom-border-btn {
-    display: inline-block;
-    margin: 5px 5px;
-    text-align: center;
-    padding: 8px 16px;
-    border-radius: 25px;
-    white-space: nowrap;
+    display: inline-block !important; /* Added !important */
+    margin: 5px 5px !important; /* Added !important */
+    text-align: center !important; /* Added !important */
+    padding: 8px 16px !important; /* Added !important */
+    border-radius: 25px !important; /* Added !important */
+    white-space: nowrap !important; /* Added !important */
 }
 
 /* Adjust spacing for the <p> tag and image within the card */
 .conference-scroll-item .projects-thumb p {
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 5px !important; /* Added !important */
+    margin-bottom: 5px !important; /* Added !important */
 }
 .conference-scroll-item .projects-thumb a.image {
-    display: block;
-    margin-top: auto;
-    padding-top: 15px;
-    flex-grow: 1;
-    text-align: center;
+    display: block !important; /* Added !important */
+    margin-top: auto !important; /* Added !important */
+    padding-top: 15px !important; /* Added !important */
+    flex-grow: 1 !important; /* Added !important */
+    text-align: center !important; /* Added !important */
 }
 .conference-scroll-item .projects-thumb .projects-image {
-    width: 90%; /* Make image slightly smaller than full width to show some padding */
-    height: auto;
-    display: inline-block;
-    object-fit: cover;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    width: 90% !important; /* Added !important */
+    height: auto !important; /* Added !important */
+    display: inline-block !important; /* Added !important */
+    object-fit: cover !important; /* Added !important */
+    border-radius: 8px !important; /* Added !important */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important; /* Added !important */
 }
 
 /* General Bootstrap overrides/fixes - Crucial to align with .container widths */
+/* Verify these .container max-width values from your actual Bootstrap setup */
 .container {
     max-width: 960px; /* Common desktop .container width */
 }
@@ -229,7 +236,6 @@
         max-width: 1140px; /* Typical larger desktop .container width */
     }
 }
-/* IMPORTANT: Verify these .container max-width values from your actual Bootstrap setup */
 
 /* Styles for social icons */
 #filt {
