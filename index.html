@@ -21,28 +21,63 @@
         <script src="js/magicscroll.js" type="text/javascript"></script>
 
 <style>
-#conference-list {
-    display: flex;
-    flex-wrap: wrap;
+/* Styles for the MagicScroll container */
+.MagicScroll {
+    white-space: nowrap; /* Ensures items stay in one line */
+    overflow-x: auto; /* Enables horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Improves scrolling on iOS */
+    padding-bottom: 20px; /* Add some padding for the scrollbar */
+    scrollbar-width: thin; /* Firefox scrollbar */
+    scrollbar-color: #888 #f1f1f1; /* Firefox scrollbar color */
 }
 
-.conference-item {
-    display: none;
+/* Custom scrollbar for Webkit browsers (Chrome, Safari) */
+.MagicScroll::-webkit-scrollbar {
+    height: 8px;
 }
 
-.conference-item.visible {
-    display: block;
+.MagicScroll::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
 }
 
-.conference-item .custom-btn,
-.conference-item .custom-border-btn {
-    display: inline-block; /* Set buttons to inline-block */
-    margin-bottom: -5px; /* Explicit bottom margin */
-    margin-left: 10px;  /* Keep horizontal margin */
-    margin-right: 10px; /* Keep horizontal margin */
-    text-align: center; /* Center the button text */
-    padding: 8px 16px; /* Maintain desired padding */
+.MagicScroll::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
 }
+
+.MagicScroll::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Styles for individual scrollable items */
+.conference-scroll-item {
+    display: inline-block; /* Display items side-by-side */
+    vertical-align: top; /* Align items to the top if their heights vary */
+    width: 380px; /* Set a fixed width for each item on desktop */
+    padding: 0 15px; /* Add horizontal padding between items */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 991.98px) { /* Tablets and smaller */
+    .conference-scroll-item {
+        width: 330px; /* Adjust width for smaller screens */
+    }
+}
+
+@media (max-width: 767.98px) { /* Mobile phones */
+    .conference-scroll-item {
+        width: 100%; /* Make items full width for very small screens,
+                         MagicScroll will still handle horizontal flow */
+    }
+}
+
+/* Ensure projects-thumb inside has consistent bottom margin */
+.conference-scroll-item .projects-thumb {
+    margin-bottom: 30px;
+}
+
 
 }
 </style>
@@ -323,7 +358,7 @@
 
             <!-- Conferences List -->
             <div id="conference-list" class="row">
-                <div class="col-lg-4 col-md-6 col-12 conference-item">
+                <div class="conference-scroll-iten">
                     <div class="projects-thumb">
                         <div class="projects-info">
                             <h3 class="projects-title">EAS 2025</h3>
@@ -335,7 +370,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 col-12 conference-item">
+                <div class="conference-scroll-iten">
                     <div class="projects-thumb">
                         <div class="projects-info">
                             <h3 class="projects-title">New Frontiers</h3>
@@ -348,7 +383,7 @@
                     </div>
                 </div>
 		    
-                <div class="col-lg-4 col-md-6 col-12 conference-item">
+                <div class="conference-scroll-iten">
                     <div class="projects-thumb">
                         <div class="projects-info">
                             <h3 class="projects-title">Cool Stars 22</h3>
@@ -362,7 +397,7 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-4 col-md-6 col-12 conference-item">
+                <div class="conference-scroll-iten">
                     <div class="projects-thumb">
                         <div class="projects-info">
                             <h3 class="projects-title">UH Lunch Talk</h3>
@@ -371,7 +406,7 @@
                     </div>
                 </div>
                 
-                <div class="col-lg-4 col-md-6 col-12 conference-item">
+                <div class="conference-scroll-iten">
                     <div class="projects-thumb">
                         <div class="projects-info">
                             <h3 class="projects-title">NAM 2023</h3>
@@ -382,7 +417,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 col-12 conference-item">
+                <div class="conference-scroll-iten">
                     <div class="projects-thumb">
                         <div class="projects-info">
                             <h3 class="projects-title">The Imitation Game</h3>
@@ -394,7 +429,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 col-12 conference-item">
+                <div class="conference-scroll-iten">
                     <div class="projects-thumb">
                         <div class="projects-info">
                             <h3 class="projects-title">UH Lunch Talk</h3>
@@ -404,13 +439,6 @@
                 </div>
                 
             </div>
-
-            <!-- Show More Button -->
-            <div class="text-center mt-3">
-                <button id="show-more-btn" class="custom-btn custom-border-btn btn">Show More</button>
-            </div>
-	    <div style="height: 50px;"></div>
-
         </div>
     </div>
 </section>
