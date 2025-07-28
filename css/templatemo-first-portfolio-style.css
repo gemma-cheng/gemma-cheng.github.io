@@ -40,6 +40,10 @@ https://templatemo.com/tm-578-first-portfolio
   --border-radius-medium:         20px;
   --border-radius-small:          10px;
 
+  --bs-gutter-x: 1.5rem; /* Standard Bootstrap horizontal gutter (30px) */
+  --bs-gutter-y: 0; 
+  --bs-border-radius: 0.5rem; /* Standard Bootstrap component border-radius (8px) */
+	
   --font-weight-normal:           400;
   --font-weight-medium:           500;
   --font-weight-bold:             700;
@@ -1198,35 +1202,26 @@ strong {
 }
 
 
-
-
 /*---------------------------------------
-  CAROUSEL               
+  CAROUSEL (Conferences & Talks)               
 -----------------------------------------*/
 
-/* Custom Carousel Styles - Final Attempt for Bootstrap Column Mimicry */
-
-/* Define CSS Variables for Gutters (Mimicking Bootstrap) */
-:root {
-    --bs-gutter-x: 1.5rem; /* Bootstrap's default horizontal gutter (30px) */
-    --bs-gutter-y: 0; /* No vertical gutter for columns in a row */
-    --bs-border-radius: 0.5rem; /* Bootstrap's default border-radius (8px) for cards/components */
-    --section-bg-color: #f8f8fa; /* Your light background color for comparison */
-}
-
-/* Ensure the entire section respects a max-width, matching your main .container */
-/* This is important for consistent horizontal alignment with other page content. */
+/* Ensure the entire section respects a max-width and background */
 #section_5 {
-    /* If your .container has a max-width, apply it here to align the carousel */
-    /* EXAMPLE VALUES - VERIFY AGAINST YOUR ACTUAL BOOTSTRAP CSS */
-    max-width: 1140px; /* Common for large desktop containers */
+    /* Use the global white-color for the section background, to contrast with cards */
+    background-color: var(--white-color); /* THIS FIXES THE BACKGROUND ISSUE */
+    
+    /* These values should align with your main .container. Verify them! */
+    max-width: 1140px; /* Example, match your site's largest .container max-width */
     margin-left: auto;
     margin-right: auto;
-    /* This section might also have a background color like #fff0f6 */
-    background-color: #fff0f6; /* Set to your specific section background if needed */
-    padding-top: 50px; /* Ensure sufficient spacing from header */
-    padding-bottom: 50px; /* Ensure sufficient spacing from footer */
+    padding-top: 75px; /* Use default section padding (section-padding) */
+    padding-bottom: 75px;
 }
+/* If section_5 already has .section-padding, you can remove padding-top/bottom here */
+/* For example, if you already have: <section class="projects section-padding-2" id="section_5"> */
+/* Then remove padding-top/bottom from #section_5 rule here. */
+
 
 /* Main wrapper for scrollable content and navigation buttons */
 .scroll-container-with-buttons {
@@ -1234,14 +1229,13 @@ strong {
     max-width: 100%; /* Take full width of parent #section_5 */
     margin: 0 auto; /* Center it */
     
-    /* Padding for buttons on the edges of this *carousel component* */
-    /* This padding will contain the actual scrollable row + the buttons */
+    /* Padding to make space for the buttons on the edges of this *carousel component* */
     padding-left: 50px; 
     padding-right: 50px;
-    box-sizing: border-box; /* Crucial for padding to not add to total width */
+    box-sizing: border-box; 
 }
 
-/* Styles for scroll buttons */
+/* Styles for scroll navigation buttons */
 .scroll-button {
     position: absolute;
     top: 50%;
@@ -1256,13 +1250,13 @@ strong {
     justify-content: center;
     cursor: pointer;
     font-size: 1.6rem;
-    color: #333;
+    color: var(--dark-color); /* Use your dark color for consistency */
     z-index: 10;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
     outline: none;
 }
-.scroll-button:hover { background-color: #eee; color: #000; }
+.scroll-button:hover { background-color: #eee; color: var(--secondary-color); } /* Hover color */
 .scroll-button-left { left: 0; }
 .scroll-button-right { right: 0; }
 
@@ -1284,21 +1278,20 @@ strong {
     display: flex;
     flex-wrap: nowrap; /* Items stay on one line */
     
-    /* Simulate Bootstrap .row negative horizontal margins to pull columns out */
+    /* Simulate Bootstrap .row negative horizontal margins */
     margin-left: calc(-1 * var(--bs-gutter-x) / 2); /* -0.75rem or -15px */
     margin-right: calc(-1 * var(--bs-gutter-x) / 2); /* -0.75rem or -15px */
     
-    /* No 'gap' property, as column padding will create the gutters */
-    gap: 0; 
+    gap: 0; /* No 'gap' property, spacing defined by column padding */
     padding: 0; /* Ensure no extra padding on this container */
 }
 
 /* Individual conference item - MIMICS BOOTSTRAP .col-* */
 .conference-scroll-item {
-    flex-grow: 0; /* Do not grow beyond flex-basis */
-    flex-shrink: 0; /* Do not shrink below flex-basis */
-    box-sizing: border-box; /* Padding is included in width calculation */
-    min-width: 280px; /* Safe fallback minimum width for smallest screens */
+    flex-grow: 0; /* Do not grow */
+    flex-shrink: 0; /* Do not shrink */
+    box-sizing: border-box; /* Padding is included in width */
+    min-width: 280px; /* Safe fallback minimum width */
     
     /* Bootstrap column padding (gutter) */
     padding-left: calc(var(--bs-gutter-x) / 2); /* 0.75rem or 15px */
@@ -1311,9 +1304,8 @@ strong {
 }
 
 /* Responsive adjustments for .conference-scroll-item */
-/* Note: Using 1200px and 992px based on standard Bootstrap breakpoints */
 @media (max-width: 1199.98px) { /* Adjust for smaller large desktops if needed */
-    /* No change needed unless you specifically define different percentages here */
+    /* No change needed here if you want it consistent with desktop-lg */
 }
 
 @media (max-width: 991.98px) { /* Tablets (col-md-6 equivalent: 2 items) */
@@ -1339,17 +1331,19 @@ strong {
     height: 100%; /* Important for consistent height across items */
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
+    background-color: #ffffff; /* Explicitly set card background to white */
     padding: 20px; /* Internal content padding (your desired card padding) */
-    border-radius: var(--bs-border-radius); /* Use Bootstrap's default border-radius */
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05); /* Match your screenshot's subtle shadow */
+    border-radius: var(--border-radius-medium); /* Use your defined medium radius (15px) */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05); /* Match screenshot's subtle shadow */
 }
+
+/* Card titles */
 .conference-scroll-item .projects-info {
     flex-shrink: 0;
-    margin-bottom: 10px; /* Space below title/info before buttons */
+    margin-bottom: 15px; /* Increased space below title/info before buttons, looks more like screenshot */
 }
 .conference-scroll-item .projects-info .projects-title {
-    font-size: 1.8rem; /* Adjust title size to match screenshot if needed */
+    font-size: var(--h3-font-size); /* Use a larger font size, like H3 (36px) or H4 (32px) */
     margin-bottom: 0.5rem; /* Space below title */
 }
 
@@ -1361,16 +1355,34 @@ strong {
     flex-shrink: 0;
 }
 
+/* Individual Buttons within cards */
 .conference-scroll-item .custom-btn,
 .conference-scroll-item .custom-border-btn {
     display: inline-block; /* Buttons side-by-side */
     margin: 5px 5px; /* Spacing between buttons, and top/bottom */
     text-align: center;
-    padding: 8px 16px;
-    border-radius: 25px; /* More rounded as in screenshot */
+    padding: 10px 20px; /* Increased padding for larger, rounded buttons */
+    border-radius: var(--border-radius-large); /* Very rounded like your screenshot (100px) */
     white-space: nowrap; /* Keep button text from wrapping */
-    font-size: 0.9rem; /* Adjust font size to fit buttons better if needed */
+    font-size: var(--p-font-size); /* Use paragraph font size for button text */
+    font-weight: var(--font-weight-bold); /* Bold text */
+    /* If you have different background/text colors for custom-btn vs custom-border-btn,
+       ensure those are applied from your main .custom-btn rules in the CSS */
+    background: var(--secondary-color); /* Pink background for buttons */
+    color: var(--dark-color); /* Dark text color */
 }
+/* Ensure the hover states also match your global custom-btn/custom-border-btn */
+.conference-scroll-item .custom-btn:hover,
+.conference-scroll-item .custom-border-btn:hover {
+    background: var(--primary-color); /* Greenish hover */
+    color: var(--white-color);
+}
+/* This might be needed if custom-border-btn has a transparent background globally */
+.conference-scroll-item .custom-border-btn {
+  border: 2px solid transparent; /* Keep border logic if it's a border-btn */
+  color: var(--white-color); /* Adjust text color as needed for border-btn */
+}
+
 
 /* Adjust spacing for the <p> tag and image within the card */
 .conference-scroll-item .projects-thumb p {
@@ -1389,47 +1401,19 @@ strong {
     height: auto;
     display: inline-block; /* Allows text-align: center on parent a.image */
     object-fit: cover;
-    border-radius: 8px; /* Slightly rounded image corners */
+    border-radius: var(--bs-border-radius); /* Use Bootstrap's default radius (8px) for images */
     box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow on image */
 }
 
-/* General Bootstrap overrides/fixes - Crucial to align with .container widths */
-/* IMPORTANT: Verify these .container max-width values from your actual Bootstrap setup */
-/* These values should come from your bootstrap.min.css or a variables file. */
-/* Using --bs-breakpoint-... variables is ideal if your template defines them */
-@media (min-width: 576px) { /* Small devices (sm) */
-    .container, .container-sm {
-        max-width: 540px;
-    }
-}
-@media (min-width: 768px) { /* Medium devices (md) */
-    .container, .container-md {
-        max-width: 720px;
-    }
-}
-@media (min-width: 992px) { /* Large devices (lg) */
-    .container, .container-lg {
-        max-width: 960px;
-    }
-}
-@media (min-width: 1200px) { /* Extra large devices (xl) */
-    .container, .container-xl {
-        max-width: 1140px;
-    }
-}
-@media (min-width: 1400px) { /* XXL devices (xxl) */
-    .container, .container-xxl {
-        max-width: 1320px;
-    }
-}
+/* Your global .container responsive values */
+/* Verify these against your bootstrap.min.css or template's source */
+@media (min-width: 576px) { .container, .container-sm { max-width: 540px; } }
+@media (min-width: 768px) { .container, .container-md { max-width: 720px; } }
+@media (min-width: 992px) { .container, .container-lg { max-width: 960px; } }
+@media (min-width: 1200px) { .container, .container-xl { max-width: 1140px; } }
+@media (min-width: 1400px) { .container, .container-xxl { max-width: 1320px; } }
 
 /* Styles for social icons (Keep your original #filt as is) */
 #filt {
     filter: invert(0%) sepia(100%) saturate(5500%) hue-rotate(260deg) brightness(68%) contrast(115%);
 }
-
-
-
-
-
-
