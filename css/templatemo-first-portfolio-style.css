@@ -1210,48 +1210,53 @@ strong {
 
 /* Define CSS Variables for Gutters (Mimicking Bootstrap) */
 :root {
-    --bs-gutter-x: 1.5rem; /* Standard Bootstrap horizontal gutter (30px) */
-    --bs-gutter-y: 0; /* No vertical gutter for columns in a row */
-    --bs-border-radius: 0.5rem; /* Bootstrap's default border-radius (8px) for cards/components */
+    --bs-gutter-x: 1.5rem; /* Bootstrap's default horizontal gutter (30px) */
+    --bs-gutter-y: 0;
+    --bs-border-radius: 0.5rem; /* Bootstrap's standard component border-radius (8px) */
     
-    /* Ensure these are your base colors: */
+    /* Global Colors (Ensure these are correct based on your overall theme) */
     --white-color:                  #f4f5ff; /* Main page background (pale blue/grey) */
-    --section-bg-color:             #fff0f6; /* THIS IS THE COLOR FOR YOUR CARDS/SECTION HEADERS (light pink) */
+    --primary-color:                #2ee63d; /* Your greenish */
+    --secondary-color:              #ffafcc; /* Your light pink (used for buttons/borders) */
+    --section-bg-color:             #fff0f6; /* Your slightly darker pink (for card backgrounds) */
     --dark-color:                   #424242; /* Main text/heading color (dark grey) */
     --p-color:                      #000000; /* Paragraph text color (black) */
-    --secondary-color:              #ffafcc; /* Your pink for buttons/borders */
-    --primary-color:                #2ee63d; /* Your greenish for button hover */
     
+    /* Specific Border Radii (Adjust as desired) */
     --border-radius-large:          100px; /* For pill buttons */
     --border-radius-medium:         15px; /* For card corners */
+    --border-radius-small:          10px; /* From your template */
 }
 
-/* Ensure the entire section has the correct background and max-width */
+/* Ensure the overall section width and background */
 #section_5 {
     background-color: var(--white-color); /* Section background is pale blue/grey */
     
-    /* Set max-width here. Adjust this to match your site's .container max-width for desired overall width. */
-    /* Example: If your main content area is 1140px on large screens */
-    max-width: 1140px; /* <-- ADJUST THIS VALUE TO MAKE SECTION CONTAINER WIDER */
+    /* Set max-width here. This should align perfectly with your main .container. */
+    max-width: 1140px; /* VERIFIED: This is your .container width */
     margin-left: auto;
     margin-right: auto;
     
     padding-top: 75px; 
     padding-bottom: 75px;
-    /* If section_5 already has .section-padding or .section-padding-2, these paddings are redundant */
 }
 
 
 /* Main wrapper for scrollable content and navigation buttons */
 .scroll-container-with-buttons {
     position: relative;
-    max-width: 100%; /* Take full width of parent #section_5 */
-    margin: 0 auto; /* Center it */
     
-    /* Padding to make space for the buttons on the edges of this *carousel component* */
+    /* This container needs to take up the 1140px, but its *inner content* (where cards go)
+       needs to respect the 15px gutter of a Bootstrap row.
+       Let's use the .container's standard behavior by making its own inner width match */
+    width: 100%; /* Take full width of parent #section_5 (1140px) */
+    max-width: 1140px; /* Ensure it doesn't grow beyond the standard container width */
+    margin: 0 auto; /* Center it */
+    box-sizing: border-box; /* Crucial for padding to not add to total width */
+
+    /* Add padding for buttons. This padding will be *outside* the simulated Bootstrap row. */
     padding-left: 50px; 
     padding-right: 50px;
-    box-sizing: border-box; 
 }
 
 /* Styles for scroll navigation buttons */
@@ -1275,7 +1280,10 @@ strong {
     transition: all 0.3s ease;
     outline: none;
 }
-.scroll-button:hover { background-color: #eee; color: var(--secondary-color); } 
+.scroll-button:hover { 
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+} 
 .scroll-button-left { left: 0; }
 .scroll-button-right { right: 0; }
 
@@ -1285,9 +1293,9 @@ strong {
     overflow-x: scroll; 
     -webkit-overflow-scrolling: touch; 
     
-    /* Add padding to this wrapper to prevent shadow cutoff */
-    padding-top: 20px; /* Give some space at the top for shadows */
-    padding-bottom: 20px; /* Give space at the bottom for shadows AND scrollbar */
+    /* Increased padding to allow top/bottom shadows to show */
+    padding-top: 30px; 
+    padding-bottom: 30px; 
 
     scrollbar-width: none; 
     -ms-overflow-style: none;
@@ -1300,12 +1308,18 @@ strong {
     display: flex;
     flex-wrap: nowrap; 
     
-    /* Simulate Bootstrap .row negative horizontal margins */
-    margin-left: calc(-1 * var(--bs-gutter-x) / 2); 
-    margin-right: calc(-1 * var(--bs-gutter-x) / 2); 
+    /* Correctly mimic Bootstrap .row negative horizontal margins relative to its own content width */
+    /* This margin must offset the padding of the #conference-list-wrapper, if present.
+       Or, better, it should be relative to its own internal content.
+       Let's remove this margin and rely on padding on the items themselves. */
+    margin: 0; /* No margin on #conference-list itself */
     
-    gap: 0; 
-    padding: 0; 
+    /* Add padding to #conference-list to simulate the INNER content area of a Bootstrap container */
+    /* This padding means the 'row' itself has 15px padding on its ends */
+    padding-left: var(--bs-gutter-x) / 2; /* 0.75rem or 15px */
+    padding-right: var(--bs-gutter-x) / 2; /* 0.75rem or 15px */
+    
+    gap: 0; /* No explicit gap, spacing comes from column padding */
 }
 
 /* Individual conference item - MIMICS BOOTSTRAP .col-* */
@@ -1316,134 +1330,30 @@ strong {
     min-width: 280px; 
     
     /* Bootstrap column padding (gutter) */
+    /* This padding is *internal* to the column. The content inside takes 100% of the space *within this padding*. */
     padding-left: calc(var(--bs-gutter-x) / 2); /* 0.75rem or 15px */
     padding-right: calc(var(--bs-gutter-x) / 2); /* 0.75rem or 15px */
 
-    /* Responsive width percentages */
-    flex-basis: 33.333333%;
-    max-width: 33.333333%;
+    /* Responsive width percentages (using Bootstrap's breakpoints) */
+    /* Desktop Large (col-lg-4 equivalent: 3 items) */
+    /* This percentage is applied to the available space *after its own padding*.
+       The total available width for flex items in a Bootstrap row is:
+       (container_width) - (row_padding_left + row_padding_right)
+       So, 1140px - 30px = 1110px.
+       Each item should be 1/3rd of 1110px = 370px.
+       This 370px is the width *including its 30px padding*. So content is 340px.
+       Since we want 356px content, the total item width needs to be 386px.
+       Let's force the pixel width here, and then scale down responsively. */
+    width: 386px; /* TARGET WIDTH: 356px content + 30px padding = 386px total */
+    max-width: 386px; 
 }
 
 /* Responsive adjustments for .conference-scroll-item */
-@media (max-width: 1199.98px) { 
-    /* No change needed unless specifically targetting narrower desktops */
-}
-@media (max-width: 991.98px) { /* Tablets (col-md-6 equivalent: 2 items) */
-    .scroll-container-with-buttons { padding-left: 40px; padding-right: 40px; }
-    .scroll-button { width: 40px; height: 40px; font-size: 1.4rem; }
+/* IMPORTANT: Re-adjust percentages based on container max-widths and responsive widths */
+@media (max-width: 1199.98px) { /* This breakpoint corresponds to the XL .container going to 960px */
     .conference-scroll-item {
-        flex-basis: 50%;
-        max-width: 50%;
-    }
-}
-@media (max-width: 767.98px) { /* Mobile (col-12 equivalent: 1 item) */
-    .scroll-container-with-buttons { padding-left: 30px; padding-right: 30px; }
-    .scroll-button { width: 35px; height: 35px; font-size: 1.2rem; }
-    .conference-scroll-item {
-        flex-basis: 100%;
-        max-width: 100%;
-    }
-}
-
-/* Styles for the projects-thumb cards inside the scroll items */
-.conference-scroll-item .projects-thumb {
-    height: 100%; 
-    display: flex;
-    flex-direction: column;
-    /* Card background is now light pink */
-    background-color: var(--section-bg-color); /* THIS FIXES CARD BACKGROUND TO PINK */
-    
-    padding: 20px; /* Internal content padding */
-    border-radius: var(--border-radius-medium); /* Use 15px radius for cards */
-    
-    /* Ensure shadows are visible and prominent */
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15); /* Increased opacity for stronger shadow */
-    /* You might even try: box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15) !important; */
-    /* Or the one from your original projects-thumb: 0 1rem 1rem rgba(0,0,0,.175); */
-    /* Let's use 0 1rem 1rem rgba(0,0,0,.175) to match your original projects-thumb exactly. */
-}
-
-/* Specific adjustment if the global .projects-thumb has a different border-radius */
-/* Ensure the .projects-thumb for the carousel uses the desired 15px radius */
-.projects-thumb {
-    border-radius: var(--border-radius-medium); /* Ensures all projects-thumbs (including non-carousel) are 15px */
-}
-
-/* Card titles */
-.conference-scroll-item .projects-info {
-    flex-shrink: 0;
-    margin-bottom: 15px; 
-}
-.conference-scroll-item .projects-info .projects-title {
-    font-size: var(--h3-font-size); 
-    margin-bottom: 0.5rem; 
-}
-
-/* Button Group (Ensure this div is in your HTML around your buttons) */
-.conference-scroll-item .projects-thumb .button-group {
-    text-align: center; 
-    margin-top: 10px; 
-    margin-bottom: 20px; 
-    flex-shrink: 0;
-}
-
-/* Individual Buttons within cards */
-.conference-scroll-item .custom-btn,
-.conference-scroll-item .custom-border-btn {
-    display: inline-block; 
-    margin: 5px 5px; 
-    text-align: center;
-    padding: 10px 20px; 
-    border-radius: var(--border-radius-large); 
-    white-space: nowrap; 
-    font-size: var(--p-font-size); 
-    font-weight: var(--font-weight-bold);
-    
-    background: var(--secondary-color); /* Pink background for buttons */
-    /* THIS IS THE FIX FOR BUTTON TEXT COLOR */
-    color: var(--dark-color); /* Dark text color for buttons */
-}
-/* Ensure hover states match */
-.conference-scroll-item .custom-btn:hover,
-.conference-scroll-item .custom-border-btn:hover {
-    background: var(--primary-color); 
-    color: var(--white-color);
-}
-/* Ensure custom-border-btn also has its border property */
-.conference-scroll-item .custom-border-btn {
-  border: 2px solid transparent; 
-}
-
-
-/* Adjust spacing for the <p> tag and image within the card */
-.conference-scroll-item .projects-thumb p {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-.conference-scroll-item .projects-thumb a.image {
-    display: block;
-    margin-top: auto; 
-    padding-top: 15px; 
-    flex-grow: 1; 
-    text-align: center; 
-}
-.conference-scroll-item .projects-thumb .projects-image {
-    width: 90%; 
-    height: auto;
-    display: inline-block; 
-    object-fit: cover;
-    border-radius: var(--bs-border-radius); 
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
-}
-
-/* Your global .container responsive values - KEEP AS IS */
-@media (min-width: 576px) { .container, .container-sm { max-width: 540px; } }
-@media (min-width: 768px) { .container, .container-md { max-width: 720px; } }
-@media (min-width: 992px) { .container, .container-lg { max-width: 960px; } }
-@media (min-width: 1200px) { .container, .container-xl { max-width: 1140px; } }
-@media (min-width: 1400px) { .container, .container-xxl { max-width: 1320px; } }
-
-/* Styles for social icons (Keep your original #filt as is) */
-#filt {
-    filter: invert(0%) sepia(100%) saturate(5500%) hue-rotate(260deg) brightness(68%) contrast(115%);
-}
+        /*
+            For a container max-width: 960px.
+            #conference-list (row) will be 960px - 30px = 930px.
+            3 items: 930px / 3 = 310px (content area per item).
+            Total item width: 310px
