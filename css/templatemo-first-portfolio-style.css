@@ -1206,26 +1206,49 @@ strong {
   CAROUSEL (Conferences & Talks)               
 -----------------------------------------*/
 
+/* Custom Carousel Styles - Final Attempt for Bootstrap Column Mimicry */
+
+/* Define CSS Variables for Gutters (Mimicking Bootstrap) */
+:root {
+    --bs-gutter-x: 1.5rem; /* Standard Bootstrap horizontal gutter (30px) */
+    --bs-gutter-y: 0; /* No vertical gutter for columns in a row */
+    --bs-border-radius: 0.5rem; /* Bootstrap's default border-radius (8px) for cards/components */
+    
+    /* Ensure these are your base colors: */
+    --white-color:                  #f4f5ff; /* Main page background (pale blue/grey) */
+    --section-bg-color:             #fff0f6; /* THIS IS THE COLOR FOR YOUR CARDS/SECTION HEADERS (light pink) */
+    --dark-color:                   #424242; /* Main text/heading color (dark grey) */
+    --p-color:                      #000000; /* Paragraph text color (black) */
+    --secondary-color:              #ffafcc; /* Your pink for buttons/borders */
+    --primary-color:                #2ee63d; /* Your greenish for button hover */
+    
+    --border-radius-large:          100px; /* For pill buttons */
+    --border-radius-medium:         15px; /* For card corners */
+}
+
 /* Ensure the entire section has the correct background and max-width */
 #section_5 {
-    /* The section background should be the main page background color */
-    background-color: var(--white-color); /* THIS IS THE FIX FOR SECTION BACKGROUND */
+    background-color: var(--white-color); /* Section background is pale blue/grey */
     
-    max-width: 1140px; /* Example, match your site's largest .container max-width */
+    /* Set max-width here. Adjust this to match your site's .container max-width for desired overall width. */
+    /* Example: If your main content area is 1140px on large screens */
+    max-width: 1140px; /* <-- ADJUST THIS VALUE TO MAKE SECTION CONTAINER WIDER */
     margin-left: auto;
     margin-right: auto;
+    
     padding-top: 75px; 
     padding-bottom: 75px;
+    /* If section_5 already has .section-padding or .section-padding-2, these paddings are redundant */
 }
-/* If section_5 already has .section-padding, these paddings are redundant */
-/* <section class="projects section-padding-2" id="section_5"> implies it has padding from .section-padding-2 */
 
 
 /* Main wrapper for scrollable content and navigation buttons */
 .scroll-container-with-buttons {
     position: relative;
-    max-width: 100%; 
-    margin: 0 auto; 
+    max-width: 100%; /* Take full width of parent #section_5 */
+    margin: 0 auto; /* Center it */
+    
+    /* Padding to make space for the buttons on the edges of this *carousel component* */
     padding-left: 50px; 
     padding-right: 50px;
     box-sizing: border-box; 
@@ -1261,7 +1284,10 @@ strong {
 #conference-list-wrapper {
     overflow-x: scroll; 
     -webkit-overflow-scrolling: touch; 
-    padding-bottom: 20px; 
+    
+    /* Add padding to this wrapper to prevent shadow cutoff */
+    padding-top: 20px; /* Give some space at the top for shadows */
+    padding-bottom: 20px; /* Give space at the bottom for shadows AND scrollbar */
 
     scrollbar-width: none; 
     -ms-overflow-style: none;
@@ -1275,8 +1301,8 @@ strong {
     flex-wrap: nowrap; 
     
     /* Simulate Bootstrap .row negative horizontal margins */
-    margin-left: calc(-1 * var(--bs-gutter-x) / 2);
-    margin-right: calc(-1 * var(--bs-gutter-x) / 2);
+    margin-left: calc(-1 * var(--bs-gutter-x) / 2); 
+    margin-right: calc(-1 * var(--bs-gutter-x) / 2); 
     
     gap: 0; 
     padding: 0; 
@@ -1300,7 +1326,7 @@ strong {
 
 /* Responsive adjustments for .conference-scroll-item */
 @media (max-width: 1199.98px) { 
-    /* No specific changes here for now, defaults to 33.33% behavior */
+    /* No change needed unless specifically targetting narrower desktops */
 }
 @media (max-width: 991.98px) { /* Tablets (col-md-6 equivalent: 2 items) */
     .scroll-container-with-buttons { padding-left: 40px; padding-right: 40px; }
@@ -1324,24 +1350,29 @@ strong {
     height: 100%; 
     display: flex;
     flex-direction: column;
-    /* Card background should be --section-bg-color (light pink) */
-    background-color: var(--section-bg-color); /* THIS FIXES CARD BACKGROUND */
+    /* Card background is now light pink */
+    background-color: var(--section-bg-color); /* THIS FIXES CARD BACKGROUND TO PINK */
     
     padding: 20px; /* Internal content padding */
-    /* Use var(--border-radius-medium) which is now 15px in :root */
-    border-radius: var(--border-radius-medium); /* THIS FIXES CARD ROUNDING */
+    border-radius: var(--border-radius-medium); /* Use 15px radius for cards */
     
-    /* Ensure shadows are visible */
-    /* Your original .projects-thumb in your CSS has this box-shadow: */
-    /* box-shadow: 0 1rem 1rem rgba(0,0,0,.175); */
-    /* Let's explicitly apply it here, matching the one you have in your original CSS */
-    box-shadow: 0 1rem 1rem rgba(0,0,0,.175); /* THIS ENSURES THE SHADOW */
+    /* Ensure shadows are visible and prominent */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15); /* Increased opacity for stronger shadow */
+    /* You might even try: box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15) !important; */
+    /* Or the one from your original projects-thumb: 0 1rem 1rem rgba(0,0,0,.175); */
+    /* Let's use 0 1rem 1rem rgba(0,0,0,.175) to match your original projects-thumb exactly. */
+}
+
+/* Specific adjustment if the global .projects-thumb has a different border-radius */
+/* Ensure the .projects-thumb for the carousel uses the desired 15px radius */
+.projects-thumb {
+    border-radius: var(--border-radius-medium); /* Ensures all projects-thumbs (including non-carousel) are 15px */
 }
 
 /* Card titles */
 .conference-scroll-item .projects-info {
     flex-shrink: 0;
-    margin-bottom: 15px;
+    margin-bottom: 15px; 
 }
 .conference-scroll-item .projects-info .projects-title {
     font-size: var(--h3-font-size); 
@@ -1363,19 +1394,19 @@ strong {
     margin: 5px 5px; 
     text-align: center;
     padding: 10px 20px; 
-    border-radius: var(--border-radius-large); /* Very rounded (100px) */
+    border-radius: var(--border-radius-large); 
     white-space: nowrap; 
     font-size: var(--p-font-size); 
     font-weight: var(--font-weight-bold);
     
-    /* Explicitly define button colors to match screenshot */
     background: var(--secondary-color); /* Pink background for buttons */
-    color: var(--dark-color); /* Dark text color */
+    /* THIS IS THE FIX FOR BUTTON TEXT COLOR */
+    color: var(--dark-color); /* Dark text color for buttons */
 }
 /* Ensure hover states match */
 .conference-scroll-item .custom-btn:hover,
 .conference-scroll-item .custom-border-btn:hover {
-    background: var(--primary-color); /* Greenish hover */
+    background: var(--primary-color); 
     color: var(--white-color);
 }
 /* Ensure custom-border-btn also has its border property */
@@ -1401,12 +1432,11 @@ strong {
     height: auto;
     display: inline-block; 
     object-fit: cover;
-    border-radius: var(--bs-border-radius); /* Use Bootstrap's default radius (8px) for images */
+    border-radius: var(--bs-border-radius); 
     box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
 }
 
-/* Your global .container responsive values from your original CSS */
-/* These values are correct, keep them as is. */
+/* Your global .container responsive values - KEEP AS IS */
 @media (min-width: 576px) { .container, .container-sm { max-width: 540px; } }
 @media (min-width: 768px) { .container, .container-md { max-width: 720px; } }
 @media (min-width: 992px) { .container, .container-lg { max-width: 960px; } }
