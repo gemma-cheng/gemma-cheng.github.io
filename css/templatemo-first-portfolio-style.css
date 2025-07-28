@@ -1199,3 +1199,192 @@ strong {
 
 
 
+
+/*---------------------------------------
+  CAROUSEL               
+-----------------------------------------*/
+
+:root {
+    --carousel-gap-desktop: 30px;
+    --carousel-gap-tablet: 25px;
+    --carousel-gap-mobile: 20px;
+    --current-carousel-gap: var(--carousel-gap-desktop);
+}
+
+.scroll-container-with-buttons {
+    position: relative;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 50px; 
+    padding-right: 50px;
+}
+
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: #333;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.scroll-button:hover {
+    background-color: #eee;
+    color: #000;
+}
+
+.scroll-button-left {
+    left: 0;
+}
+
+.scroll-button-right {
+    right: 0;
+}
+
+#conference-list-wrapper {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 20px;
+
+    scrollbar-width: none; /* Hide scrollbar */
+    -ms-overflow-style: none;
+}
+#conference-list-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+#conference-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--current-carousel-gap);
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+@media (max-width: 1199.98px) {
+    .conference-scroll-item {
+        width: calc(33.3333% - 30px) !important;
+    }
+}
+
+
+@media (max-width: 991.98px) { 
+    :root {
+        --current-carousel-gap: var(--carousel-gap-tablet);
+    }
+    .scroll-container-with-buttons {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    .scroll-button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.4rem;
+    }
+    width: calc(50% - 25px) !important; 
+}
+
+@media (max-width: 767.98px) { 
+    :root {
+        --current-carousel-gap: var(--carousel-gap-mobile);
+    }
+    .scroll-container-with-buttons {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .scroll-button {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+    width: calc(100% - 20px) !important;
+}
+
+.conference-scroll-item .projects-thumb {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    background-color: #ffffff !important;
+    padding: 20px !important;
+    border-radius: 10px !important;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05) !important;
+}
+.conference-scroll-item .projects-info {
+    flex-shrink: 0 !important;
+    margin-bottom: 10px !important;
+}
+.conference-scroll-item .projects-info .projects-title {
+    font-size: 1.8rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.conference-scroll-item .projects-thumb .button-group {
+    text-align: center !important;
+    margin-top: 10px !important;
+    margin-bottom: 20px !important;
+    flex-shrink: 0 !important;
+}
+
+.conference-scroll-item .custom-btn,
+.conference-scroll-item .custom-border-btn {
+    display: inline-block !important;
+    margin: 5px 5px !important;
+    text-align: center !important;
+    padding: 8px 16px !important;
+    border-radius: 25px !important;
+    white-space: nowrap !important;
+}
+
+.conference-scroll-item .projects-thumb p {
+    margin-top: 5px !important;
+    margin-bottom: 5px !important;
+}
+.conference-scroll-item .projects-thumb a.image {
+    display: block !important;
+    margin-top: auto !important;
+    padding-top: 15px !important;
+    flex-grow: 1 !important;
+    text-align: center !important;
+}
+.conference-scroll-item .projects-thumb .projects-image {
+    width: 90% !important;
+    height: auto !important;
+    display: inline-block !important;
+    object-fit: cover !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+
+.container {
+    max-width: 960px;
+}
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}
+
+#filt {
+    filter: invert(0%) sepia(100%) saturate(5500%) hue-rotate(260deg) brightness(68%) contrast(115%);
+}
+
+
+
+
+
+
+
+
