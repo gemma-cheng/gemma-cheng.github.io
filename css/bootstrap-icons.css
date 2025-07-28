@@ -981,6 +981,7 @@ url("../fonts/fontello.woff") format("woff");
 .bi-octagon::before { content: "\f4ac"; }
 .bi-option::before { content: "\f4ad"; }
 .my-orcid::before { content: "\E800" }
+.nasa-ads::before { content: "\E800" }
 .bi-outlet::before { content: "\f4ae"; }
 .bi-paint-bucket::before { content: "\f4af"; }
 .bi-palette-fill::before { content: "\f4b0"; }
