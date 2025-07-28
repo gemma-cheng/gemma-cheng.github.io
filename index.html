@@ -21,8 +21,7 @@
 <style>
 /* Define CSS Variables for Gap for Consistency and Responsiveness */
 :root {
-    /* These gaps define the visual space *between* the column-like items */
-    --carousel-gap-desktop: 30px;
+    --carousel-gap-desktop: 30px; /* This is the gap *between* cards */
     --carousel-gap-tablet: 25px;
     --carousel-gap-mobile: 20px;
     --current-carousel-gap: var(--carousel-gap-desktop); /* Default for desktop */
@@ -30,38 +29,38 @@
 
 /* Main wrapper for scrollable content and navigation buttons */
 .scroll-container-with-buttons {
-    position: relative; /* THIS IS CRUCIAL: Allows absolute positioning of child buttons */
-    /* Adjust padding to make space for the buttons on the sides. */
-    padding-left: 50px; /* Space for left button */
-    padding-right: 50px; /* Space for right button */
-    
-    /* Max width of the overall carousel section to align with your content area */
-    max-width: 1200px; /* Adjust this to match your main content width / .container width */
-    margin-left: auto; /* Center the wrapper */
+    position: relative;
+    /* Explicitly set max-width for the entire carousel section to align it */
+    /* This should match the max-width of your main content container (.container) */
+    max-width: 1200px; /* Adjust this to match your site's .container max-width */
+    margin-left: auto;
     margin-right: auto;
+    
+    /* Padding for buttons */
+    padding-left: 50px; 
+    padding-right: 50px;
 }
 
-
-/* Styles for the scroll navigation buttons - NOW POSITIONED CORRECTLY */
+/* Styles for the scroll navigation buttons */
 .scroll-button {
     position: absolute;
-    top: 50%; /* Vertically center */
+    top: 50%;
     transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    background-color: rgba(255, 255, 255, 0.9);
     border: 1px solid #ddd;
-    border-radius: 50%; /* Circular shape */
+    border-radius: 50%;
     width: 45px;
     height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1.6rem; /* Icon size */
+    font-size: 1.6rem;
     color: #333;
-    z-index: 10; /* Ensure buttons are above content */
+    z-index: 10;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     transition: background-color 0.3s, color 0.3s;
-    outline: none; /* Remove focus outline on click */
+    outline: none;
 }
 
 .scroll-button:hover {
@@ -69,72 +68,68 @@
     color: #000;
 }
 
-/* Specific button positioning relative to .scroll-container-with-buttons */
 .scroll-button-left {
-    left: 0; /* Position at the far left edge of its relative parent */
+    left: 0;
 }
 
 .scroll-button-right {
-    right: 0; /* Position at the far right edge of its relative parent */
+    right: 0;
 }
 
 
 /* Container that holds the horizontally scrollable items */
 #conference-list-wrapper {
-    overflow-x: scroll; /* Enable horizontal scrolling */
-    -webkit-overflow-scrolling: touch; /* Improves scrolling on iOS */
-    padding-bottom: 20px; /* Space for consistent bottom margin (even if scrollbar is hidden) */
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 20px;
 
-    /* Hide the scrollbar visually */
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Hide scrollbar */
+    -ms-overflow-style: none;
 }
-
-/* Hide scrollbar for Webkit browsers (Chrome, Safari) */
 #conference-list-wrapper::-webkit-scrollbar {
     display: none;
 }
 
 /* Flex container for the conference items */
 #conference-list {
-    display: flex; /* Use Flexbox */
-    flex-wrap: nowrap; /* Prevent items from wrapping to the next line */
-    /* Remove padding here. The padding will be on the items themselves now. */
-    /* The gaps define the space between items, like Bootstrap's .row margin-x */
-    gap: var(--current-carousel-gap); 
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--current-carousel-gap); /* This is the gap between the .conference-scroll-item elements */
     
-    /* A common pattern for flex containers that need "negative margin" effect */
-    /* margin-left: calc(-1 * var(--current-carousel-gap) / 2);
-       margin-right: calc(-1 * var(--current-carousel-gap) / 2); */
-    /* This makes the gap apply *between* items, but the first/last item flush with edge */
-    /* You may need to experiment with this vs. padding on .conference-scroll-item */
+    /* Remove any implicit padding or margins that might affect the 100% width calculation */
+    padding: 0; 
+    margin: 0;
 }
 
 /* Individual conference item for scrolling */
 .conference-scroll-item {
     flex: 0 0 auto; /* Allow flex-basis to dictate exact width, prevent shrinking/growing */
-    box-sizing: border-box; /* IMPORTANT: Ensures padding is included in the width */
+    box-sizing: border-box; /* Includes padding in width calculation */
     min-width: 280px; /* Ensures a minimum width on smallest screens */
     
-    /* THIS IS THE KEY CHANGE: Mimic Bootstrap column padding */
-    /* Each .conference-scroll-item now gets its own 15px side padding, just like a .col-* */
-    padding: 0 15px; 
-
-    /* NEW WIDTH CALCULATION FOR FLEX-BASIS: */
-    /* The 100% refers to the parent (conference-list) which has no padding now.
-       So, `33.3333%` gives each item one-third of that full width.
-       The gap is now managed strictly between these items. */
-    flex-basis: 33.3333%; /* Roughly 1/3 for 3 items */
-    max-width: 33.3333%; /* Ensure it doesn't grow larger than intended */
+    /* The core width strategy: */
+    /* On desktop, aim for a fixed pixel width that matches your "My Papers" items.
+       Then, add the 15px Bootstrap-like column padding to this item. */
+    width: 380px; /* Example target width, you may need to fine-tune this value */
+    padding: 0 15px; /* Simulates Bootstrap's col- padding around the inner content */
 }
 
 /* Responsive adjustments */
-@media (max-width: 991.98px) { /* Tablets and smaller (2 items visible) */
+@media (max-width: 1199.98px) { /* Breakpoint before 1200px container */
+    /* Assuming a typical Bootstrap setup, this is roughly where 3-column layouts transition */
+    .conference-scroll-item {
+        width: 32%; /* About 3 items per row, allowing for gaps */
+        /* Each item takes ~33.33% of the overall content area. */
+        /* (100% - 2*gap) / 3 will be handled by the flexbox layout, but item width should be this base % */
+    }
+}
+
+@media (max-width: 991.98px) { /* Tablets and smaller (mimics col-md-6 behavior) */
     :root {
-        --current-carousel-gap: var(--carousel-gap-tablet); /* Override gap for tablets */
+        --current-carousel-gap: var(--carousel-gap-tablet);
     }
     .scroll-container-with-buttons {
-        padding-left: 40px; /* Adjust padding for smaller buttons */
+        padding-left: 40px;
         padding-right: 40px;
     }
     .scroll-button {
@@ -142,19 +137,18 @@
         height: 40px;
         font-size: 1.4rem;
     }
-    /* Tablet: 2 items visible */
+    /* For 2 items, it's 50% of the row */
     .conference-scroll-item {
-        flex-basis: 50%; /* Roughly 1/2 for 2 items */
-        max-width: 50%;
+        width: 49%; /* About 2 items per row, allowing for gap */
     }
 }
 
-@media (max-width: 767.98px) { /* Mobile phones (1 item visible) */
+@media (max-width: 767.98px) { /* Mobile phones (mimics col-12 behavior) */
     :root {
-        --current-carousel-gap: var(--carousel-gap-mobile); /* Override gap for mobile */
+        --current-carousel-gap: var(--carousel-gap-mobile);
     }
     .scroll-container-with-buttons {
-        padding-left: 30px; /* Adjust padding for smallest buttons */
+        padding-left: 30px;
         padding-right: 30px;
     }
     .scroll-button {
@@ -164,8 +158,7 @@
     }
     /* Mobile: 1 item visible */
     .conference-scroll-item {
-        flex-basis: 100%; /* Takes the full available width */
-        max-width: 100%;
+        width: 100%; /* Takes the full available width */
     }
 }
 
@@ -174,38 +167,36 @@
     height: 100%; /* Important for consistent height across items */
     display: flex;
     flex-direction: column;
-    background-color: #ffffff; /* Explicit background for thumbs */
+    background-color: #ffffff;
     padding: 20px; /* This is the INTERNAL padding of the card content */
     border-radius: 10px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05); /* Add subtle shadow from your image */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
 }
 .conference-scroll-item .projects-info {
     flex-shrink: 0;
-    margin-bottom: 10px; /* Space below title/info before buttons */
+    margin-bottom: 10px;
 }
 .conference-scroll-item .projects-info .projects-title {
-    font-size: 1.8rem; /* Adjust title size to match screenshot if needed */
-    margin-bottom: 0.5rem; /* Space below title */
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
 }
 
-
 /* Adjust button layout for scroll items within the card */
-/* Add a wrapper around buttons for proper centering as seen in image */
 .conference-scroll-item .projects-thumb .button-group {
-    text-align: center; /* Center the inline-block buttons within this group */
-    margin-top: 10px; /* Space above button group */
-    margin-bottom: 20px; /* Space below button group, before image/p */
-    flex-shrink: 0; /* Prevent button group from shrinking */
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    flex-shrink: 0;
 }
 
 .conference-scroll-item .custom-btn,
 .conference-scroll-item .custom-border-btn {
-    display: inline-block; /* Buttons side-by-side */
-    margin: 5px 5px; /* Spacing between buttons, and top/bottom */
+    display: inline-block;
+    margin: 5px 5px;
     text-align: center;
-    padding: 8px 16px; /* Match screenshot style */
-    border-radius: 25px; /* More rounded as in screenshot */
-    white-space: nowrap; /* Keep button text from wrapping */
+    padding: 8px 16px;
+    border-radius: 25px;
+    white-space: nowrap;
 }
 
 /* Adjust spacing for the <p> tag and image within the card */
@@ -215,32 +206,30 @@
 }
 .conference-scroll-item .projects-thumb a.image {
     display: block;
-    margin-top: auto; /* Pushes image to the bottom of the card if content varies */
-    padding-top: 15px; /* Space above the image */
-    flex-grow: 1; /* Allows image to take up remaining vertical space */
-    text-align: center; /* Center the image within its link/block */
+    margin-top: auto;
+    padding-top: 15px;
+    flex-grow: 1;
+    text-align: center;
 }
 .conference-scroll-item .projects-thumb .projects-image {
     width: 90%; /* Make image slightly smaller than full width to show some padding */
     height: auto;
-    display: inline-block; /* Allows text-align: center on parent a.image */
+    display: inline-block;
     object-fit: cover;
-    border-radius: 8px; /* Slightly rounded image corners */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Subtle shadow on image */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-
-/* General Bootstrap overrides/fixes if needed for your template */
-/* Ensure .container max-width matches what you expect for width calculations */
+/* General Bootstrap overrides/fixes - Crucial to align with .container widths */
 .container {
-    max-width: 960px; /* Example: If your main content area is ~960px */
+    max-width: 960px; /* Common desktop .container width */
 }
 @media (min-width: 1200px) {
     .container {
-        max-width: 1140px; /* Example: If your main content area is ~1140px on larger screens */
+        max-width: 1140px; /* Typical larger desktop .container width */
     }
 }
-/* You might need to check your original Bootstrap CSS or template's variables */
+/* IMPORTANT: Verify these .container max-width values from your actual Bootstrap setup */
 
 /* Styles for social icons */
 #filt {
