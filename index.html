@@ -19,99 +19,191 @@
         <link href="css/templatemo-first-portfolio-style.css" rel="stylesheet">
         
 <style>
-#conference-list-wrapper {
-    overflow-x: auto; 
-    -webkit-overflow-scrolling: touch; 
-    padding-bottom: 20px; 
-    margin: 0 -15px; 
-    width: auto; 
-    position: relative;
-}
-
-#conference-list-wrapper::-webkit-scrollbar {
-    height: 8px;
-}
-
-#conference-list-wrapper::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-    border-radius: 10px;
-}
-
-#conference-list-wrapper::-webkit-scrollbar-thumb {
-    background: #888; 
-    border-radius: 10px;
-}
-
-#conference-list-wrapper::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-}
-
+/* Remove existing conflicting rules related to old scroll logic */
+/*
 #conference-list {
-    display: flex; 
-    flex-wrap: nowrap; 
-    padding: 0 15px; 
-    gap: 30px; 
+    display: flex;
+    flex-wrap: wrap;
+}
+.conference-item {
+    display: none;
+}
+.conference-item.visible {
+    display: block;
+}
+*/
+/* Ensure the original button styling doesn't conflict */
+.conference-item .custom-btn,
+.conference-item .custom-border-btn {
+    /* Adjust these if they were causing layout issues before */
+    display: inline-block;
+    margin-bottom: -5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    padding: 8px 16px;
 }
 
+/* New CSS for Horizontal Scroll with Buttons and Infinite Loop */
+
+/* Main wrapper for scrollable content and navigation buttons */
+.scroll-container-with-buttons {
+    position: relative; /* Allows absolute positioning of child buttons */
+    padding: 0 50px; /* Space for the navigation buttons on the sides */
+    margin: 0 -15px; /* Offset the container padding if it's within a Bootstrap row */
+}
+
+/* Styles for the scroll navigation buttons */
+.scroll-button {
+    position: absolute;
+    top: 50%; /* Vertically center */
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    border: 1px solid #ddd;
+    border-radius: 50%; /* Circular shape */
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.6rem; /* Icon size */
+    color: #333;
+    z-index: 10; /* Ensure buttons are above content */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, color 0.3s;
+    outline: none; /* Remove focus outline on click */
+}
+
+.scroll-button:hover {
+    background-color: #eee;
+    color: #000;
+}
+
+/* Specific button positioning */
+.scroll-button-left {
+    left: 0;
+}
+
+.scroll-button-right {
+    right: 0;
+}
+
+/* Container that holds the horizontally scrollable items */
+#conference-list-wrapper {
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Improves scrolling on iOS */
+    padding-bottom: 20px; /* Space for scrollbar (even if hidden) and consistent bottom margin */
+    scroll-snap-type: x mandatory; /* Makes items snap into view */
+
+    /* Hide the scrollbar visually */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+#conference-list-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Flex container for the conference items */
+#conference-list {
+    display: flex; /* Use Flexbox */
+    flex-wrap: nowrap; /* Prevent items from wrapping to the next line */
+    gap: 30px; /* Space between items */
+    padding-right: 15px; /* Ensures last item isn't directly on the edge if gap isn't applied at end */
+}
+
+/* Individual conference item for scrolling */
 .conference-scroll-item {
-    flex: 0 0 auto; 
-    box-sizing: border-box; 
-    scroll-snap-align: start;
-	
+    flex: 0 0 auto; /* Prevent items from shrinking or growing */
+    box-sizing: border-box; /* Include padding in width calculation */
+    scroll-snap-align: start; /* Helps items snap into view when scrolling */
+
+    /* Calculate width for 3 items visible + 2 gaps on large screens */
+    /* (100% of container width - (number of gaps * gap size)) / number of visible items */
+    /* For 3 items and 30px gap: (100% - 2*30px) / 3 = (100% - 60px) / 3 */
     width: calc((100% - 60px) / 3);
-    min-width: 300px;
+    min-width: 300px; /* Minimum width to prevent items from becoming too small */
 }
 
 /* Responsive adjustments */
-@media (max-width: 991.98px) { 
+@media (max-width: 991.98px) { /* Tablets and smaller (2 items visible) */
+    .scroll-container-with-buttons {
+        padding: 0 40px; /* Adjust padding for smaller buttons */
+    }
+    .scroll-button {
+        width: 40px;
+        height: 40px;
+        font-size: 1.4rem;
+    }
     .conference-scroll-item {
-        width: calc((100% - 30px) / 2); 
+        width: calc((100% - 30px) / 2); /* 2 items per row with 1 gap */
     }
 }
 
-@media (max-width: 767.98px) { 
-    .conference-list-wrapper {
-        padding: 0 5px;
+@media (max-width: 767.98px) { /* Mobile phones (1 item visible) */
+    .scroll-container-with-buttons {
+        padding: 0 30px; /* Adjust padding for smallest screens */
+    }
+    .scroll-button {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
     }
     #conference-list {
-        gap: 20px;
+        gap: 20px; /* Slightly smaller gap on mobile */
     }
     .conference-scroll-item {
-        width: calc(100% - 0px);
-        min-width: 280px;
+        width: calc(100% - 0px); /* 1 item per row (full width of container) */
+        min-width: 280px; /* Minimum width for mobile items */
     }
 }
 
+/* Ensure the .projects-thumb inside has consistent height and layout */
 .conference-scroll-item .projects-thumb {
-    height: 100%;
+    height: 100%; /* Important for consistent height across items */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    background-color: #ffffff; /* Explicit background for thumbs */
     padding: 20px;
     border-radius: 10px;
 }
+.conference-scroll-item .projects-info {
+    flex-shrink: 0; /* Prevent title from shrinking */
+}
 
+/* Adjust button layout for scroll items - restore closer to original */
 .conference-scroll-item .custom-btn,
 .conference-scroll-item .custom-border-btn {
-    display: block;
-    width: 100%;
-    margin: 5px 0;
+    display: inline-block; /* Keep buttons inline as original */
+    margin-top: 5px; /* Add some top margin to separate from info */
+    margin-bottom: 5px; /* Maintain bottom margin */
+    margin-left: 5px;  /* Slightly reduced horizontal margin for better fit */
+    margin-right: 5px; /* Slightly reduced horizontal margin for better fit */
     text-align: center;
-    padding: 10px 15px;
+    padding: 8px 16px;
+    flex-shrink: 0; /* Prevent buttons from shrinking */
 }
 
-.conference-scroll-item .custom-btn:first-of-type {
-    margin-top: 15px;
+/* Adjust spacing for the <p> tag and image within the card */
+.conference-scroll-item .projects-thumb p {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
-
-.conference-scroll-item .projects-image {
+.conference-scroll-item .projects-thumb a.image {
+    display: block; /* Ensure it takes its own line */
+    margin-top: auto; /* Pushes image to the bottom of the card if content varies */
+    padding-top: 15px; /* Space above the image */
+    flex-grow: 1; /* Allow the image container to take remaining space */
+}
+.conference-scroll-item .projects-thumb .projects-image {
     width: 100%;
     height: auto;
-    margin-top: auto;
-    padding-top: 15px;
+    display: block;
+    object-fit: cover; /* Ensure images cover their area nicely */
 }
-
-}
+</style>
 </style>
 
 
@@ -382,14 +474,23 @@
         <div class="row justify-content-center">
             <div class="col-lg-10 col-12 mx-auto">
                 <div class="section-title-wrap d-flex justify-content-center align-items-center mb-4">
-			<h2 class="text-white ms-4 mb-0">Conferences & Talks</h2>
+                    <h2 class="text-white ms-4 mb-0">Conferences & Talks</h2>
                 </div>
             </div>
 
             <div class="clearfix"></div>
 
-            <!-- Conferences List -->
-            <div id="conference-list-wrapper">
+            <!-- New wrapper for scroll content and navigation buttons -->
+            <div class="scroll-container-with-buttons">
+                <!-- Navigation Buttons -->
+                <button class="scroll-button scroll-button-left" aria-label="Scroll left">
+                    <i class="bi-chevron-left"></i>
+                </button>
+                <button class="scroll-button scroll-button-right" aria-label="Scroll right">
+                    <i class="bi-chevron-right"></i>
+                </button>
+
+                <!-- Wrapper for the horizontally scrollable items --><div id="conference-list-wrapper">
 		<div id="conference-list">
                 <div class="conference-scroll-iten">
                     <div class="projects-thumb">
@@ -602,6 +703,143 @@
 
         window.addEventListener("resize", updateVisibleItems);
         updateVisibleItems(); // Run on page load
+    });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const scrollContainer = document.getElementById("conference-list-wrapper");
+        const conferenceList = document.getElementById("conference-list");
+        const scrollLeftBtn = document.querySelector(".scroll-button-left");
+        const scrollRightBtn = document.querySelector(".scroll-button-right");
+
+        // Exit if essential elements are missing
+        if (!scrollContainer || !conferenceList || !scrollLeftBtn || !scrollRightBtn) {
+            console.warn("Could not find all required elements for infinite scroll functionality.");
+            return;
+        }
+
+        const originalItems = Array.from(conferenceList.children);
+        const totalOriginalItems = originalItems.length;
+        const gap = 30; // Matches CSS gap value for #conference-list
+
+        // If not enough items to scroll, hide buttons and disable functionality
+        if (totalOriginalItems === 0) {
+            scrollLeftBtn.style.display = 'none';
+            scrollRightBtn.style.display = 'none';
+            return;
+        }
+        
+        // Number of items to clone for seamless looping.
+        // It should be at least the maximum number of items visible at once (3 on desktop)
+        // plus a little buffer to ensure a smooth transition without flashing the jump.
+        const numClones = Math.max(3, Math.ceil(scrollContainer.clientWidth / (originalItems[0].offsetWidth + gap))) + 1; // At least visible items + 1
+        
+        // Clone and append items from the beginning
+        for (let i = 0; i < numClones; i++) {
+            conferenceList.appendChild(originalItems[i].cloneNode(true));
+        }
+
+        // Clone and prepend items from the end
+        for (let i = totalOriginalItems - 1; i >= totalClonesToPrepend; i--) {
+            conferenceList.prepend(originalItems[i].cloneNode(true));
+        }
+
+        // Total number of items after cloning
+        const allItems = conferenceList.children;
+        const totalClonesToPrepend = numClones; // Corrected after loop
+        
+        // Set initial scroll position to the beginning of the original content
+        let initialScrollPos = 0;
+        if (totalClonesToPrepend > 0 && allItems.length > 0) {
+            // The position of the first original item starts after the prepended clones.
+            // Width of prepended items = sum of their widths + gaps
+            initialScrollPos = 0;
+            for(let i = 0; i < totalClonesToPrepend; i++) {
+                initialScrollPos += allItems[i].offsetWidth;
+                if (i < totalClonesToPrepend - 1) { // Add gap if not the last cloned item
+                    initialScrollPos += gap;
+                }
+            }
+        }
+        scrollContainer.scrollLeft = initialScrollPos;
+
+
+        let isTransitioning = false; // Flag to prevent multiple jumps during a transition
+
+        // Function to get the scroll amount (width of one item + gap)
+        function getScrollAmount() {
+            // Get the width of an actual rendered item dynamically
+            const firstItem = conferenceList.children[totalClonesToPrepend]; // Get a "real" item
+            if (!firstItem) return 0; // Fallback if no items
+            return firstItem.offsetWidth + gap;
+        }
+
+        // Event listener for scroll end to handle infinite looping
+        scrollContainer.addEventListener("scroll", function () {
+            if (isTransitioning) return; // Prevent re-triggering while a jump is in progress
+
+            const currentScrollLeft = scrollContainer.scrollLeft;
+            const scrollWidth = scrollContainer.scrollWidth;
+            const clientWidth = scrollContainer.clientWidth;
+
+            const originalContentStart = initialScrollPos;
+            const originalContentEnd = originalContentStart + (getScrollAmount() * totalOriginalItems);
+
+            // If scrolled into the prepended clones (near the very beginning)
+            if (currentScrollLeft <= 0) {
+                isTransitioning = true;
+                // Jump to the equivalent position at the end of the "real" content
+                scrollContainer.scrollLeft = originalContentEnd - clientWidth;
+                isTransitioning = false;
+            } 
+            // If scrolled into the appended clones (near the very end)
+            else if (currentScrollLeft + clientWidth >= scrollWidth) {
+                isTransitioning = true;
+                // Jump to the equivalent position at the beginning of the "real" content
+                scrollContainer.scrollLeft = originalContentStart;
+                isTransitioning = false;
+            }
+        }, { passive: true }); // Use passive listener for better scroll performance
+
+        // Event listeners for navigation buttons
+        scrollRightBtn.addEventListener("click", function () {
+            scrollContainer.scrollBy({
+                left: getScrollAmount(),
+                behavior: "smooth",
+            });
+        });
+
+        scrollLeftBtn.addEventListener("click", function () {
+            scrollContainer.scrollBy({
+                left: -getScrollAmount(),
+                behavior: "smooth",
+            });
+        });
+
+        // Optional: Re-adjust scroll position on resize to maintain correct view
+        window.addEventListener('resize', () => {
+             // Recalculate and set initial scroll position to keep it aligned if container width changes significantly
+             // This can be complex for infinite loops. For simplicity, we'll just re-set.
+             let newInitialScrollPos = 0;
+             if (totalClonesToPrepend > 0 && allItems.length > 0) {
+                for(let i = 0; i < totalClonesToPrepend; i++) {
+                    newInitialScrollPos += allItems[i].offsetWidth;
+                    if (i < totalClonesToPrepend - 1) {
+                        newInitialScrollPos += gap;
+                    }
+                }
+            }
+            // Temporarily disable smooth scroll for the jump
+            scrollContainer.style.scrollBehavior = 'auto';
+            scrollContainer.scrollLeft = newInitialScrollPos;
+            // Restore smooth scroll after a short delay
+            setTimeout(() => {
+                scrollContainer.style.scrollBehavior = 'smooth';
+            }, 100);
+        });
+
+        // Initialize scroll behavior for smooth transitions by default
+        scrollContainer.style.scrollBehavior = 'smooth';
     });
 </script>
 
