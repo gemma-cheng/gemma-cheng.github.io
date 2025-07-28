@@ -1204,20 +1204,26 @@ strong {
   CAROUSEL               
 -----------------------------------------*/
 
+<style>
 :root {
-    --carousel-gap-desktop: 30px;
-    --carousel-gap-tablet: 25px;
-    --carousel-gap-mobile: 20px;
-    --current-carousel-gap: var(--carousel-gap-desktop);
+    --column-gutter: 15px; /* Bootstrap's default column padding */
+    --current-gap-between-items: 30px; /* Equivalent to 2 * --column-gutter */
+}
+
+#section_5 {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .scroll-container-with-buttons {
     position: relative;
-    max-width: 1200px;
-    margin-left: auto;
+    max-width: 100%; /* Take full width of parent #section_5 */
+    margin-left: auto; /* Center it within #section_5 */
     margin-right: auto;
+    
     padding-left: 50px; 
     padding-right: 50px;
+    box-sizing: border-box;
 }
 
 .scroll-button {
@@ -1240,148 +1246,139 @@ strong {
     transition: all 0.3s ease;
     outline: none;
 }
-
-.scroll-button:hover {
-    background-color: #eee;
-    color: #000;
-}
-
-.scroll-button-left {
-    left: 0;
-}
-
-.scroll-button-right {
-    right: 0;
-}
+.scroll-button:hover { background-color: #eee; color: #000; }
+.scroll-button-left { left: 0; }
+.scroll-button-right { right: 0; }
 
 #conference-list-wrapper {
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 20px;
-
-    scrollbar-width: none; /* Hide scrollbar */
+    scrollbar-width: none;
     -ms-overflow-style: none;
 }
-#conference-list-wrapper::-webkit-scrollbar {
-    display: none;
-}
+#conference-list-wrapper::-webkit-scrollbar { display: none; }
 
 #conference-list {
     display: flex;
-    flex-wrap: nowrap;
-    gap: var(--current-carousel-gap);
-    padding: 0 !important;
-    margin: 0 !important;
+    flex-wrap: nowrap; /* Items stay on one line */
+    
+    margin-left: calc(-1 * var(--column-gutter));
+    margin-right: calc(-1 * var(--column-gutter));
+    
+    gap: 0;
+    padding: 0;
 }
 
-@media (max-width: 1199.98px) {
+.conference-scroll-item {
+    flex-grow: 0;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    min-width: 280px;
+    
+    padding-left: var(--column-gutter);
+    padding-right: var(--column-gutter);
+
+    flex-basis: 33.333333%;
+    max-width: 33.333333%;
+}
+
+@media (max-width: 991.98px) {
+    .scroll-container-with-buttons { padding-left: 40px; padding-right: 40px; }
+    .scroll-button { width: 40px; height: 40px; font-size: 1.4rem; }
     .conference-scroll-item {
-        width: calc(33.3333% - 30px) !important;
+        flex-basis: 50%;
+        max-width: 50%;
     }
 }
 
-
-@media (max-width: 991.98px) { 
-    :root {
-        --current-carousel-gap: var(--carousel-gap-tablet);
+@media (max-width: 767.98px) {
+    .scroll-container-with-buttons { padding-left: 30px; padding-right: 30px; }
+    .scroll-button { width: 35px; height: 35px; font-size: 1.2rem; }
+    .conference-scroll-item {
+        flex-basis: 100%;
+        max-width: 100%;
     }
-    .scroll-container-with-buttons {
-        padding-left: 40px;
-        padding-right: 40px;
-    }
-    .scroll-button {
-        width: 40px;
-        height: 40px;
-        font-size: 1.4rem;
-    }
-    width: calc(50% - 25px) !important; 
-}
-
-@media (max-width: 767.98px) { 
-    :root {
-        --current-carousel-gap: var(--carousel-gap-mobile);
-    }
-    .scroll-container-with-buttons {
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-    .scroll-button {
-        width: 35px;
-        height: 35px;
-        font-size: 1.2rem;
-    }
-    width: calc(100% - 20px) !important;
 }
 
 .conference-scroll-item .projects-thumb {
-    height: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    background-color: #ffffff !important;
-    padding: 20px !important;
-    border-radius: 10px !important;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05) !important;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.05);
 }
 .conference-scroll-item .projects-info {
-    flex-shrink: 0 !important;
-    margin-bottom: 10px !important;
+    flex-shrink: 0;
+    margin-bottom: 10px;
 }
 .conference-scroll-item .projects-info .projects-title {
-    font-size: 1.8rem !important;
-    margin-bottom: 0.5rem !important;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
 }
 
 .conference-scroll-item .projects-thumb .button-group {
-    text-align: center !important;
-    margin-top: 10px !important;
-    margin-bottom: 20px !important;
-    flex-shrink: 0 !important;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    flex-shrink: 0;
 }
 
 .conference-scroll-item .custom-btn,
 .conference-scroll-item .custom-border-btn {
-    display: inline-block !important;
-    margin: 5px 5px !important;
-    text-align: center !important;
-    padding: 8px 16px !important;
-    border-radius: 25px !important;
-    white-space: nowrap !important;
+    display: inline-block;
+    margin: 5px 5px;
+    text-align: center;
+    padding: 8px 16px;
+    border-radius: 25px;
+    white-space: nowrap;
 }
 
 .conference-scroll-item .projects-thumb p {
-    margin-top: 5px !important;
-    margin-bottom: 5px !important;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 .conference-scroll-item .projects-thumb a.image {
-    display: block !important;
-    margin-top: auto !important;
-    padding-top: 15px !important;
-    flex-grow: 1 !important;
-    text-align: center !important;
+    display: block;
+    margin-top: auto;
+    padding-top: 15px;
+    flex-grow: 1;
+    text-align: center;
 }
 .conference-scroll-item .projects-thumb .projects-image {
-    width: 90% !important;
-    height: auto !important;
-    display: inline-block !important;
-    object-fit: cover !important;
-    border-radius: 8px !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+    width: 90%;
+    height: auto;
+    display: inline-block;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .container {
+    max-width: 720px;
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
     max-width: 960px;
+  }
 }
 @media (min-width: 1200px) {
-    .container {
-        max-width: 1140px;
-    }
+  .container {
+    max-width: 1140px;
+  }
 }
 
 #filt {
     filter: invert(0%) sepia(100%) saturate(5500%) hue-rotate(260deg) brightness(68%) contrast(115%);
 }
-
-
+</style>
 
 
 
