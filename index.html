@@ -19,62 +19,14 @@
         <link href="css/templatemo-first-portfolio-style.css" rel="stylesheet">
         
 <style>
-/* Define CSS Variables for Gap for Consistency and Responsiveness */
-:root {
-    --carousel-gap-desktop: 30px;
-    --carousel-gap-tablet: 25px;
-    --carousel-gap-mobile: 20px;
-    --current-carousel-gap: var(--carousel-gap-desktop); /* Default for desktop */
-}
-
-/* Main wrapper for scrollable content and navigation buttons */
-.scroll-container-with-buttons {
-    position: relative; /* Allows absolute positioning of child buttons */
-    padding: 0 50px; /* Space for the navigation buttons on the sides */
-    margin: 0 -15px; /* Offset to align with Bootstrap's row/container padding */
-}
-
-/* Styles for the scroll navigation buttons */
-.scroll-button {
-    position: absolute;
-    top: 50%; /* Vertically center */
-    transform: translateY(-50%);
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
-    border: 1px solid #ddd;
-    border-radius: 50%; /* Circular shape */
-    width: 45px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1.6rem; /* Icon size */
-    color: #333;
-    z-index: 10; /* Ensure buttons are above content */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    transition: background-color 0.3s, color 0.3s;
-    outline: none; /* Remove focus outline on click */
-}
-
-.scroll-button:hover {
-    background-color: #eee;
-    color: #000;
-}
-
-/* Specific button positioning */
-.scroll-button-left {
-    left: 0;
-}
-
-.scroll-button-right {
-    right: 0;
-}
+/* ... (your existing :root and general carousel button/wrapper styles) ... */
 
 /* Container that holds the horizontally scrollable items */
 #conference-list-wrapper {
     overflow-x: scroll; /* Enable horizontal scrolling */
     -webkit-overflow-scrolling: touch; /* Improves scrolling on iOS */
     padding-bottom: 20px; /* Space for consistent bottom margin (even if scrollbar is hidden) */
+    /* NO scroll-snap-type here as we removed it for smoother JS looping */
 
     /* Hide the scrollbar visually */
     scrollbar-width: none; /* Firefox */
@@ -95,21 +47,19 @@
 
 /* Individual conference item for scrolling */
 .conference-scroll-item {
-    flex: 0 0 auto; /* Let flex-basis determine exact width, prevent shrinking/growing */
+    flex: 0 0 auto; /* Allow flex-basis to dictate exact width, prevent shrinking/growing */
     box-sizing: border-box; /* Includes padding in width calculation */
-    scroll-snap-align: start; /* Helps items snap into view when scrolling */
-    min-width: 280px; /* Ensures a minimum width on smallest screens, acts as fallback */
+    /* We handle snapping via JS for precise loop, so no scroll-snap-align needed here directly */
+    min-width: 280px; /* Ensures a minimum width on smallest screens */
 
-    /* Dynamic width calculation for each item to match Bootstrap column widths */
-    /* Desktop: ~3 items visible, Tablet: ~2 items, Mobile: ~1 item */
-    
-    /* Default width for Desktop (3 items) */
-    flex-basis: calc((100% - (2 * var(--carousel-gap-desktop))) / 3);
-    max-width: calc((100% - (2 * var(--carousel-gap-desktop))) / 3); /* Add max-width to prevent overflow */
+    /* Default width for Desktop (mimics col-lg-4 behavior) */
+    /* Each item is 33.3333% of the container, minus a portion of the total gap space */
+    flex-basis: calc(33.3333% - (2 * var(--carousel-gap-desktop) / 3)); /* For 3 items & 2 gaps, distribute gap space */
+    max-width: calc(33.3333% - (2 * var(--carousel-gap-desktop) / 3));
 }
 
 /* Responsive adjustments */
-@media (max-width: 991.98px) { /* Tablets and smaller (2 items visible) */
+@media (max-width: 991.98px) { /* Tablets and smaller (mimics col-md-6 behavior) */
     :root {
         --current-carousel-gap: var(--carousel-gap-tablet); /* Override gap for tablets */
     }
@@ -122,13 +72,11 @@
         font-size: 1.4rem;
     }
     /* For 2 items, there is 1 gap. */
-    .conference-scroll-item {
-        flex-basis: calc((100% - var(--carousel-gap-tablet)) / 2);
-        max-width: calc((100% - var(--carousel-gap-tablet)) / 2);
-    }
+    flex-basis: calc(50% - (1 * var(--carousel-gap-tablet) / 2)); /* For 2 items & 1 gap, distribute gap space */
+    max-width: calc(50% - (1 * var(--carousel-gap-tablet) / 2));
 }
 
-@media (max-width: 767.98px) { /* Mobile phones (1 item visible) */
+@media (max-width: 767.98px) { /* Mobile phones (mimics col-12 behavior) */
     :root {
         --current-carousel-gap: var(--carousel-gap-mobile); /* Override gap for mobile */
     }
@@ -140,7 +88,7 @@
         height: 35px;
         font-size: 1.2rem;
     }
-    /* For 1 item, it takes the full width. */
+    /* For 1 item, it takes the full width, no gap distribution needed */
     .conference-scroll-item {
         flex-basis: 100%; /* Takes the full available width */
         max-width: 100%;
@@ -153,24 +101,24 @@
     display: flex;
     flex-direction: column;
     background-color: #ffffff; /* Explicit background for thumbs */
-    padding: 20px;
+    padding: 20px; /* This padding IS the internal padding of the card, just like Bootstrap column content */
     border-radius: 10px;
 }
 .conference-scroll-item .projects-info {
-    flex-shrink: 0; /* Prevent title/info from shrinking */
+    flex-shrink: 0;
 }
 
 /* Adjust button layout for scroll items within the card */
 .conference-scroll-item .custom-btn,
 .conference-scroll-item .custom-border-btn {
     display: inline-block; /* Keep buttons inline as original */
-    margin-top: 5px; /* Add some top margin to separate from info */
-    margin-bottom: 5px; /* Maintain bottom margin */
-    margin-left: 5px;  /* Slightly reduced horizontal margin for better fit */
-    margin-right: 5px; /* Slightly reduced horizontal margin for better fit */
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
     text-align: center;
     padding: 8px 16px;
-    flex-shrink: 0; /* Prevent buttons from shrinking */
+    flex-shrink: 0;
 }
 
 /* Adjust spacing for the <p> tag and image within the card */
@@ -179,16 +127,16 @@
     margin-bottom: 5px;
 }
 .conference-scroll-item .projects-thumb a.image {
-    display: block; /* Ensure it takes its own line */
-    margin-top: auto; /* Pushes image to the bottom of the card if content varies */
-    padding-top: 15px; /* Space above the image */
-    flex-grow: 1; /* Allow the image container to take remaining space */
+    display: block;
+    margin-top: auto;
+    padding-top: 15px;
+    flex-grow: 1; /* Allows image to take up remaining vertical space */
 }
 .conference-scroll-item .projects-thumb .projects-image {
     width: 100%;
     height: auto;
     display: block;
-    object-fit: cover; /* Ensure images cover their area nicely */
+    object-fit: cover;
 }
 
 /* Styles for social icons */
