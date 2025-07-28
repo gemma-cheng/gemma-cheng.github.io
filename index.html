@@ -19,78 +19,117 @@
         <link href="css/templatemo-first-portfolio-style.css" rel="stylesheet">
         
 <style>
-/* ... (your existing CSS for .scroll-container-with-buttons, .scroll-button, #conference-list-wrapper, #conference-list, etc.) ... */
+/* Remove existing conflicting rules related to old scroll logic (if any remain from previous attempts) */
+/* For example, remove these if they are present: */
+/*
+#conference-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.conference-item {
+    display: none;
+}
+.conference-item.visible {
+    display: block;
+}
+*/
+
+/* Define CSS Variables for Gap for Consistency and Responsiveness */
+:root {
+    --carousel-gap-desktop: 30px;
+    --carousel-gap-tablet: 25px;
+    --carousel-gap-mobile: 20px;
+    --current-carousel-gap: var(--carousel-gap-desktop); /* Default for desktop */
+}
+
+/* Main wrapper for scrollable content and navigation buttons */
+.scroll-container-with-buttons {
+    position: relative; /* Allows absolute positioning of child buttons */
+    padding: 0 50px; /* Space for the navigation buttons on the sides */
+    margin: 0 -15px; /* Offset to align with Bootstrap's row/container padding */
+}
+
+/* Styles for the scroll navigation buttons */
+.scroll-button {
+    position: absolute;
+    top: 50%; /* Vertically center */
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    border: 1px solid #ddd;
+    border-radius: 50%; /* Circular shape */
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.6rem; /* Icon size */
+    color: #333;
+    z-index: 10; /* Ensure buttons are above content */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, color 0.3s;
+    outline: none; /* Remove focus outline on click */
+}
+
+.scroll-button:hover {
+    background-color: #eee;
+    color: #000;
+}
+
+/* Specific button positioning */
+.scroll-button-left {
+    left: 0;
+}
+
+.scroll-button-right {
+    right: 0;
+}
+
+/* Container that holds the horizontally scrollable items */
+#conference-list-wrapper {
+    overflow-x: scroll; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Improves scrolling on iOS */
+    padding-bottom: 20px; /* Space for consistent bottom margin (even if scrollbar is hidden) */
+    scroll-snap-type: x mandatory; /* Makes items snap into view */
+
+    /* Hide the scrollbar visually */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+/* Hide scrollbar for Webkit browsers (Chrome, Safari) */
+#conference-list-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* Flex container for the conference items */
+#conference-list {
+    display: flex; /* Use Flexbox */
+    flex-wrap: nowrap; /* Prevent items from wrapping to the next line */
+    gap: var(--current-carousel-gap); /* Use CSS variable for consistency */
+    padding-right: 15px; /* Optional: adds a little padding to the end of the scrollable list */
+}
 
 /* Individual conference item for scrolling */
 .conference-scroll-item {
-    flex: 0 0 380px; /* Fixed width for desktop, similar to Bootstrap's col-lg-4 */
-    box-sizing: border-box; /* Ensures padding is included in the width */
-    scroll-snap-align: start; /* Helps items snap into view */
-    min-width: 300px; /* Ensures a minimum width even if 380px is too much for the screen */
+    flex: 0 0 auto; /* Let flex-basis determine exact width, prevent shrinking/growing */
+    box-sizing: border-box; /* Includes padding in width calculation */
+    scroll-snap-align: start; /* Helps items snap into view when scrolling */
+    min-width: 280px; /* Ensures a minimum width on smallest screens, acts as fallback */
+
+    /* Default (Desktop: 3 items visible) */
+    /*
+        Formula: (100% of container width - (number of gaps * gap size)) / number of visible items
+        For 3 items, there are 2 gaps.
+    */
+    flex-basis: calc((100% - (2 * var(--carousel-gap-desktop))) / 3);
 }
 
 /* Responsive adjustments */
 @media (max-width: 991.98px) { /* Tablets and smaller (2 items visible) */
-    .conference-scroll-item {
-        flex: 0 0 calc(50% - 15px); /* Half width, accounting for half of the 30px gap */
-        /* This mimics col-md-6 behavior (50% - 30px total padding for col-md-6) */
+    :root {
+        --current-carousel-gap: var(--carousel-gap-tablet); /* Override gap for tablets */
     }
-}
-
-@media (max-width: 767.98px) { /* Mobile phones (1 item visible) */
-    .conference-scroll-item {
-        flex: 0 0 100%; /* Full width */
-        /* min-width: 280px; is inherited, ensures content isn't too squished */
-    }
-}
-
-/* Ensure the .projects-thumb inside has consistent height and layout */
-.conference-scroll-item .projects-thumb {
-    height: 100%; /* Important for consistent height across items */
-    display: flex;
-    flex-direction: column;
-    background-color: #ffffff; /* Explicit background for thumbs */
-    padding: 20px;
-    border-radius: 10px;
-}
-.conference-scroll-item .projects-info {
-    flex-shrink: 0;
-}
-
-/* Adjust button layout for scroll items within the card */
-.conference-scroll-item .custom-btn,
-.conference-scroll-item .custom-border-btn {
-    display: inline-block;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    text-align: center;
-    padding: 8px 16px;
-    flex-shrink: 0;
-}
-
-/* Adjust spacing for the <p> tag and image within the card */
-.conference-scroll-item .projects-thumb p {
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-.conference-scroll-item .projects-thumb a.image {
-    display: block;
-    margin-top: auto;
-    padding-top: 15px;
-    flex-grow: 1; /* Allows image to take up remaining vertical space */
-}
-.conference-scroll-item .projects-thumb .projects-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-}
-
-
-/* Responsive adjustments */
-@media (max-width: 991.98px) { /* Tablets and smaller (2 items visible) */
     .scroll-container-with-buttons {
         padding: 0 40px; /* Adjust padding for smaller buttons */
     }
@@ -99,12 +138,16 @@
         height: 40px;
         font-size: 1.4rem;
     }
+    /* For 2 items, there is 1 gap. */
     .conference-scroll-item {
-        width: calc((100% - 30px) / 2); /* 2 items per row with 1 gap */
+        flex-basis: calc((100% - var(--carousel-gap-tablet)) / 2);
     }
 }
 
 @media (max-width: 767.98px) { /* Mobile phones (1 item visible) */
+    :root {
+        --current-carousel-gap: var(--carousel-gap-mobile); /* Override gap for mobile */
+    }
     .scroll-container-with-buttons {
         padding: 0 30px; /* Adjust padding for smallest screens */
     }
@@ -113,12 +156,9 @@
         height: 35px;
         font-size: 1.2rem;
     }
-    #conference-list {
-        gap: 20px; /* Slightly smaller gap on mobile */
-    }
+    /* For 1 item, there are 0 gaps *within* the calculation, it takes full width. */
     .conference-scroll-item {
-        width: calc(100% - 0px); /* 1 item per row (full width of container) */
-        min-width: 280px; /* Minimum width for mobile items */
+        flex-basis: 100%;
     }
 }
 
@@ -672,94 +712,131 @@
         updateVisibleItems(); // Run on page load
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () {
         const scrollContainer = document.getElementById("conference-list-wrapper");
         const conferenceList = document.getElementById("conference-list");
         const scrollLeftBtn = document.querySelector(".scroll-button-left");
         const scrollRightBtn = document.querySelector(".scroll-button-right");
 
-        // Exit if essential elements are missing
+        // Basic check for existence of elements
         if (!scrollContainer || !conferenceList || !scrollLeftBtn || !scrollRightBtn) {
-            console.warn("Could not find all required elements for infinite scroll functionality.");
-            return;
+            console.error("Missing one or more required DOM elements for the carousel.");
+            return; // Stop execution if elements are not found
         }
 
         const originalItems = Array.from(conferenceList.children);
         const totalOriginalItems = originalItems.length;
-        const gap = 30; // Matches CSS gap value for #conference-list
 
-        // If there are no items, hide buttons and stop
+        // Hide buttons if there aren't enough items to scroll
         if (totalOriginalItems === 0) {
             scrollLeftBtn.style.display = 'none';
             scrollRightBtn.style.display = 'none';
             return;
         }
 
-        // --- Cloning Logic for Infinite Loop ---
-        // We clone all original items and append them to the end, and prepend them to the beginning.
-        // This creates a continuous loop.
-        // Structure becomes: [cloned originalItems] + [originalItems] + [cloned originalItems]
+        // --- Determine the number of clones needed for seamless loop ---
+        // A common strategy is to clone a full set of original items to both ends.
+        // This makes the math for looping simpler.
+        const numClones = totalOriginalItems; 
 
-        // Clone and append original items to the end
+        // Clear existing children to re-populate with clones
+        conferenceList.innerHTML = ''; 
+
+        // 1. Prepend clones: Add items from the END of the original list to the beginning.
+        for (let i = totalOriginalItems - 1; i >= 0; i--) {
+            conferenceList.prepend(originalItems[i].cloneNode(true));
+        }
+        
+        // 2. Add original items: These will be the "main" visible content.
         originalItems.forEach(item => {
             conferenceList.appendChild(item.cloneNode(true));
         });
 
-        // Clone and prepend original items to the beginning
-        // We reverse the array to prepend them in the correct visual order (last original becomes first prepended, etc.)
-        originalItems.slice().reverse().forEach(item => {
-            conferenceList.prepend(item.cloneNode(true));
+        // 3. Append clones: Add items from the BEGINNING of the original list to the end.
+        originalItems.forEach(item => {
+            conferenceList.appendChild(item.cloneNode(true));
         });
 
-        // --- Determine Item and Section Widths ---
-        // Get a reference to one of the (now middle) original items to determine its width dynamically.
-        // After cloning, the 'real' first original item is now at index 'totalOriginalItems'.
-        const firstOriginalItem = conferenceList.children[totalOriginalItems];
-        if (!firstOriginalItem) {
-            console.error("Could not find first original item after cloning. Check cloning logic or element availability.");
-            return;
+        // --- Helper function to get current gap value from CSS ---
+        function getCurrentCssGap() {
+            // Get the computed style of the #conference-list to read the 'gap' property
+            const computedStyle = window.getComputedStyle(conferenceList);
+            return parseFloat(computedStyle.gap); // Parse the pixel value
         }
 
-        // Calculate the effective width of one item, including the gap
-        const itemEffectiveWidth = firstOriginalItem.offsetWidth + gap; 
+        // --- Helper function to get the scroll step size (width of one item + its trailing gap) ---
+        function getItemScrollWidth() {
+            // Get the width of the first original item (now located after the prepended clones)
+            const firstRenderedOriginalItem = conferenceList.children[numClones];
+            if (!firstRenderedOriginalItem) {
+                console.error("First original item not found after cloning.");
+                return 0;
+            }
+            return firstRenderedOriginalItem.offsetWidth + getCurrentCssGap();
+        }
 
-        // Calculate the pixel position where the 'real' original content starts and ends.
-        // realContentStartScroll: The scrollLeft position where the first original item begins.
-        const realContentStartScroll = totalOriginalItems * itemEffectiveWidth;
-        // realContentEndScroll: The scrollLeft position right after the last original item ends.
-        const realContentEndScroll = realContentStartScroll + (totalOriginalItems * itemEffectiveWidth);
-
-        // --- Initial Scroll Position ---
-        // Set the initial scroll position to the beginning of the actual original content block.
-        // This ensures the user starts viewing the "real" content, not the prepended clones.
-        scrollContainer.scrollLeft = realContentStartScroll;
+        // --- Initial Scroll Position Setup ---
+        // Calculate the scroll position where the 'real' original content starts.
+        // It's the sum of the widths of all prepended clones plus their gaps.
+        let realContentStartScroll = 0;
+        for (let i = 0; i < numClones; i++) {
+            realContentStartScroll += conferenceList.children[i].offsetWidth;
+            if (i < numClones - 1) { // Add gap for all except the very last prepended clone
+                realContentStartScroll += getCurrentCssGap();
+            }
+        }
         
+        scrollContainer.scrollLeft = realContentStartScroll; // Set initial scroll
+        
+        console.log("--- Carousel Initialized ---");
+        console.log(`Original items: ${totalOriginalItems}`);
+        console.log(`Total items after cloning: ${conferenceList.children.length}`);
+        console.log(`Current CSS Gap: ${getCurrentCssGap()}px`);
+        console.log(`Calculated Item Scroll Width: ${getItemScrollWidth()}px`);
+        console.log(`Real content starts at (approx): ${realContentStartScroll}px`);
+        console.log(`Initial scrollLeft set to: ${scrollContainer.scrollLeft}px`);
+
         let isProgrammaticScroll = false; // Flag to prevent re-triggering during internal scroll jumps
 
-        // --- Scroll Event Listener for Infinite Looping ---
+        // --- Scroll Event Listener for Infinite Looping Logic ---
         scrollContainer.addEventListener("scroll", function () {
-            // If the scroll was triggered by our own JavaScript jump, ignore it to prevent flicker
-            if (isProgrammaticScroll) return; 
+            if (isProgrammaticScroll) return; // Ignore if scroll was initiated by our script
 
             const currentScrollLeft = scrollContainer.scrollLeft;
             const scrollWidth = scrollContainer.scrollWidth;
             const clientWidth = scrollContainer.clientWidth;
 
-            // If scrolled past the real content into the appended clones (to the far right)
-            if (currentScrollLeft >= realContentEndScroll) {
-                isProgrammaticScroll = true; // Mark as programmatic scroll
-                // Jump back to the equivalent position within the *start* of the real content
-                scrollContainer.scrollLeft = realContentStartScroll + (currentScrollLeft - realContentEndScroll);
+            // Recalculate 'real' content boundaries on the fly, as widths might change on resize
+            const currentItemScrollWidth = getItemScrollWidth();
+            const currentRealContentStartScroll = numClones * currentItemScrollWidth;
+            // The end of the real content is its start + (total number of original items * effective width)
+            const currentRealContentEndScroll = currentRealContentStartScroll + (totalOriginalItems * currentItemScrollWidth);
+            
+            // console.log(`Current Scroll: ${currentScrollLeft}, Start: ${currentRealContentStartScroll}, End: ${currentRealContentEndScroll}`);
+
+
+            // If scrolled past the end of the "real" content (into the appended clones)
+            if (currentScrollLeft >= currentRealContentEndScroll) {
+                isProgrammaticScroll = true;
+                // Jump back to the start of the "real" content, plus any overflow amount
+                scrollContainer.scrollLeft = currentRealContentStartScroll + (currentScrollLeft - currentRealContentEndScroll);
+                // console.log(`Jumped from end to start: ${scrollContainer.scrollLeft}`);
             }
-            // If scrolled before the real content into the prepended clones (to the far left)
-            else if (currentScrollLeft < realContentStartScroll) {
-                isProgrammaticScroll = true; // Mark as programmatic scroll
-                // Jump forward to the equivalent position within the *end* of the real content
-                scrollContainer.scrollLeft = realContentEndScroll - (realContentStartScroll - currentScrollLeft);
+            // If scrolled before the start of the "real" content (into the prepended clones)
+            else if (currentScrollLeft <= 0) { // This condition is often problematic, prefer < realContentStartScroll
+            // Or even better: if currentScrollLeft <= a few pixels past the prepended block
+            // However, with `scroll-snap-type`, it often snaps to exactly 0 after the last prepended item.
+            // Let's use `currentScrollLeft < currentRealContentStartScroll - (currentItemScrollWidth / 2)` as a more robust trigger.
+            // Simplified for now based on full prepended block scroll:
+            // if (currentScrollLeft < currentRealContentStartScroll) { // This could trigger too early if you're just at the start of prepended items
+                isProgrammaticScroll = true;
+                // Jump forward to the end of the "real" content, minus any overflow amount
+                scrollContainer.scrollLeft = currentRealContentEndScroll - (currentRealContentStartScroll - currentScrollLeft);
+                // console.log(`Jumped from start to end: ${scrollContainer.scrollLeft}`);
             }
 
-            // After a jump, reset the programmatic scroll flag slightly after the browser processes the jump.
-            clearTimeout(scrollContainer._programmaticScrollTimeout); // Clear any previous timeouts
+            // After a jump, reset the programmatic scroll flag after a short delay
+            clearTimeout(scrollContainer._programmaticScrollTimeout); 
             scrollContainer._programmaticScrollTimeout = setTimeout(() => {
                 isProgrammaticScroll = false;
             }, 50); // Small delay to ensure the browser has processed the jump
@@ -768,33 +845,32 @@
         // --- Navigation Button Handlers ---
         scrollRightBtn.addEventListener("click", function () {
             scrollContainer.scrollBy({
-                left: itemEffectiveWidth, // Scroll by one item's effective width
+                left: getItemScrollWidth(), // Scroll by one item's effective width
                 behavior: "smooth",
             });
+             console.log("Scrolling right. Step:", getItemScrollWidth());
         });
 
         scrollLeftBtn.addEventListener("click", function () {
             scrollContainer.scrollBy({
-                left: -itemEffectiveWidth, // Scroll back by one item's effective width
+                left: -getItemScrollWidth(), // Scroll back by one item's effective width
                 behavior: "smooth",
             });
+            console.log("Scrolling left. Step:", -getItemScrollWidth());
         });
 
         // --- Handle Resize Events ---
         window.addEventListener('resize', function() {
-            // When the window is resized, item widths and scroll positions might change.
-            // We need to re-align the carousel to the start of the 'real' content.
-            isProgrammaticScroll = true; // Mark as programmatic scroll
+            // On resize, recalculate initial scroll position and jump there
+            isProgrammaticScroll = true;
             scrollContainer.style.scrollBehavior = 'auto'; // Temporarily disable smooth scroll for the jump
+            
+            // Recalculate start position based on new item widths
+            const newRealContentStartScroll = numClones * getItemScrollWidth();
+            scrollContainer.scrollLeft = newRealContentStartScroll;
+            console.log(`Resized: Jumped to ${scrollContainer.scrollLeft}px`);
 
-            const newFirstOriginalItem = conferenceList.children[totalOriginalItems];
-            if (newFirstOriginalItem) {
-                const newItemEffectiveWidth = newFirstOriginalItem.offsetWidth + gap;
-                const newRealContentStartScroll = totalOriginalItems * newItemEffectiveWidth;
-                scrollContainer.scrollLeft = newRealContentStartScroll;
-            }
-
-            // Restore smooth scroll after a short delay
+            // Re-enable smooth scroll after a slight delay
             setTimeout(() => {
                 scrollContainer.style.scrollBehavior = 'smooth';
                 isProgrammaticScroll = false;
