@@ -988,6 +988,17 @@ strong {
     overflow: hidden;
 }
 
+.social-icon-link:hover {
+    background: var(--dark-color);
+    color: var(--white-color);
+}
+
+.social-icon-link.my-orcid:hover,
+.social-icon-link.nasa-ads:hover {
+    filter: invert(1);
+    /* If you want a dark background on hover: */
+    background-color: var(--dark-color);
+}
 
 /*---------------------------------------
   RESPONSIVE STYLES               
