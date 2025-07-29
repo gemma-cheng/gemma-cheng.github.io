@@ -516,171 +516,63 @@
     });
 
 	
-    document.addEventListener("DOMContentLoaded", function () {
-        const scrollContainer = document.getElementById("conference-list-wrapper");
-        const conferenceList = document.getElementById("conference-list");
-        const scrollLeftBtn = document.querySelector(".scroll-button-left");
-        const scrollRightBtn = document.querySelector(".scroll-button-right");
+document.addEventListener("DOMContentLoaded", function () {
+    const scrollContainer = document.getElementById("conference-list-wrapper");
+    const conferenceList = document.getElementById("conference-list");
+    const scrollLeftBtn = document.querySelector(".scroll-button-left");
+    const scrollRightBtn = document.querySelector(".scroll-button-right");
 
-        if (!scrollContainer || !conferenceList || !scrollLeftBtn || !scrollRightBtn) {
-            console.error("Missing one or more required DOM elements for the carousel. Skipping initialization.");
-            return;
+    const visibleCount = 3; // Number of visible items at a time
+    const originalItems = Array.from(conferenceList.children);
+
+    // Clone first N and last N items for seamless looping
+    for (let i = 0; i < visibleCount; i++) {
+        conferenceList.appendChild(originalItems[i].cloneNode(true));
+        conferenceList.insertBefore(
+            originalItems[originalItems.length - 1 - i].cloneNode(true),
+            conferenceList.firstChild
+        );
+    }
+
+    // Helper to get the width of one item (including margin/padding)
+    function getItemWidth() {
+        return conferenceList.children[visibleCount].getBoundingClientRect().width;
+    }
+
+    // Set initial scroll position to the first real item
+    function setInitialScroll() {
+        scrollContainer.scrollLeft = getItemWidth() * visibleCount;
+    }
+
+    setInitialScroll();
+
+    // Handle seamless looping
+    scrollContainer.addEventListener("scroll", function () {
+        const itemWidth = getItemWidth();
+        const totalItems = conferenceList.children.length;
+        const maxScroll = itemWidth * (totalItems - visibleCount);
+
+        // If scrolled to (or past) the clones at the start, jump to the real items at the end
+        if (scrollContainer.scrollLeft <= itemWidth * 0.5) {
+            scrollContainer.scrollLeft = itemWidth * (originalItems.length + visibleCount);
         }
-
-        const originalItems = Array.from(conferenceList.children);
-        const totalOriginalItems = originalItems.length;
-
-        if (totalOriginalItems === 0) {
-            scrollLeftBtn.style.display = 'none';
-            scrollRightBtn.style.display = 'none';
-            console.warn("No original carousel items found. Carousel will not function.");
-            return;
+        // If scrolled to (or past) the clones at the end, jump to the real items at the start
+        else if (scrollContainer.scrollLeft >= maxScroll - itemWidth * 0.5) {
+            scrollContainer.scrollLeft = itemWidth * visibleCount;
         }
-
-        // --- Cloning Strategy ---
-        // Clone original items once and append them to the end.
-        // The list will become: [original items] + [cloned items].
-        // This is a common and often simpler way to manage infinite loops.
-        originalItems.forEach(item => {
-            conferenceList.appendChild(item.cloneNode(true));
-        });
-
-        // --- Helper function to get current gap value from CSS ---
-        function getCurrentCssGap() {
-            const computedStyle = window.getComputedStyle(conferenceList);
-            return parseFloat(computedStyle.gap) || 0;
-        }
-
-        // --- Helper function to get the precise scroll step size (width of one item + its trailing gap) ---
-        // This calculates the width of a single item as currently rendered.
-        function getItemEffectiveWidth() {
-            if (originalItems[0]) {
-                return originalItems[0].getBoundingClientRect().width + getCurrentCssGap();
-            }
-            return 0;
-        }
-
-        // --- Core Variables for Infinite Loop ---
-        let loopPoint = 0; // The pixel position where the original content starts repeating (end of first set of originals)
-        let isProgrammaticScroll = false; // Flag to prevent re-triggering during internal scroll jumps
-        let currentScrollStep = 0; // Tracks the logical "step" we are on (0 to totalOriginalItems - 1)
-
-
-        // --- Function to Recalculate Boundaries and Reset Scroll Position ---
-        function recalculateAndResetScroll() {
-            const itemWidth = getItemEffectiveWidth();
-            // The loop point is where the first set of original items ends and the clones begin.
-            loopPoint = totalOriginalItems * itemWidth;
-
-            // When resizing or initializing, snap to the very beginning of the "real" content.
-            // This is crucial for consistency.
-            scrollContainer.style.scrollBehavior = 'auto'; // Disable smooth scroll for jump
-            scrollContainer.scrollLeft = 0; // Always start at 0 after recalculation/reset
-            currentScrollStep = 0; // Reset logical step counter
-            
-            // Re-enable smooth scroll after a tiny delay
-            setTimeout(() => {
-                scrollContainer.style.scrollBehavior = 'smooth';
-            }, 50);
-
-            console.log("Recalculated & Reset:", { itemWidth, loopPoint, currentScrollStep });
-        }
-
-        // Initial setup on DOMContentLoaded
-        recalculateAndResetScroll();
-
-        // --- Scroll Event Listener for Infinite Looping ---
-        scrollContainer.addEventListener("scroll", function () {
-            if (isProgrammaticScroll) return; // Ignore programmatic scrolls
-
-            const currentScrollLeft = scrollContainer.scrollLeft;
-
-            // If we've scrolled past the loopPoint (into the cloned items)
-            if (currentScrollLeft >= loopPoint) {
-                isProgrammaticScroll = true;
-                // Jump back to the start of the original content block,
-                // maintaining the offset scrolled into the cloned section.
-                scrollContainer.scrollLeft = currentScrollLeft - loopPoint;
-                // console.log(`Jumped from end to start. New scrollLeft: ${scrollContainer.scrollLeft}`);
-            }
-            
-            // This cloning method generally doesn't require a jump from start to end
-            // because there are no clones prepended at the very beginning.
-            // If the user scrolls manually extremely fast and reaches 0, it might jump.
-            // For most cases, this `if` block is enough.
-
-            // Reset the programmatic scroll flag after a short delay
-            clearTimeout(scrollContainer._programmaticScrollTimeout);
-            scrollContainer._programmaticScrollTimeout = setTimeout(() => {
-                isProgrammaticScroll = false;
-            }, 50);
-        }, { passive: true });
-
-
-        // --- Navigation Button Handlers ---
-        scrollRightBtn.addEventListener("click", function () {
-            const stepWidth = getItemEffectiveWidth();
-            currentScrollStep++;
-            let targetScroll = currentScrollStep * stepWidth;
-
-            // If we're about to scroll past the original content block,
-            // immediately jump back *before* scrolling to the new target.
-            // This creates the illusion of infinite loop.
-            if (targetScroll >= loopPoint) {
-                isProgrammaticScroll = true;
-                scrollContainer.style.scrollBehavior = 'auto'; // Instant jump
-                scrollContainer.scrollLeft = 0; // Jump to the beginning of the original items
-                
-                // Adjust currentScrollStep to reflect that we're now at the beginning
-                currentScrollStep = 0;
-                targetScroll = 0; // New target is 0 after the jump
-                
-                // Re-enable smooth scroll after a tiny delay
-                setTimeout(() => {
-                    scrollContainer.style.scrollBehavior = 'smooth';
-                    isProgrammaticScroll = false;
-                    // Now perform the smooth scroll from the new '0' position
-                    scrollContainer.scrollBy({ left: stepWidth, behavior: 'smooth' });
-                }, 50); 
-            } else {
-                 scrollContainer.scrollBy({ left: stepWidth, behavior: 'smooth' });
-            }
-        });
-
-        scrollLeftBtn.addEventListener("click", function () {
-            const stepWidth = getItemEffectiveWidth();
-            currentScrollStep--;
-            let targetScroll = currentScrollStep * stepWidth;
-
-            // If we're about to scroll before the beginning of the original content (logically),
-            // immediately jump to the start of the cloned block (which visually is the end of the content).
-            if (currentScrollStep < 0) {
-                isProgrammaticScroll = true;
-                scrollContainer.style.scrollBehavior = 'auto'; // Instant jump
-                scrollContainer.scrollLeft = loopPoint; // Jump to the start of the cloned block
-                
-                // Adjust currentScrollStep to reflect that we're now at the end (logically)
-                currentScrollStep = totalOriginalItems - 1; // Last original item
-                targetScroll = loopPoint - stepWidth; // Target is now before the end of the first original block
-                
-                // Re-enable smooth scroll after a tiny delay
-                setTimeout(() => {
-                    scrollContainer.style.scrollBehavior = 'smooth';
-                    isProgrammaticScroll = false;
-                    // Now perform the smooth scroll from the new 'loopPoint'
-                    scrollContainer.scrollBy({ left: -stepWidth, behavior: 'smooth' });
-                }, 50);
-            } else {
-                 scrollContainer.scrollBy({ left: -stepWidth, behavior: 'smooth' });
-            }
-        });
-
-
-        // --- Handle Resize Events ---
-        window.addEventListener('resize', function() {
-            recalculateAndResetScroll(); // Recalculate everything and reset scroll on resize
-        });
     });
+
+    // Button navigation
+    scrollRightBtn.addEventListener("click", function () {
+        scrollContainer.scrollBy({ left: getItemWidth(), behavior: "smooth" });
+    });
+    scrollLeftBtn.addEventListener("click", function () {
+        scrollContainer.scrollBy({ left: -getItemWidth(), behavior: "smooth" });
+    });
+
+    // On resize, reset scroll position
+    window.addEventListener("resize", setInitialScroll);
+});
 </script>
 
 
