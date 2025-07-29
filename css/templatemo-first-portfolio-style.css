@@ -1344,19 +1344,6 @@ strong {
 /* Buttons */
 .conference-scroll-item .custom-btn,
 .conference-scroll-item .custom-border-btn {
-    display: inline-block;
-    width: auto; /* Prevent stretching */
-    margin: 5px 5px;
-    text-align: center;
-    padding: 10px 20px;
-    border-radius: var(--border-radius-large);
-    white-space: nowrap;
-    font-size: var(--p-font-size);
-    font-weight: var(--font-weight-bold);
-    background: var(--secondary-color);
-    color: var(--white-color); /* White text for buttons */
-    border: none;
-    transition: background 0.3s, color 0.3s;
 }
 .conference-scroll-item .custom-btn:hover,
 .conference-scroll-item .custom-border-btn:hover {
