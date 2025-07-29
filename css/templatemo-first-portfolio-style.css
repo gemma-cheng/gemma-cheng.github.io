@@ -968,35 +968,32 @@ strong {
   color: var(--white-color);
 }
 
-.social-icon-link.my-orcid {
-    background-image: url('../images/orcid1.svg');
-    background-size: 80%;
-    background-repeat: no-repeat;
-    background-position: center;
-    line-height: 0;
-    text-indent: -9999px;
-    overflow: hidden;
+.social-icon-link.my-orcid{
+    background: var(--white-color);
+    -webkit-mask: url('../images/orcid1.svg') center/80% no-repeat;
+    mask: url('../images/orcid1.svg') center/80% no-repeat;
+    background-color: var(--dark-color);
+    transition: background-color 0.3s;
+}
+
+
+.social-icon-link.nasa-ads {
+    background: var(--white-color);
+    -webkit-mask: url('../images/ads.svg') center/80% no-repeat;
+    mask: url('../images/ads.svg') center/80% no-repeat;
+    background-color: var(--dark-color);
+    transition: background-color 0.3s;
 }
 
 .social-icon-link.nasa-ads {
-    background-image: url('../images/ads.svg');
-    background-size: 80%;
-    background-repeat: no-repeat;
-    background-position: center;
-    line-height: 0;
-    text-indent: -9999px;
-    overflow: hidden;
-}
-
-.social-icon-link:hover {
-    background: var(--dark-color);
-    color: var(--white-color);
+    -webkit-mask: url('../images/ads.svg') center/80% no-repeat;
+    mask: url('../images/ads.svg') center/80% no-repeat;
 }
 
 .social-icon-link.my-orcid:hover,
 .social-icon-link.nasa-ads:hover {
-    background-color: var(--dark-color);
-    filter: invert(1);
+    background-color: var(--white-color)
+}
 }
 
 /*---------------------------------------
