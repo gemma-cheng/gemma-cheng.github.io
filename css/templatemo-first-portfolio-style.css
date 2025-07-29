@@ -968,35 +968,45 @@ strong {
   color: var(--white-color);
 }
 
-.social-icon-link.my-orcid{
-    background: var(--white-color);
+.social-icon-link.my-orcid,
+.social-icon-link.nasa-ads {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    /* Icon mask */
     -webkit-mask: url('../images/orcid1.svg') center/80% no-repeat;
     mask: url('../images/orcid1.svg') center/80% no-repeat;
-    background-color: var(--dark-color);
+    background-color: var(--dark-color); /* Icon color (dark by default) */
     transition: background-color 0.3s;
+    z-index: 1;
 }
-
-
-.social-icon-link.nasa-ads {
-    background: var(--white-color);
-    -webkit-mask: url('../images/ads.svg') center/80% no-repeat;
-    mask: url('../images/ads.svg') center/80% no-repeat;
-    background-color: var(--dark-color);
-    transition: background-color 0.3s;
-}
-
 .social-icon-link.nasa-ads {
     -webkit-mask: url('../images/ads.svg') center/80% no-repeat;
     mask: url('../images/ads.svg') center/80% no-repeat;
 }
 
+/* Circle background using a pseudo-element */
+.social-icon-link.my-orcid::before,
+.social-icon-link.nasa-ads::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 100px;
+    background: var(--white-color); /* Default circle background */
+    z-index: -1;
+    transition: background 0.3s;
+}
+
+/* On hover: swap icon and background colors */
 .social-icon-link.my-orcid:hover,
 .social-icon-link.nasa-ads:hover {
-    background-color: var(--white-color)
+    background-color: var(--white-color); /* Icon becomes white */
 }
 .social-icon-link.my-orcid:hover::before,
 .social-icon-link.nasa-ads:hover::before {
-    background: var(--dark-color);
+    background: var(--dark-color); /* Circle background becomes dark */
 }
 
 /*---------------------------------------
