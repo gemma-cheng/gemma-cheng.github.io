@@ -969,7 +969,6 @@ strong {
 }
 
 .social-icon-link {
-  background: var(--white-color);
   border-radius: 100px;
   display: inline-block;
   width: 30px;
