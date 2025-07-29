@@ -1312,15 +1312,6 @@ strong {
 
 /* Card Styling */
 .conference-scroll-item .projects-thumb {
-    background: var(--section-bg-color);
-    padding: 40px;
-    border-radius: var(--border-radius-medium);
-    box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    min-height: 250px;
-    justify-content: flex-start;
 }
 
 /* Card Title */
@@ -1345,21 +1336,8 @@ strong {
 
 /* Image and Paragraph */
 .conference-scroll-item .projects-thumb p {
-    margin-top: 5px;
-    margin-bottom: 5px;
 }
 .conference-scroll-item .projects-thumb a.image {
-    display: block;
-    margin-top: auto;
-    padding-top: 15px;
-    flex-grow: 1;
-    text-align: center;
 }
 .conference-scroll-item .projects-thumb .projects-image {
-    width: 90%;
-    height: auto;
-    display: inline-block;
-    object-fit: cover;
-    border-radius: var(--bs-border-radius);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
