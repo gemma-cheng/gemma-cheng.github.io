@@ -510,7 +510,52 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 20);
     }
 
-    // Debounced scroll handler
+    // Helper: Wait for scroll animation to finish
+    function waitForScrollEnd(callback) {
+        let lastPos = null;
+        let sameCount = 0;
+        function check() {
+            const current = scrollContainer.scrollLeft;
+            if (current === lastPos) {
+                sameCount++;
+                if (sameCount > 2) { // Wait for 2 frames of no movement
+                    callback();
+                    return;
+                }
+            } else {
+                sameCount = 0;
+                lastPos = current;
+            }
+            requestAnimationFrame(check);
+        }
+        requestAnimationFrame(check);
+    }
+
+    // Button navigation with seamless jump after animation
+    scrollRightBtn.addEventListener("click", function () {
+        scrollContainer.scrollBy({ left: getItemWidth(), behavior: "smooth" });
+        waitForScrollEnd(() => {
+            const itemWidth = getItemWidth();
+            const totalItems = conferenceList.children.length;
+            const maxScroll = itemWidth * (totalItems - visibleCount);
+            const rightLimit = maxScroll - itemWidth * 0.5;
+            if (scrollContainer.scrollLeft >= rightLimit) {
+                jumpTo(itemWidth * visibleCount);
+            }
+        });
+    });
+    scrollLeftBtn.addEventListener("click", function () {
+        scrollContainer.scrollBy({ left: -getItemWidth(), behavior: "smooth" });
+        waitForScrollEnd(() => {
+            const itemWidth = getItemWidth();
+            const leftLimit = itemWidth * 0.5;
+            if (scrollContainer.scrollLeft <= leftLimit) {
+                jumpTo(itemWidth * (originalItems.length + visibleCount));
+            }
+        });
+    });
+
+    // For user scroll (drag/trackpad), use debounced scroll event as before
     let scrollTimeout = null;
     scrollContainer.addEventListener("scroll", function () {
         if (scrollTimeout) clearTimeout(scrollTimeout);
@@ -527,15 +572,7 @@ document.addEventListener("DOMContentLoaded", function () {
             else if (scrollContainer.scrollLeft >= rightLimit) {
                 jumpTo(itemWidth * visibleCount);
             }
-        }, 0);
-    });
-
-    // Button navigation
-    scrollRightBtn.addEventListener("click", function () {
-        scrollContainer.scrollBy({ left: getItemWidth(), behavior: "smooth" });
-    });
-    scrollLeftBtn.addEventListener("click", function () {
-        scrollContainer.scrollBy({ left: -getItemWidth(), behavior: "smooth" });
+        }, 120);
     });
 
     // On resize, reset scroll position
