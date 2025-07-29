@@ -995,8 +995,8 @@ strong {
 
 .social-icon-link.my-orcid:hover,
 .social-icon-link.nasa-ads:hover {
-    filter: invert(1);
     background-color: var(--dark-color);
+    filter: invert(1);
 }
 
 /*---------------------------------------
