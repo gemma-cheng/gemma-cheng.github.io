@@ -1325,20 +1325,12 @@ strong {
 
 /* Card Title */
 .conference-scroll-item .projects-info {
-    flex-shrink: 0;
-    margin-bottom: 15px;
 }
 .conference-scroll-item .projects-info .projects-title {
-    font-size: var(--h3-font-size);
-    margin-bottom: 0.5rem;
 }
 
 /* Button Group */
 .conference-scroll-item .projects-thumb .button-group {
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    flex-shrink: 0;
 }
 
 /* Buttons */
@@ -1347,11 +1339,8 @@ strong {
 }
 .conference-scroll-item .custom-btn:hover,
 .conference-scroll-item .custom-border-btn:hover {
-    background: var(--primary-color);
-    color: var(--dark-color); /* Dark text on hover */
 }
 .conference-scroll-item .custom-border-btn {
-    border: 2px solid transparent;
 }
 
 /* Image and Paragraph */
