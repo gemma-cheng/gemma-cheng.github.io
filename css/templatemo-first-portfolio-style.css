@@ -969,7 +969,7 @@ strong {
 }
 
 .social-icon-link.my-orcid {
-    background-image: url('../images/orcid.png');
+    background-image: url('../images/orcid.svg');
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
@@ -979,7 +979,7 @@ strong {
 }
 
 .social-icon-link.nasa-ads {
-    background-image: url('../images/untitled.png');
+    background-image: url('../images/ads.svg');
     background-size: 80%;
     background-repeat: no-repeat;
     background-position: center;
@@ -996,7 +996,6 @@ strong {
 .social-icon-link.my-orcid:hover,
 .social-icon-link.nasa-ads:hover {
     filter: invert(1);
-    /* If you want a dark background on hover: */
     background-color: var(--dark-color);
 }
 
