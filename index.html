@@ -505,34 +505,29 @@ document.addEventListener("DOMContentLoaded", function () {
     function jumpTo(pos) {
         scrollContainer.style.scrollBehavior = "auto";
         scrollContainer.scrollLeft = pos;
-        // Restore smooth after a tick
         setTimeout(() => {
             scrollContainer.style.scrollBehavior = "smooth";
         }, 20);
     }
 
-    // Listen for scroll events and jump if in clone zone
-    let isJumping = false;
+    // Debounced scroll handler
+    let scrollTimeout = null;
     scrollContainer.addEventListener("scroll", function () {
-        if (isJumping) return;
-        const itemWidth = getItemWidth();
-        const totalItems = conferenceList.children.length;
-        const maxScroll = itemWidth * (totalItems - visibleCount);
-        const leftLimit = itemWidth * 0.5;
-        const rightLimit = maxScroll - itemWidth * 0.5;
+        if (scrollTimeout) clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            const itemWidth = getItemWidth();
+            const totalItems = conferenceList.children.length;
+            const maxScroll = itemWidth * (totalItems - visibleCount);
+            const leftLimit = itemWidth * 0.5;
+            const rightLimit = maxScroll - itemWidth * 0.5;
 
-        // If scrolled to (or past) the clones at the start, jump to the real items at the end
-        if (scrollContainer.scrollLeft <= leftLimit) {
-            isJumping = true;
-            jumpTo(itemWidth * (originalItems.length + visibleCount));
-            setTimeout(() => { isJumping = false; }, 40);
-        }
-        // If scrolled to (or past) the clones at the end, jump to the real items at the start
-        else if (scrollContainer.scrollLeft >= rightLimit) {
-            isJumping = true;
-            jumpTo(itemWidth * visibleCount);
-            setTimeout(() => { isJumping = false; }, 40);
-        }
+            if (scrollContainer.scrollLeft <= leftLimit) {
+                jumpTo(itemWidth * (originalItems.length + visibleCount));
+            }
+            else if (scrollContainer.scrollLeft >= rightLimit) {
+                jumpTo(itemWidth * visibleCount);
+            }
+        }, 120); // Wait 120ms after last scroll event before checking
     });
 
     // Button navigation
