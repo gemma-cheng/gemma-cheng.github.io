@@ -994,6 +994,9 @@ strong {
 .social-icon-link.nasa-ads:hover {
     background-color: var(--white-color)
 }
+.social-icon-link.my-orcid:hover::before,
+.social-icon-link.nasa-ads:hover::before {
+    background: var(--dark-color);
 }
 
 /*---------------------------------------
