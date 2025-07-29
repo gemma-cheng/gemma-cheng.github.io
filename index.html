@@ -473,56 +473,13 @@
 
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const items = document.querySelectorAll(".conference-item");
-        const showMoreBtn = document.getElementById("show-more-btn");
-
-        function updateVisibleItems() {
-            let itemsPerRow;
-            if (window.innerWidth >= 992) {
-                itemsPerRow = 3; // Large screens (desktop)
-            } else if (window.innerWidth >= 768) {
-                itemsPerRow = 2; // Medium screens (tablets)
-            } else {
-                itemsPerRow = 1; // Small screens (phones)
-            }
-
-            // Hide all items initially
-            items.forEach(item => item.classList.remove("visible"));
-
-            // Show only the first row
-            for (let i = 0; i < itemsPerRow; i++) {
-                if (items[i]) {
-                    items[i].classList.add("visible");
-                }
-            }
-
-            showMoreBtn.textContent = "Show More";
-        }
-
-        showMoreBtn.addEventListener("click", function () {
-            const isExpanded = this.textContent === "Show Less";
-
-            if (isExpanded) {
-                updateVisibleItems(); // Hide extra items again
-            } else {
-                items.forEach(item => item.classList.add("visible")); // Show all items
-                this.textContent = "Show Less";
-            }
-        });
-
-        window.addEventListener("resize", updateVisibleItems);
-        updateVisibleItems(); // Run on page load
-    });
-
-	
 document.addEventListener("DOMContentLoaded", function () {
     const scrollContainer = document.getElementById("conference-list-wrapper");
     const conferenceList = document.getElementById("conference-list");
     const scrollLeftBtn = document.querySelector(".scroll-button-left");
     const scrollRightBtn = document.querySelector(".scroll-button-right");
 
-    const visibleCount = 3; // Number of visible items at a time
+    const visibleCount = 3;
     const originalItems = Array.from(conferenceList.children);
 
     // Clone first N and last N items for seamless looping
@@ -534,31 +491,47 @@ document.addEventListener("DOMContentLoaded", function () {
         );
     }
 
-    // Helper to get the width of one item (including margin/padding)
     function getItemWidth() {
         return conferenceList.children[visibleCount].getBoundingClientRect().width;
     }
 
-    // Set initial scroll position to the first real item
     function setInitialScroll() {
         scrollContainer.scrollLeft = getItemWidth() * visibleCount;
     }
 
     setInitialScroll();
 
-    // Handle seamless looping
+    // Helper: Instantly jump to a scroll position (no animation)
+    function jumpTo(pos) {
+        scrollContainer.style.scrollBehavior = "auto";
+        scrollContainer.scrollLeft = pos;
+        // Restore smooth after a tick
+        setTimeout(() => {
+            scrollContainer.style.scrollBehavior = "smooth";
+        }, 20);
+    }
+
+    // Listen for scroll events and jump if in clone zone
+    let isJumping = false;
     scrollContainer.addEventListener("scroll", function () {
+        if (isJumping) return;
         const itemWidth = getItemWidth();
         const totalItems = conferenceList.children.length;
         const maxScroll = itemWidth * (totalItems - visibleCount);
+        const leftLimit = itemWidth * 0.5;
+        const rightLimit = maxScroll - itemWidth * 0.5;
 
         // If scrolled to (or past) the clones at the start, jump to the real items at the end
-        if (scrollContainer.scrollLeft <= itemWidth * 0.5) {
-            scrollContainer.scrollLeft = itemWidth * (originalItems.length + visibleCount);
+        if (scrollContainer.scrollLeft <= leftLimit) {
+            isJumping = true;
+            jumpTo(itemWidth * (originalItems.length + visibleCount));
+            setTimeout(() => { isJumping = false; }, 40);
         }
         // If scrolled to (or past) the clones at the end, jump to the real items at the start
-        else if (scrollContainer.scrollLeft >= maxScroll - itemWidth * 0.5) {
-            scrollContainer.scrollLeft = itemWidth * visibleCount;
+        else if (scrollContainer.scrollLeft >= rightLimit) {
+            isJumping = true;
+            jumpTo(itemWidth * visibleCount);
+            setTimeout(() => { isJumping = false; }, 40);
         }
     });
 
@@ -574,8 +547,6 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener("resize", setInitialScroll);
 });
 </script>
-
-
 
 
     </body>
