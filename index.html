@@ -593,11 +593,49 @@ document.addEventListener("DOMContentLoaded", function () {
     // On resize, reset scroll position
     window.addEventListener("resize", setInitialScroll);
 });
-</script>
 
+	(function () {
+    const nav = document.querySelector('nav.navbar');
+    if (!nav) return;
+
+    // Insert a spacer after the navbar to avoid content jump
+    const spacer = document.createElement('div');
+    spacer.className = 'navbar-spacer';
+    spacer.style.display = 'none';
+    nav.parentNode.insertBefore(spacer, nav.nextSibling);
+
+    function setSpacerHeight() {
+      spacer.style.height = nav.getBoundingClientRect().height + 'px';
+    }
+
+    function updateNav() {
+      const atTop = window.scrollY === 0;
+      if (atTop) {
+        if (!nav.classList.contains('navbar-fixed-top')) {
+          nav.classList.add('navbar-fixed-top');
+          setSpacerHeight();
+          spacer.style.display = 'block';
+        }
+      } else {
+        if (nav.classList.contains('navbar-fixed-top')) {
+          nav.classList.remove('navbar-fixed-top');
+          spacer.style.display = 'none';
+        }
+      }
+    }
+
+    // Run on load, scroll, and resize
+    window.addEventListener('scroll', updateNav, { passive: true });
+    window.addEventListener('resize', () => {
+      if (nav.classList.contains('navbar-fixed-top')) setSpacerHeight();
+    });
+    updateNav();
+  })();
+</script>
 
     </body>
 </html>
+
 
 
 
