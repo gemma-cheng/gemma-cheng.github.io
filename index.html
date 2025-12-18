@@ -594,47 +594,26 @@ document.addEventListener("DOMContentLoaded", function () {
     window.addEventListener("resize", setInitialScroll);
 });
 
-	(function () {
-    const nav = document.querySelector('nav.navbar');
-    if (!nav) return;
+  (function () {
+    const navInner = document.querySelector('.navbar .container');
+    if (!navInner) return;
 
-    // Insert a spacer after the navbar to avoid content jump
-    const spacer = document.createElement('div');
-    spacer.className = 'navbar-spacer';
-    spacer.style.display = 'none';
-    nav.parentNode.insertBefore(spacer, nav.nextSibling);
-
-    function setSpacerHeight() {
-      spacer.style.height = nav.getBoundingClientRect().height + 'px';
-    }
-
-    function updateNav() {
-      const atTop = window.scrollY === 0;
-      if (atTop) {
-        if (!nav.classList.contains('navbar-fixed-top')) {
-          nav.classList.add('navbar-fixed-top');
-          setSpacerHeight();
-          spacer.style.display = 'block';
-        }
+    function updateShadow() {
+      if (window.scrollY === 0) {
+        navInner.classList.add('no-shadow-top');
       } else {
-        if (nav.classList.contains('navbar-fixed-top')) {
-          nav.classList.remove('navbar-fixed-top');
-          spacer.style.display = 'none';
-        }
+        navInner.classList.remove('no-shadow-top');
       }
     }
 
-    // Run on load, scroll, and resize
-    window.addEventListener('scroll', updateNav, { passive: true });
-    window.addEventListener('resize', () => {
-      if (nav.classList.contains('navbar-fixed-top')) setSpacerHeight();
-    });
-    updateNav();
+    window.addEventListener('scroll', updateShadow, { passive: true });
+    window.addEventListener('load', updateShadow);
   })();
 </script>
 
     </body>
 </html>
+
 
 
 
