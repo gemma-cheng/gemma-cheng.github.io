@@ -85,9 +85,10 @@ body {
 
 .about-bg { background: var(--white-color) !important; }
 .featured-bg { background: var(--section-bg-color) !important; }
-.papers-bg { background: var(--white-color) !important; }
-.talks-bg { background: var(--section-bg-color) !important; }
-.coauthors-bg { background: var(--white-color) !important; }
+.research-bg { background: var(--white-color) !important; }
+.papers-bg { background: var(--section-bg-color) !important; }
+.talks-bg { background: var(--white-color) !important; }
+.coauthors-bg { background: var(--section-bg-color) !important; }
 
 /*---------------------------------------
   TYPOGRAPHY               
@@ -1252,6 +1253,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
