@@ -313,6 +313,10 @@ strong {
 	background-color: var(--secondary-color);
 }
 
+#section_2 .about-thumb .custom-btn {
+  align-self: center;
+}
+
 /*---------------------------------------
   NAVIGATION              
 -----------------------------------------*/
@@ -1345,3 +1349,4 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
