@@ -54,6 +54,17 @@ body {
     font-family: var(--body-font-family); 
 }
 
+.section-divider {
+  height: 64px;
+  background: linear-gradient(
+    to bottom,
+    var(--white-color) 0%,
+    var(--section-bg-color) 100%
+  );
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
 
 /*---------------------------------------
   TYPOGRAPHY               
@@ -1353,6 +1364,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
