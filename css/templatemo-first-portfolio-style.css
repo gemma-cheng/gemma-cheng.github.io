@@ -351,7 +351,7 @@ strong {
 }
 
 .navbar {
-  background: white-color;
+  background: var(--white-color);
   position: absolute;
   z-index: 9;
   right: 0;
@@ -490,11 +490,16 @@ strong {
   left: 0;
   right: 0;
   z-index: 1030;
+  background: var(--white-color);
 }
 
-/* Spacer to prevent layout jump when navbar is fixed */
 .navbar-spacer {
   height: 0; /* will be set by JS */
+}
+
+.is-sticky,
+.is-sticky .navbar .container {
+  background: var(--white-color);
 }
 
 /*-------------------------------
@@ -1362,5 +1367,6 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
