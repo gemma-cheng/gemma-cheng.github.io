@@ -54,16 +54,33 @@ body {
     font-family: var(--body-font-family); 
 }
 
+/* Generic gradient divider (block-level, full width) */
 .section-divider {
+  display: block;
   height: 64px;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.divider-white-to-section {
   background: linear-gradient(
     to bottom,
     var(--white-color) 0%,
     var(--section-bg-color) 100%
   );
-  border: 0;
-  padding: 0;
-  margin: 0;
+}
+
+.divider-section-to-white {
+  background: linear-gradient(
+    to bottom,
+    var(--section-bg-color) 0%,
+    var(--white-color) 100%
+  );
+}
+
+.section-divider-wrapper {
+  width: 100%;
 }
 
 /*---------------------------------------
@@ -1364,6 +1381,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
