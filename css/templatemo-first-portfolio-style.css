@@ -362,7 +362,7 @@ strong {
 }
 
 .navbar {
-  background: var(--section-bg-color);
+  background: none;
   position: absolute;
   z-index: 9;
   right: 0;
@@ -1364,6 +1364,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
