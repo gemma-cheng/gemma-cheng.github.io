@@ -1416,14 +1416,13 @@ strong {
 }
 
 
-
-
-.profile-title,              /* About info box header strip */
-.papers-info,                /* Papers card heading wrapper */
-.research-thumb .d-flex,     /* Research card heading row */
-.talks-info,                 /* Talks card heading wrapper */
-.coauthors-info,             /* Co-authors card heading wrapper */
-.projects-info {             /* Generic wrapper some cards use */
+.profile-title,                /* About info box header strip */
+.papers-info,                  /* Papers card heading wrapper */
+.research-thumb .d-flex,       /* Research card heading row */
+.talks-info,                   /* Talks card heading wrapper */
+.coauthors-info,               /* Co-authors card heading wrapper */
+.projects-info,                /* Generic title wrapper */
+.section-title-wrap {          /* Section headers */
   text-align: center !important;
 }
 
@@ -1443,18 +1442,64 @@ strong {
   display: inline-block;
   margin-left: auto !important;
   margin-right: auto !important;
+  margin-top: 0 !important;
   align-self: center;
 }
 
 .button-row,
-.talks-btn-row {
+.talks-btn-row,
+.papers-btn-row,
+.research-btn-row,
+.coauthors-btn-row,
+.about-btn-row {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   column-gap: 6px;
   row-gap: 6px;
+  margin: 6px 0;
 }
 
-.section-title-wrap {
-  text-align: center;
+.profile-thumb > a.custom-btn,
+.profile-thumb > a.custom-border-btn,
+.research-thumb > a.custom-btn,
+.research-thumb > a.custom-border-btn,
+.papers-thumb > a.custom-btn,
+.papers-thumb > a.custom-border-btn,
+.talks-thumb > a.custom-btn,
+.talks-thumb > a.custom-border-btn,
+.coauthors-thumb > a.custom-btn,
+.coauthors-thumb > a.custom-border-btn,
+.projects-thumb > a.custom-btn,
+.projects-thumb > a.custom-border-btn {
+  display: inline-block;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+@media (min-width: 768px) {
+  .custom-btn,
+  .custom-border-btn {
+    padding: 6px 14px;
+    font-size: 0.95rem;
+  }
+}
+
+.talks-thumb a.image,
+.papers-thumb a.image,
+.research-thumb a.image,
+.coauthors-thumb a.image,
+.projects-thumb a.image {
+  display: block;
+  margin-top: 8px;
+}
+
+.talks-thumb img,
+.papers-thumb img,
+.research-thumb img,
+.coauthors-thumb img,
+.projects-thumb img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
