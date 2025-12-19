@@ -20,7 +20,7 @@ https://templatemo.com/tm-578-first-portfolio
   --pink-border-color:                 #ffafcc; /* button & table outlines */
   --blue-border-color:                 #afb2ff; /* button & table outlines */
   --featured-border-color:        #7c009e; /* not sure where this colour is */
-  --new-color:     		  #ffe8f1; /* table alternate rows (pink) */
+  --new-color:     		  #e8e8ff; /* table alternate rows (blue) */
 
   --test-color:                   #feffc2; /* text colour */
 
@@ -602,7 +602,7 @@ strong {
   ABOUT              
 -----------------------------------------*/
 .profile-thumb {
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--blue-border-color);
   border-radius: var(--border-radius-medium);
   position: relative;
   overflow: hidden;
@@ -610,13 +610,13 @@ strong {
 
 .profile-title {
   background: var(--new-color);
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--blue-border-color);
   padding: 15px 30px;
 }
 
 .profile-small-title {
-  border-right: 1px solid var(--secondary-color);
-  color: var(--secondary-color);
+  border-right: 1px solid var(--blue-border-color);
+  color: var(--dark-color);
   font-weight: var(--font-weight-bold);
   min-width: 140px;
   margin-right: 10px;
@@ -1252,6 +1252,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
