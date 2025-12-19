@@ -1416,13 +1416,12 @@ strong {
 }
 
 
-.profile-title,                /* About info box header strip */
-.papers-info,                  /* Papers card heading wrapper */
-.research-thumb .d-flex,       /* Research card heading row */
-.talks-info,                   /* Talks card heading wrapper */
-.coauthors-info,               /* Co-authors card heading wrapper */
-.projects-info,                /* Generic title wrapper */
-.section-title-wrap {          /* Section headers */
+.profile-thumb,
+.research-thumb,
+.papers-thumb,
+.talks-thumb,
+.coauthors-thumb,
+.projects-thumb {
   text-align: center !important;
 }
 
@@ -1443,7 +1442,7 @@ strong {
   margin-left: auto !important;
   margin-right: auto !important;
   margin-top: 0 !important;
-  align-self: center;
+  align-self: center !important;
 }
 
 .button-row,
@@ -1495,4 +1494,5 @@ strong {
   width: 100%;
   height: auto;
 }
+
 
