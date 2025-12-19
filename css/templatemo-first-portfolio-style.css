@@ -667,8 +667,8 @@ strong {
   RESEARCH              
 -----------------------------------------*/
 .research-thumb {
-  background: var(--white-color);
-  border: 2px solid var(--secondary-color);
+  background: var(--section-bg-color);
+  border: 2px solid var(--pink-border-color);
   border-radius: var(--border-radius-medium);
   box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
   position: relative;
@@ -698,8 +698,8 @@ strong {
   PAPERS              
 -----------------------------------------*/
 .papers-thumb {
-  background: var(--section-bg-color);
-  border: 2px solid var(--pink-border-color);
+  background: var(--white-color);
+  border: 2px solid var(--blue-border-color);
   border-radius: var(--border-radius-medium);
   box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
   position: relative;
@@ -729,8 +729,8 @@ strong {
   TALKS              
 -----------------------------------------*/
 .talks-thumb {
-  background: var(--white-color);
-  border: 2px solid var(--blue-border-color);
+  background: var(--section-bg-color);
+  border: 2px solid var(--pink-border-color);
   border-radius: var(--border-radius-medium);
   box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
   position: relative;
@@ -760,8 +760,8 @@ strong {
   CO-AUTHORS              
 -----------------------------------------*/
 .coauthors-thumb {
-  background: var(--section-bg-color);
-  border: 2px solid var(--pink-border-color);
+  background: var(--white-color);
+  border: 2px solid var(--blue-border-color);
   border-radius: var(--border-radius-medium);
   box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
   position: relative;
@@ -1120,7 +1120,7 @@ strong {
 
 /* Carousel Section Width */
 #section_5 {
-    background-color: var(--white-color);
+    background-color: var(--section-bg-color);
     max-width: 1320px;
     margin-left: auto;
     margin-right: auto;
@@ -1130,7 +1130,7 @@ strong {
 
 /* Carousel Outer Wrapper */
 .scroll-container-with-buttons {
-    background-color: var(--white-color);
+    background-color: var(--section-bg-color);
     position: relative;
     width: 100%;
     max-width: 1320px;
@@ -1154,7 +1154,7 @@ strong {
     justify-content: center;
     cursor: pointer;
     font-size: 1.6rem;
-    color: var(--dark-color);
+    color: var(--pink-border-color);
     z-index: 10;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     transition: all 0.3s;
@@ -1163,7 +1163,7 @@ strong {
 .scroll-button-left { left: -100px; }  /* Place outside the content area */
 .scroll-button-right { right: -100px; } /* Place outside the content area */
 .scroll-button:hover {
-    background: var(--dark-color);
+    background: var(--pink-border-color);
     color: var(--white-color);
 }
 
@@ -1192,6 +1192,7 @@ strong {
 
 /* Carousel Item (Column) */
 .conference-scroll-item {
+    background-color: var(--section-bg-color);
     flex: 0 0 auto;
     box-sizing: border-box;
     min-width: 280px;
@@ -1253,6 +1254,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
