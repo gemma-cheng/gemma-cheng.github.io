@@ -870,8 +870,8 @@ strong {
 #section_5 {
   background: var(--blue) !important;
   width: 100%;
-  max-width: none;        /* remove the 1320px cap */
-  margin: 0;              /* no centering on the section itself */
+  max-width: none;
+  margin: 0;
   padding-top: 75px;
   padding-bottom: 75px;
 }
@@ -1323,7 +1323,6 @@ strong {
 
 /* Carousel Item (Column) */
 .conference-scroll-item {
-    background-color: var(--blue-box);
     flex: 0 0 auto;
     box-sizing: border-box;
     min-width: 280px;
@@ -1385,6 +1384,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
