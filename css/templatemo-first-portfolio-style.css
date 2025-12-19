@@ -28,6 +28,18 @@ https://templatemo.com/tm-578-first-portfolio
   --purple:                       #f9f0ff;
   --blue:                         #f0f9ff;
   --green:                        #f0fff7;
+  --yellow-box: 				  #fffbaf;
+  --orange-box:                   #ffe6af;
+  --pink-box:                     #ffafdc;
+  --purple-box:                   #ecafff;
+  --blue-box:                     #afc2ff;
+  --green-box:                    #afffdf;
+  --yellow-txt: 				  #ffe147;
+  --orange-txt:                   #ffc340;
+  --pink-txt:                     #ffafcc;
+  --purple-txt:                   #a80bd9;
+  --blue-txt:                     #1140d6;
+  --green-txt:                    #00c476;
 
   --test-color:                   #feffc2; /* test colour */
 
@@ -70,19 +82,43 @@ body {
   margin: 0;
 }
 
-.divider-white-to-section {
+.yellow-to-orange {
   background: linear-gradient(
     to bottom,
-    var(--white-color) 0%,
-    var(--section-bg-color) 100%
+    var(--yellow) 0%,
+    var(--orange) 100%
   );
 }
 
-.divider-section-to-white {
+.orange-to-pink {
   background: linear-gradient(
     to bottom,
-    var(--section-bg-color) 0%,
-    var(--white-color) 100%
+    var(--orange) 0%,
+    var(--pink) 100%
+  );
+}
+
+.pink-to-purple {
+  background: linear-gradient(
+    to bottom,
+    var(--pink) 0%,
+    var(--purple) 100%
+  );
+}
+
+.purple-to-blue {
+  background: linear-gradient(
+    to bottom,
+    var(--purple) 0%,
+    var(--blue) 100%
+  );
+}
+
+.blue-to-green {
+  background: linear-gradient(
+    to bottom,
+    var(--blue) 0%,
+    var(--green) 100%
   );
 }
 
@@ -98,8 +134,19 @@ body {
 .talks-bg { background: var(--blue) !important; }
 .coauthors-bg { background: var(--green) !important; }
 
-.heading-pink .section-title-wrap { background: var(--secondary-color); }
-.heading-blue .section-title-wrap { background: var(--secondary-blue-color); }
+.heading-yellow .section-title-wrap { background: var(--yellow-txt); }
+.heading-orange .section-title-wrap { background: var(--orange-txt); }
+.heading-pink .section-title-wrap { background: var(--pink-txt); }
+.heading-purple .section-title-wrap { background: var(--purple-txt); }
+.heading-blue .section-title-wrap { background: var(--blue-txt); }
+.heading-green .section-title-wrap { background: var(--green-txt); }
+
+.box-yellow .section-title-wrap { background: var(--yellow-box); }
+.box-orange .section-title-wrap { background: var(--orange-box); }
+.box-pink .section-title-wrap { background: var(--pink-box); }
+.box-purple .section-title-wrap { background: var(--purple-box); }
+.box-blue .section-title-wrap { background: var(--blue-box); }
+.box-green .section-title-wrap { background: var(--green-box); }
 
 /*---------------------------------------
   TYPOGRAPHY               
@@ -1318,6 +1365,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
