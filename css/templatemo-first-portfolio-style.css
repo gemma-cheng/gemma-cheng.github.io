@@ -1454,9 +1454,9 @@ strong {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  column-gap: 6px;
-  row-gap: 6px;
-  margin: 6px 0;
+  column-gap: 5px;
+  row-gap: 5px;
+  margin: 5px 0;
 }
 
 .profile-thumb > a.custom-btn,
@@ -1482,7 +1482,7 @@ strong {
 .coauthors-thumb a.image,
 .projects-thumb a.image {
   display: block;
-  margin-top: 8px;
+  margin-top: 5px;
 }
 
 .talks-thumb img,
@@ -1494,5 +1494,6 @@ strong {
   width: 100%;
   height: auto;
 }
+
 
 
