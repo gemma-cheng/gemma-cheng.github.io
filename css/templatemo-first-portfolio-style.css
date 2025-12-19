@@ -13,8 +13,8 @@ https://templatemo.com/tm-578-first-portfolio
 :root {
   --white-color:                  #f4f5ff; /* main background (blue pale) */
   --primary-color:                #2ee63d; /* let's begin button */
-  --secondary-color:              #ffafcc; /* bottom half swirl & heading boxes (pink dark) */
-  --section-bg-color:             #fff0f6; /* info section background (pink pale) */
+  --secondary-color:              #ffafcc; /* half swirl & heading boxes (pink dark) */
+  --section-bg-color:             #fff0f6; /* section background (pink pale) */
   --dark-color:                   #424242; /* headings (grey dark) */
   --p-color:                      #000000; /* paragraph text colour (black) */
   --pink-border-color:                 #ffafcc; /* button & table outlines */
@@ -652,15 +652,15 @@ strong {
 }
 
 .featured-text {
-  color: var(--secondary-color);
+  color: var(--dark-color);
 }
 
 .featured-border-bottom {
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--blue-border-color);
 }
 
 .featured-border-start {
-  border-left: 1px solid var(--border-color);
+  border-left: 1px solid var(--blue-border-color);
 }
 
 /*---------------------------------------
@@ -1121,7 +1121,7 @@ strong {
 /* Carousel Section Width */
 #section_5 {
     background-color: var(--white-color);
-    max-width: 1320px; /* Make this wider than .container if you want! */
+    max-width: 1320px;
     margin-left: auto;
     margin-right: auto;
     padding-top: 75px;
@@ -1132,10 +1132,10 @@ strong {
 .scroll-container-with-buttons {
     position: relative;
     width: 100%;
-    max-width: 1320px; /* Match #section_5 for full width */
+    max-width: 1320px;
     margin: 0 auto;
     box-sizing: border-box;
-    padding: 0; /* No horizontal padding here */
+    padding: 0;
 }
 
 /* Carousel Arrows */
@@ -1159,8 +1159,8 @@ strong {
     transition: all 0.3s;
     outline: none;
 }
-.scroll-button-left { left: -60px; }  /* Place outside the content area */
-.scroll-button-right { right: -60px; } /* Place outside the content area */
+.scroll-button-left { left: -100px; }  /* Place outside the content area */
+.scroll-button-right { right: -100px; } /* Place outside the content area */
 .scroll-button:hover {
     background: var(--secondary-color);
     color: var(--white-color);
@@ -1172,7 +1172,6 @@ strong {
     -webkit-overflow-scrolling: touch;
     padding-top: 30px;
     padding-bottom: 30px;
-    /* Remove horizontal padding! */
     padding-left: 0;
     padding-right: 0;
     scrollbar-width: none;
@@ -1197,7 +1196,7 @@ strong {
     min-width: 280px;
     padding-left: 15px;
     padding-right: 15px;
-    width: 400px; /* Adjust as needed for your design */
+    width: 400px;
     max-width: 400px;
 }
 
@@ -1253,6 +1252,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
