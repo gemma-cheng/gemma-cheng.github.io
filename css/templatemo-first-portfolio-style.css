@@ -11,7 +11,7 @@ https://templatemo.com/tm-578-first-portfolio
   CUSTOM PROPERTIES ( VARIABLES )             
 -----------------------------------------*/
 :root {
-  --white-color:                  #fef0ff; /* main background (blue pale) */
+  --white-color:                  #f2e6fa; /* main background (blue pale) */
   --primary-color:                #2ee63d; /* let's begin button */
   --secondary-color:              #ffafcc; /* half swirl & heading boxes (pink dark) */
   --secondary-blue-color:         #b0afff; /* half swirl & heading boxes (blue dark) */
@@ -1312,6 +1312,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
