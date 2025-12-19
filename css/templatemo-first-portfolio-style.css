@@ -1477,14 +1477,6 @@ strong {
   margin-right: auto !important;
 }
 
-@media (min-width: 768px) {
-  .custom-btn,
-  .custom-border-btn {
-    padding: 6px 14px;
-    font-size: 0.95rem;
-  }
-}
-
 .talks-thumb a.image,
 .papers-thumb a.image,
 .research-thumb a.image,
@@ -1503,3 +1495,4 @@ strong {
   width: 100%;
   height: auto;
 }
+
