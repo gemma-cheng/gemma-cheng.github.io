@@ -406,19 +406,39 @@ strong {
 	background-color: var(--secondary-color);
 }
 
-.btn-pink {
-  background: var(--secondary-color) !important;
-  border-color: var(--secondary-color) !important;
+.btn-yellow {
+  background: var(--yellow-txt) !important;
+  border-color: var(--yellow-txt) !important;
   color: var(--white-color) !important;
 }
-.btn-pink:hover {
+.btn-yellow:hover {
+  background: var(--dark-color) !important;
+  border-color: var(--dark-color) !important;
+}
+
+.btn-orange {
+  background: var(--orange-txt) !important;
+  border-color: var(--orange-txt) !important;
+  color: var(--white-color) !important;
+}
+.btn-orange:hover {
+  background: var(--dark-color) !important;
+  border-color: var(--dark-color) !important;
+}
+
+.btn-purple {
+  background: var(--purple-txt) !important;
+  border-color: var(--purple-txt) !important;
+  color: var(--white-color) !important;
+}
+.btn-purple:hover {
   background: var(--dark-color) !important;
   border-color: var(--dark-color) !important;
 }
 
 .btn-blue {
-  background: var(--secondary-blue-color) !important;
-  border-color: var(--secondary-blue-color) !important;
+  background: var(--blue-txt) !important;
+  border-color: var(--blue-txt) !important;
   color: var(--white-color) !important;
 }
 .btn-blue:hover {
@@ -426,16 +446,16 @@ strong {
   border-color: var(--dark-color) !important;
 }
 
-/* outline variant */
-.btn-blue-outline {
-  background: transparent !important;
-  border-color: var(--secondary-blue-color) !important;
-  color: var(--secondary-blue-color) !important;
-}
-.btn-blue-outline:hover {
-  background: var(--secondary-blue-color) !important;
+.btn-green {
+  background: var(--green-txt) !important;
+  border-color: var(--green-txt) !important;
   color: var(--white-color) !important;
 }
+.btn-green:hover {
+  background: var(--dark-color) !important;
+  border-color: var(--dark-color) !important;
+}
+
 
 /*---------------------------------------
   NAVIGATION              
@@ -687,20 +707,20 @@ strong {
   ABOUT              
 -----------------------------------------*/
 .profile-thumb {
-  border: 1px solid var(--blue-border-color);
+  border: 1px solid var(--orange-txt);
   border-radius: var(--border-radius-medium);
   position: relative;
   overflow: hidden;
 }
 
 .profile-title {
-  background: var(--new-color);
-  border-bottom: 1px solid var(--blue-border-color);
+  background: var(--orange-txt);
+  border-bottom: 1px solid var(--orange-txt);
   padding: 15px 30px;
 }
 
 .profile-small-title {
-  border-right: 1px solid var(--blue-border-color);
+  border-right: 1px solid var(--orange-txt);
   color: var(--dark-color);
   font-weight: var(--font-weight-bold);
   min-width: 140px;
@@ -1365,6 +1385,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
