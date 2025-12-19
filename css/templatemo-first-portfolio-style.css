@@ -35,7 +35,7 @@ https://templatemo.com/tm-578-first-portfolio
   --blue-box:                     #e6eefc;
   --green-box:                    #e6fcf2;
   --yellow-txt: 				  #fff7af;
-  --orange-txt:                   #ffdfaf;
+  --orange-txt:                   #ffdba6;
   --pink-txt:                     #ffafeb;
   --purple-txt:                   #ecafff;
   --blue-txt:                     #afbfff;
@@ -1251,8 +1251,8 @@ strong {
 
 /* Carousel Section Width */
 #section_5 {
-    background-color: var(--section-bg-color);
-    max-width: 1320px;
+    background-color: var(--blue);
+    max-width: 1500;
     margin-left: auto;
     margin-right: auto;
     padding-top: 75px;
@@ -1261,7 +1261,7 @@ strong {
 
 /* Carousel Outer Wrapper */
 .scroll-container-with-buttons {
-    background-color: var(--section-bg-color);
+    background-color: var(--blue);
     position: relative;
     width: 100%;
     max-width: 1320px;
@@ -1285,7 +1285,7 @@ strong {
     justify-content: center;
     cursor: pointer;
     font-size: 1.6rem;
-    color: var(--pink-border-color);
+    color: var(--blue-txt);
     z-index: 10;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     transition: all 0.3s;
@@ -1294,7 +1294,7 @@ strong {
 .scroll-button-left { left: -100px; }  /* Place outside the content area */
 .scroll-button-right { right: -100px; } /* Place outside the content area */
 .scroll-button:hover {
-    background: var(--pink-border-color);
+    background: var(--blue-txt);
     color: var(--white-color);
 }
 
@@ -1323,7 +1323,7 @@ strong {
 
 /* Carousel Item (Column) */
 .conference-scroll-item {
-    background-color: var(--section-bg-color);
+    background-color: var(--blue-box);
     flex: 0 0 auto;
     box-sizing: border-box;
     min-width: 280px;
@@ -1385,6 +1385,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
