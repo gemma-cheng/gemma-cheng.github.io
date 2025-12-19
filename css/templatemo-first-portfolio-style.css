@@ -956,11 +956,12 @@ strong {
   padding-top: 50px;
   padding-bottom: 50px;
   text-align: center;
+  background: var(--green);
 }
 
 .site-footer-title {
   font-size: var(--menu-font-size);
-  color: var(--dark-color);
+  color: var(--green-txt);
   text-transform: uppercase;
 }
 
@@ -1413,4 +1414,5 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
