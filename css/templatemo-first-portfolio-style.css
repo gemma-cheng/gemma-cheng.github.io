@@ -1417,15 +1417,32 @@ strong {
 
 
 
+
+.profile-title,              /* About info box header strip */
+.papers-info,                /* Papers card heading wrapper */
+.research-thumb .d-flex,     /* Research card heading row */
+.talks-info,                 /* Talks card heading wrapper */
+.coauthors-info,             /* Co-authors card heading wrapper */
+.projects-info {             /* Generic wrapper some cards use */
+  text-align: center !important;
+}
+
+.profile-title h4,
+.papers-info h3,
+.research-thumb h3,
+.talks-info h3,
+.coauthors-info h3,
+.projects-info h3 {
+  text-align: center !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .custom-btn,
 .custom-border-btn {
   display: inline-block;
   margin-left: auto !important;
   margin-right: auto !important;
-}
-
-.custom-btn,
-.custom-border-btn {
   align-self: center;
 }
 
@@ -1434,6 +1451,10 @@ strong {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  column-gap: 5px;
-  row-gap: 5px;
+  column-gap: 6px;
+  row-gap: 6px;
+}
+
+.section-title-wrap {
+  text-align: center;
 }
