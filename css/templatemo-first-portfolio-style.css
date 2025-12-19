@@ -90,13 +90,13 @@ body {
   width: 100%;
 }
 
-.top-bg { background: var(--section-bg-color) !important; }
-.about-bg { background: var(--white-color) !important; }
-.featured-bg { background: var(--white-color) !important; }
-.research-bg { background: var(--section-bg-color) !important; }
-.papers-bg { background: var(--white-color) !important; }
-.talks-bg { background: var(--section-bg-color) !important; }
-.coauthors-bg { background: var(--white-color) !important; }
+.top-bg { background: var(--yellow) !important; }
+.about-bg { background: var(--orange) !important; }
+.featured-bg { background: var(--orange) !important; }
+.research-bg { background: var(--pink) !important; }
+.papers-bg { background: var(--purple) !important; }
+.talks-bg { background: var(--blue) !important; }
+.coauthors-bg { background: var(--green) !important; }
 
 .heading-pink .section-title-wrap { background: var(--secondary-color); }
 .heading-blue .section-title-wrap { background: var(--secondary-blue-color); }
@@ -1318,6 +1318,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
