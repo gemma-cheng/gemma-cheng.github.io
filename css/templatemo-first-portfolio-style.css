@@ -22,6 +22,12 @@ https://templatemo.com/tm-578-first-portfolio
   --blue-border-color:            #afb2ff; /* button & table outlines */
   --featured-border-color:        #7c009e; /* not sure where this colour is */
   --new-color:     		  		  #e3e3fa; /* table alternate rows */
+  --yellow: 					  #fffef0
+  --orange:                       #fff7f0
+  --pink:                         #fff0f9
+  --purple:                       #f9f0ff
+  --blue:                         #f0f9ff
+  --green:                        #f0fff7
 
   --test-color:                   #feffc2; /* test colour */
 
@@ -905,7 +911,7 @@ strong {
 .footer-menu-link:hover {
   background: var(--secondary-color);
   border-color: transparent;
-  color: var(--white-color);
+  color: var(--green);
 }
 
 
@@ -1312,6 +1318,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
