@@ -809,6 +809,11 @@ strong {
   margin-right: auto;
 }
 
+.fullwidth-pink {
+  background: var(--section-bg-color);
+  width: 100%;
+}
+
 /*---------------------------------------
   CO-AUTHORS              
 -----------------------------------------*/
@@ -1307,6 +1312,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
