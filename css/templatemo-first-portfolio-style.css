@@ -794,6 +794,12 @@ strong {
   margin-bottom: 5px;
 }
 
+#section_5,
+#section_5 .container,
+#section_5 .row {
+  background: var(--section-bg-color) !important;
+}
+
 /*---------------------------------------
   CO-AUTHORS              
 -----------------------------------------*/
@@ -1292,6 +1298,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
