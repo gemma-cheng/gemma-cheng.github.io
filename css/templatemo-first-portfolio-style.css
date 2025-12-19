@@ -1130,6 +1130,7 @@ strong {
 
 /* Carousel Outer Wrapper */
 .scroll-container-with-buttons {
+    background-color: var(--white-color);
     position: relative;
     width: 100%;
     max-width: 1320px;
@@ -1162,7 +1163,7 @@ strong {
 .scroll-button-left { left: -100px; }  /* Place outside the content area */
 .scroll-button-right { right: -100px; } /* Place outside the content area */
 .scroll-button:hover {
-    background: var(--secondary-color);
+    background: var(--dark-color);
     color: var(--white-color);
 }
 
@@ -1252,6 +1253,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
