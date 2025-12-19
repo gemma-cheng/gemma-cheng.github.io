@@ -1416,3 +1416,24 @@ strong {
 }
 
 
+
+.custom-btn,
+.custom-border-btn {
+  display: inline-block;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.custom-btn,
+.custom-border-btn {
+  align-self: center;
+}
+
+.button-row,
+.talks-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: 5px;
+  row-gap: 5px;
+}
