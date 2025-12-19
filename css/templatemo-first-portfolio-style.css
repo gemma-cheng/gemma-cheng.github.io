@@ -395,7 +395,7 @@ strong {
 
 .is-sticky,
 .is-sticky .navbar .container {
-  background: #fff0f6;
+  background: var(--secondary-color);
 }
 
 .is-sticky .navbar-brand,
@@ -1312,6 +1312,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
