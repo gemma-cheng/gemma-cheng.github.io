@@ -14,15 +14,16 @@ https://templatemo.com/tm-578-first-portfolio
   --white-color:                  #f4f5ff; /* main background (blue pale) */
   --primary-color:                #2ee63d; /* let's begin button */
   --secondary-color:              #ffafcc; /* half swirl & heading boxes (pink dark) */
+  --secondary-blue-color:         #b0afff; /* half swirl & heading boxes (blue dark) */
   --section-bg-color:             #fff0f6; /* section background (pink pale) */
   --dark-color:                   #424242; /* headings (grey dark) */
   --p-color:                      #000000; /* paragraph text colour (black) */
-  --pink-border-color:                 #ffafcc; /* button & table outlines */
-  --blue-border-color:                 #afb2ff; /* button & table outlines */
+  --pink-border-color:            #ffafcc; /* button & table outlines */
+  --blue-border-color:            #afb2ff; /* button & table outlines */
   --featured-border-color:        #7c009e; /* not sure where this colour is */
-  --new-color:     		  #e8e8ff; /* table alternate rows (blue) */
+  --new-color:     		  		  #e3e3fa; /* table alternate rows */
 
-  --test-color:                   #feffc2; /* text colour */
+  --test-color:                   #feffc2; /* test colour */
 
 
   --body-font-family:             'DM Sans', sans-serif;
@@ -89,6 +90,9 @@ body {
 .papers-bg { background: var(--white-color) !important; }
 .talks-bg { background: var(--section-bg-color) !important; }
 .coauthors-bg { background: var(--white-color) !important; }
+
+.heading-pink .section-title-wrap { background: var(--secondary-color); }
+.heading-blue .section-title-wrap { background: var(--secondary-blue-color); }
 
 /*---------------------------------------
   TYPOGRAPHY               
@@ -1254,6 +1258,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
