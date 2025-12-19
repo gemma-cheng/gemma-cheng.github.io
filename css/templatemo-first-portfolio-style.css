@@ -888,8 +888,8 @@ strong {
 }
 
 #section_5 .talks-thumb .custom-border-btn {
-  margin-right: 10px;
-  margin-bottom: 10px;
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
 #section_5 .talks-thumb {
@@ -900,14 +900,14 @@ strong {
 #section_5 .talks-thumb .button-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 10px;
-  margin-top: 8px;
-  margin-bottom: 12px;
+  gap: 5px 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 #section_5 .talks-thumb a.image {
   display: block;
-  margin-top: 8px;
+  margin-top: 5px;
 }
 
 #section_5 .talks-thumb img {
@@ -1413,49 +1413,4 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
