@@ -353,6 +353,32 @@ strong {
 	background-color: var(--secondary-color);
 }
 
+.theme-pink .custom-btn,
+.theme-pink .custom-border-btn {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+  color: var(--white-color);
+}
+.theme-pink .custom-btn:hover,
+.theme-pink .custom-border-btn:hover {
+  background: var(--dark-color);
+  border-color: var(--dark-color);
+  color: var(--white-color);
+}
+
+.theme-blue .custom-btn,
+.theme-blue .custom-border-btn {
+  background: var(--secondary-blue-color);
+  border-color: var(--secondary-blue-color);
+  color: var(--white-color);
+}
+.theme-blue .custom-btn:hover,
+.theme-blue .custom-border-btn:hover {
+  background: var(--dark-color);
+  border-color: var(--dark-color);
+  color: var(--white-color);
+}
+
 
 /*---------------------------------------
   NAVIGATION              
@@ -698,6 +724,7 @@ strong {
 
 .research-pad {
   margin-bottom: 40px;
+  background: var(--section-bg-color);
 }
 
 
@@ -1261,6 +1288,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
