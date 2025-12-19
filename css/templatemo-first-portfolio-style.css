@@ -887,6 +887,11 @@ strong {
   width: 100%;
 }
 
+#section_5 .talks-thumb .custom-border-btn {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
 /*---------------------------------------
   CO-AUTHORS              
 -----------------------------------------*/
@@ -1384,6 +1389,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
