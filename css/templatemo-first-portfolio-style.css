@@ -33,13 +33,13 @@ https://templatemo.com/tm-578-first-portfolio
   --pink-box:                     #ffccf1;
   --purple-box:                   #f3ccff;
   --blue-box:                     #ccdaff;
-  --green-box:                    #ccffec;
+  --green-box:                    #baf5df;
   --yellow-txt: 				  #fff7af;
   --orange-txt:                   #ffdfaf;
   --pink-txt:                     #ffafeb;
   --purple-txt:                   #ecafff;
   --blue-txt:                     #afbfff;
-  --green-txt:                    #afffe3;
+  --green-txt:                    #78d6b7;
 
   --test-color:                   #feffc2; /* test colour */
 
@@ -891,7 +891,7 @@ strong {
   CO-AUTHORS              
 -----------------------------------------*/
 .coauthors-thumb {
-  background: var(--green);
+  background: var(--green-box);
   border: 2px solid var(--green-txt);
   border-radius: var(--border-radius-medium);
   box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
@@ -1385,6 +1385,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
