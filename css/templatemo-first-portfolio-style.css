@@ -84,6 +84,7 @@ body {
   width: 100%;
 }
 
+.top-bg { background: var(--section-bg-color) !important; }
 .about-bg { background: var(--white-color) !important; }
 .featured-bg { background: var(--white-color) !important; }
 .research-bg { background: var(--section-bg-color) !important; }
@@ -228,11 +229,11 @@ strong {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  background: none repeat scroll 0 0 var(--white-color);
+  background: none repeat scroll 0 0 var(--section-bg-color);
 }
 
 .spinner {
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-radius: var(--border-radius-small);
   position: relative;
 }
@@ -352,9 +353,6 @@ strong {
 	background-color: var(--secondary-color);
 }
 
-#section_2 .about-thumb .custom-btn {
-  align-self: center;
-}
 
 /*---------------------------------------
   NAVIGATION              
@@ -697,6 +695,11 @@ strong {
   text-transform: uppercase;
   margin-bottom: 5px;
 }
+
+.research-pad {
+  margin-bottom: 40px;
+}
+
 
 /*---------------------------------------
   PAPERS              
@@ -1258,6 +1261,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
