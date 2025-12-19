@@ -761,19 +761,19 @@ strong {
 }
 
 .featured-border-bottom {
-  border-bottom: 1px solid var(--blue-border-color);
+  border-bottom: 1px solid var(--orange-txt);
 }
 
 .featured-border-start {
-  border-left: 1px solid var(--blue-border-color);
+  border-left: 1px solid var(--orange-txt);
 }
 
 /*---------------------------------------
   RESEARCH              
 -----------------------------------------*/
 .research-thumb {
-  background: var(--section-bg-color);
-  border: 2px solid var(--pink-border-color);
+  background: var(--pink-box);
+  border: 2px solid var(--pink-txt);
   border-radius: var(--border-radius-medium);
   box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
   position: relative;
@@ -784,7 +784,7 @@ strong {
 }
 
 .research-thumb:hover {
-  border-color: var(--secondary-color);
+  border-color: var(--pink-txt);
 }
 
 .research-title {
@@ -794,14 +794,14 @@ strong {
 .research-tag {
   font-size: var(--menu-font-size);
   font-weight: var(--font-weight-medium);
-  color: var(--secondary-color);
+  color: var(--pink-txt);
   text-transform: uppercase;
   margin-bottom: 5px;
 }
 
 .research-pad {
   padding-bottom: 40px;
-  background: var(--section-bg-color);
+  background: var(--pink);
 }
 
 
@@ -809,8 +809,8 @@ strong {
   PAPERS              
 -----------------------------------------*/
 .papers-thumb {
-  background: var(--white-color);
-  border: 2px solid var(--blue-border-color);
+  background: var(--purple-box);
+  border: 2px solid var(--purple-txt);
   border-radius: var(--border-radius-medium);
   box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
   position: relative;
@@ -821,7 +821,7 @@ strong {
 }
 
 .papers-thumb:hover {
-  border-color: var(--secondary-color);
+  border-color: var(--purple-txt);
 }
 
 .papers-title {
@@ -831,7 +831,7 @@ strong {
 .papers-tag {
   font-size: var(--menu-font-size);
   font-weight: var(--font-weight-medium);
-  color: var(--secondary-color);
+  color: var(--purple-txt);
   text-transform: uppercase;
   margin-bottom: 5px;
 }
@@ -841,7 +841,7 @@ strong {
 -----------------------------------------*/
 .talks-thumb {
   background: var(--blue-box);
-  border: 2px solid var(--blue-border-color);
+  border: 2px solid var(--blue-txt);
   border-radius: var(--border-radius-medium);
   box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
   position: relative;
@@ -852,7 +852,7 @@ strong {
 }
 
 .talks-thumb:hover {
-  border-color: var(--secondary-color);
+  border-color: var(--blue-txt);
 }
 
 .talks-title {
@@ -862,7 +862,7 @@ strong {
 .talks-tag {
   font-size: var(--menu-font-size);
   font-weight: var(--font-weight-medium);
-  color: var(--secondary-color);
+  color: var(--blue-txt);
   text-transform: uppercase;
   margin-bottom: 5px;
 }
@@ -891,8 +891,8 @@ strong {
   CO-AUTHORS              
 -----------------------------------------*/
 .coauthors-thumb {
-  background: var(--white-color);
-  border: 2px solid var(--blue-border-color);
+  background: var(--green);
+  border: 2px solid var(--green-txt);
   border-radius: var(--border-radius-medium);
   box-shadow: 0 1rem 1rem rgba(0,0,0,.175);
   position: relative;
@@ -903,7 +903,7 @@ strong {
 }
 
 .coauthors-thumb:hover {
-  border-color: var(--secondary-color);
+  border-color: var(--green-txt);
 }
 
 .coauthors-title {
@@ -913,7 +913,7 @@ strong {
 .coauthors-tag {
   font-size: var(--menu-font-size);
   font-weight: var(--font-weight-medium);
-  color: var(--secondary-color);
+  color: var(--green-txt);
   text-transform: uppercase;
   margin-bottom: 5px;
 }
@@ -962,7 +962,7 @@ strong {
 }
 
 .footer-menu-link {
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--green-txt);
   border-radius: var(--border-radius-medium);
   font-size: var(--copyright-font-size);
   font-weight: var(--font-weight-medium);
@@ -976,9 +976,9 @@ strong {
 }
 
 .footer-menu-link:hover {
-  background: var(--secondary-color);
+  background: var(--green);
   border-color: transparent;
-  color: var(--green);
+  color: var(--green-txt);
 }
 
 
@@ -1385,6 +1385,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
