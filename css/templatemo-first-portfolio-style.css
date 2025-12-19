@@ -18,7 +18,7 @@ https://templatemo.com/tm-578-first-portfolio
   --dark-color:                   #424242; /* headings (grey dark) */
   --p-color:                      #000000; /* paragraph text colour (black) */
   --pink-border-color:                 #ffafcc; /* button & table outlines */
-  --blue-border-color:                 #ffafcc; /* button & table outlines */
+  --blue-border-color:                 #afb2ff; /* button & table outlines */
   --featured-border-color:        #7c009e; /* not sure where this colour is */
   --new-color:     		  #ffe8f1; /* table alternate rows (pink) */
 
@@ -1252,6 +1252,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
