@@ -84,7 +84,7 @@ body {
   width: 100%;
 }
 
-.about-bg { background: var(--section-bg-color) !important; }
+.about-bg { background: var(--white-color) !important; }
 .featured-bg { background: var(--white-color) !important; }
 .research-bg { background: var(--section-bg-color) !important; }
 .papers-bg { background: var(--white-color) !important; }
@@ -1258,6 +1258,7 @@ strong {
 }
 .conference-scroll-item .projects-thumb .projects-image {
 }
+
 
 
 
