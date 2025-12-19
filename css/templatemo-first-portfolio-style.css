@@ -746,6 +746,13 @@ strong {
   padding-left: 20px;
 }
 
+.about-thumb .flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 
 /*---------------------------------------
   FEATURED              
@@ -1494,6 +1501,7 @@ strong {
   width: 100%;
   height: auto;
 }
+
 
 
 
