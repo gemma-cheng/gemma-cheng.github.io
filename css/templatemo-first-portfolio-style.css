@@ -67,7 +67,10 @@ https://templatemo.com/tm-578-first-portfolio
   --font-weight-normal:           400;
   --font-weight-medium:           500;
   --font-weight-bold:             700;
+
+  --header-height: 110px;
 }
+
 
 body {
     background: var(--white-color);
@@ -488,6 +491,10 @@ strong {
 .is-sticky .navbar .custom-btn:hover {
   background: var(--secondary-color);
   color: var(--white-color);
+}
+
+section[id] {
+  scroll-margin-top: var(--header-height);
 }
 
 .navbar {
