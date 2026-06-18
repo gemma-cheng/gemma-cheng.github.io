@@ -1,110 +1,848 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Webite Under Maintenance</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="Gemma Cheng">
+
+        <title>Gemma Cheng</title>
+
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-icons.css" rel="stylesheet">
+        <link href="css/magnific-popup.css" rel="stylesheet">
+        <link href="css/templatemo-first-portfolio-style.css" rel="stylesheet">
+        <link rel="icon" type="image/png" href="images/icon.png" sizes="32x32">
+    </head>
+    
+    <body>
+
+        <section class="preloader">
+            <div class="spinner">
+                <span class="spinner-rotate"></span>    
+            </div>
+        </section>
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <a href="https://gemma-cheng.github.io/" class="navbar-brand mx-auto mx-lg-0">Gemma Cheng</a>
+
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-lg-5">
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="https://gemma-cheng.github.io/#aboutme">About Me</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="https://gemma-cheng.github.io/#research">Current Research</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="https://gemma-cheng.github.io/#mypapers">My Papers</a>
+                        </li>				
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="https://gemma-cheng.github.io/#talks">Talks & Conferences</a>
+                        </li>								
+                        <li class="nav-item">
+                            <a class="nav-link click-scroll" href="https://gemma-cheng.github.io/#coauthors">From My Co-Authors</a>
+                        </li>	
+                    </ul>
+                    <style>
+                    #filt{filter: invert(0%) sepia(100%) saturate(5500%) hue-rotate(260deg) brightness(68%) contrast(115%);}
+                    </style>
+
+                    <ul class="social-icon align-items-right">
+                        <li class="social-icon-item"><a href="https://bsky.app/profile/gemma-astro.bsky.social" class="social-icon-link"><img src="images/bsky.svg" alt="Bluesky" class="social-icon-img" /></a></li>
+                        <li class="social-icon-item"><a href="https://linkedin.com/in/gemmacheng" class="social-icon-link bi-linkedin"></a></li>
+                        <li class="social-icon-item"><a href="https://orcid.org/0009-0003-5234-0437" class="social-icon-link"><img src="images/orcid1.svg" alt="ORCID" class="social-icon-img" /></a></li>
+                        <li class="social-icon-item"><a href="https://ui.adsabs.harvard.edu/public-libraries/jNIAzrDiSlOg4TtGBiI5VQ" class="social-icon-link"><img src="images/ads.svg" alt="ADS" class="social-icon-img" /></a></li>
+                        <li class="social-icon-item"><a href="https://github.com/gemma-cheng" class="social-icon-link bi-github"></a></li>
+                    </ul>
+
+                    <div class="logo align-items-center d-none ms-auto">
+                        <a href="https://www.herts.ac.uk/research/centres/car" target="_blank"><img src="images/uh-car-dark-cmyk.svg" height=50></a>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <main>
+
+            <section class="hero d-flex justify-content-center align-items-center top-bg" id="section_1">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-7 col-12">
+                            <div class="hero-text">
+                                <div class="hero-title-wrap d-flex align-items-center mb-4">
+                                    <img src="images/Profile-Photo.jpg" class="avatar-image avatar-image-large img-fluid" alt="">
+
+                                    <h1 class="hero-title ms-3 mb-0">Hi, I'm Gemma!</h1>
+                                </div>
+
+                                <h2 class="mb-4">Astronomy PhD Student <br> at the University of Hertfordshire</h2>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-5 col-12 position-relative">
+                            <div class="hero-image-wrap"></div>
+                            <img src="images/IMG_2170-change.png" class="hero-image img-fluid" alt="">
+                        </div>
+
+                    </div>
+                </div>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#ffafcc" fill-opacity="1" d="M0,160L24,160C48,160,96,160,144,138.7C192,117,240,75,288,64C336,53,384,75,432,106.7C480,139,528,181,576,208C624,235,672,245,720,240C768,235,816,213,864,186.7C912,160,960,128,1008,133.3C1056,139,1104,181,1152,202.7C1200,224,1248,224,1296,197.3C1344,171,1392,117,1416,90.7L1440,64L1440,0L1416,0C1392,0,1344,0,1296,0C1248,0,1200,0,1152,0C1104,0,1056,0,1008,0C960,0,912,0,864,0C816,0,768,0,720,0C672,0,624,0,576,0C528,0,480,0,432,0C384,0,336,0,288,0C240,0,192,0,144,0C96,0,48,0,24,0L0,0Z"></path></svg>
+            </section>
+
+            <div class="section-divider-wrapper">
+              <div class="section-divider yellow-to-orange"></div>
+            </div>
+			
+            <section class="about about-padding about-bg heading-orange" id="aboutme">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-12">
+                            <img src="images/about.png" class="about-image img-fluid" alt="">
+                        </div>
+
+                        <div class="col-lg-6 col-12 mt-5 mt-lg-0">
+                            <div class="about-thumb">
+
+                                <div class="section-title-wrap d-flex justify-content-center">
+                                    <h2 class="text-white me-4 mb-0">About Me</h2>
+                                </div>
+
+                                <p style="margin-top: 30px;">Hi! I'm Gemma and I'm a final-year astronomy PhD student at the University of Hertfordshire. My PhD project is called "the exoplanet brown dwarf connection – ultracool companions to Gaia stars", and I've also done some work with the <a href="https://gucds.inaf.it" target="_blank">GUCDS</a> team. The main research area that I'm interested in is ultracool dwarfs, but I'm also interested in exoplanets (and always appreciate the pretty pictures of star-forming regions and galaxies!) I graduated from Hertfordshire with my undergraduate MPhys degree in 2022, with 1st Class Honours, and have stayed at Herts to continue my research journey!</p>
+                                <p>Besides astronomy, I love travelling, motorsport, my cat Beyblade and my cars (Toby, Bingo and Sprout). I studied at Oklahoma State University for a year during my undergraduate degree, and I'm excited to have the opportunity to attend conferences in new places!</p>
+                                <div class="flex-container">
+                                    <a href="files/GemmaCheng-CV.pdf" target="_blank" class="custom-btn custom-border-btn btn-orange">View CV</a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+			
+            <section class="featured section-padding featured-bg">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-lg-6 col-12">
+                            <div class="profile-thumb">
+                                <div class="profile-title">
+                                    <h4 class="mb-0">Information</h4>
+                                </div>
+
+                                <div class="profile-body">
+                                    <p>
+                                        <span class="profile-small-title">Name</span> 
+                                        <span>Gemma Cheng</span>
+                                    </p>
+
+                                    <p>
+                                        <span class="profile-small-title">Email</span> 
+                                        <span><a href="mailto:g.j.cheng@herts.ac.uk">g.j.cheng@herts.ac.uk</a></span>
+                                    </p>
+
+                                    <p style="margin-bottom: -10px;">
+                                        <span class="profile-small-title">Address</span>
+                                        <span>Centre for Astrophysics Research,</span>
+                                    </p>
+                                    <p style="margin-top: -10px; margin-bottom: 10px;">
+                                        <span class="profile-small-title"> </span>
+                                        <span>University of Hertfordshire, Hatfield, AL10 9AB</span>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-12 mt-5 mt-lg-0">
+                            <div class="about-thumb">
+                                <div class="row">
+                                    <div class="col-lg-6 col-6 featured-border-bottom py-2">
+                                        <strong class="featured-numbers">RAS</strong>
+
+                                        <p class="featured-text">Member</p>
+                                    </div>
+
+                                    <div class="col-lg-6 col-6 featured-border-start featured-border-bottom ps-5 py-2">
+                                        <strong class="featured-numbers">Final Yr</strong>
+
+                                        <p class="featured-text">PhD Student</p>
+                                    </div>
+
+                                    <div class="col-lg-6 col-6 pt-4">
+                                        <strong class="featured-numbers">1st Class</strong>
+
+                                        <p class="featured-text">MPhys Astrophysics (Hons)</p>
+                                    </div>
+
+                                    <div class="col-lg-6 col-6 featured-border-start ps-5 pt-4">
+                                        <strong class="featured-numbers">EAS</strong>
+
+                                        <p class="featured-text">Member</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="section-divider-wrapper">
+                <div class="section-divider orange-to-pink"></div>
+            </div>
+
+            <section class="research-interests research-padding research-bg heading-pink research-pad" id="research">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-10 col-12">
+                            <div class="section-title-wrap d-flex justify-content-center align-items-center mb-5">
+                                <h2 class="text-white mb-0">Current Research</h2>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-6 col-lg-4">
+                                  <div class="research-thumb">
+                                        <div class="d-flex flex-wrap align-items-center border-bottom mb-4 pb-3">
+                                            <h3 class="mb-0">T-Dwarf Companions to Gaia Primary Stars</h3>
+                                        </div>
+                                        <p>Finding T-dwarfs in wide binary systems with Gaia-detected stars to build a better picture of the physics of T-dwarfs.</p>
+                                  </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4">
+                              <div class="research-thumb">
+                                <div class="d-flex flex-wrap align-items-center border-bottom mb-4 pb-3">
+                                  <h3 class="mb-0">Candidate Halo T-Dwarfs</h3>
+                                </div>
+                                <p>Looking in the southern skies for potential halo T-dwarfs in the galactic cap regions.</p>
+                              </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 col-lg-4">
+                              <div class="research-thumb">
+                                <div class="d-flex flex-wrap align-items-center border-bottom mb-4 pb-3">
+                                  <h3 class="mb-0">WISE Deep Imaging</h3>
+                                </div>
+                                <p>Using deep WISE stacks to find new very-late-type brown dwarfs near the detection limit.</p>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+		
+            <div class="section-divider-wrapper">
+                <div class="section-divider pink-to-purple"></div>
+            </div>
+			
+            <section class="projects papers-padding papers-bg heading-purple" id="mypapers">
+                <div class="container">
+                    <div class="row justify-content-center">
+
+                        <div class="col-lg-10 col-12 mx-auto">
+                            <div class="section-title-wrap d-flex justify-content-center align-items-center mb-4">
+                                <h2 class="text-white ms-4 mb-0">My Papers</h2>
+                            </div>
+                        </div>
+                        
+                        <div class="col-12 text-center mb-2">
+                            <button id="viewToggleButton" class="custom-btn custom-border-btn btn-purple">
+                                View As List
+                            </button>
+                        </div>
+
+                        <div id="content-a" class="row justify-content-center">
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="papers-thumb">
+                                    <div class="papers-info">
+                                        <h3 class="papers-title">GUCDS VI: Spectral Types and Properties of 51 UCDs</h3>
+                                    </div>
+                                    <a href="https://ui.adsabs.harvard.edu/abs/2025MNRAS.538.3144C/abstract" target="_blank" class="custom-btn custom-border-btn btn-purple">View on ADS</a>
+                                    <p></p>
+                                    <a class="image">
+                                        <img src="images/gucds-vi.png" class="projects-image img-fluid" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="papers-thumb">
+                                    <div class="papers-info">
+                                        <h3 class="papers-title">Coming Soon...</h3>
+                                    </div>
+
+                                    <a class="image">
+                                        <img src="images/Screenshot.png" class="projects-image img-fluid" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="content-b" class="col-lg-10 col-12 mx-auto mt-3 toggle-section-hidden">
+                            <h3 class="papers-title mb-0">GUCDS VI: Spectral Types and Properties of 51 Ultracool Dwarfs</h3>
+                            <div class="row align-items-end gx-3"> 
+                                <div class="col-lg-10 col-12">
+                                    <p style="font-size: 20px;" class="mb-0"><strong>G. Cheng</strong>, H.R.A. Jones, R.L. Smart, F. Marocco, W.J. Cooper, A. Burgasser, J.C. Beamin, <br>D.J. Pinfield, J. Gagné, L. Moranta</p>
+                                    <p style="font-size: 20px;" class="mb-0"><i>2025, Monthly Notices of the Royal Astronomical Society, Volume 538, Issue 4, pp.3144-3176</i></p>
+                                </div>
+                        
+                                <div class="col-lg-2 col-12 text-lg-end">
+                                    <a href="https://ui.adsabs.harvard.edu/abs/2025MNRAS.538.3144C/abstract" target="_blank" class="custom-btn custom-border-btn btn-purple" style="margin-bottom: 5px;">View on ADS</a>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+			
+            <div class="section-divider-wrapper">
+              <div class="section-divider purple-to-blue"></div>
+            </div>
+			
+           <div class="fullwidth-bg">
+                <section class="projects talks-padding talks-bg heading-blue" id="talks">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10 col-12 mx-auto">
+                                <div class="section-title-wrap d-flex justify-content-center align-items-center mb-4">
+                                    <h2 class="text-white ms-4 mb-0">Talks & Conferences</h2>
+                                </div>
+                            </div>
+
+                            <div class="col-12 text-center mb-2">
+                                <button id="talksToggle" class="custom-btn custom-border-btn btn-blue">
+                                    View As List
+                                </button>
+                            </div>
+
+                            <div id="talks-a">			
+                                <div class="scroll-container-with-buttons">
+                                    <button class="scroll-button scroll-button-left" aria-label="Scroll left">
+                                        <i class="bi-chevron-left"></i>
+                                    </button>
+                                    <button class="scroll-button scroll-button-right" aria-label="Scroll right">
+                                        <i class="bi-chevron-right"></i>
+                                    </button>
+
+                                    <div id="conference-list-wrapper">
+                                        <div id="conference-list">
+                                            <div class="conference-scroll-item">
+                                                <div class="talks-thumb">
+                                                    <div class="talks-info">
+                                                        <h3 class="projects-title">Cool Stars 23</h3>
+                                                    </div>
+                                                    <a href="https://coolstars23.github.io/" target="_blank" class="custom-btn custom-border-btn btn-blue">Conference Website</a>
+                                                    <a href="https://zenodo.org/records/20181679" target="_blank" class="custom-btn custom-border-btn btn-blue">Poster</a>
+                                                    <p></p>
+                                                    <a class="image"><img src="images/CS23.png" class="projects-image img-fluid" alt=""></a>
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="conference-scroll-item">
+                                                <div class="talks-thumb">
+                                                    <div class="talks-info">
+                                                        <h3 class="projects-title">NAOC Student Seminar</h3>
+                                                    </div>
+                                                    <a href="files/NAOCpres.pdf" target="_blank" class="custom-btn custom-border-btn btn-blue">Slides</a>
+                                                    <p></p>
+                                                    <a class="image"><img src="images/NAOCtalk.png" class="projects-image img-fluid" alt=""></a>
+                                                </div>
+                                            </div>
+                                                
+                                            <div class="conference-scroll-item">
+                                                <div class="talks-thumb">
+                                                    <div class="talks-info">
+                                                        <h3 class="projects-title">EAS 2025</h3>
+                                                    </div>
+                                                    <a href="https://eas.unige.ch/EAS_meeting/" target="_blank" class="custom-btn custom-border-btn btn-blue">Conference Website</a>
+                                                    <a href="https://k-poster.kuoni-congress.info/eas-2025/poster/90E99BF5-8ECB-4EC3-BEA0-F574847B2111" target="_blank" class="custom-btn custom-border-btn btn-blue">Poster</a>
+                                                    <p></p>
+                                                    <a class="image"><img src="images/EAS2025.png" class="projects-image img-fluid" alt=""></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="conference-scroll-item">
+                                                <div class="talks-thumb">
+                                                    <div class="talks-info">
+                                                        <h3 class="projects-title">New Frontiers</h3>
+                                                    </div>
+                                                    <a href="https://sites.google.com/view/gradnetnewfrontiers" target="_blank" class="custom-btn custom-border-btn btn-blue">Conference Website</a>
+                                                    <a href="https://sites.google.com/view/gradnetnewfrontiers/home/student-talks#h.kfyjj7gug76z" target="_blank" class="custom-btn custom-border-btn btn-blue">Talk Abstract</a>
+                                                    <a href="https://drive.google.com/file/d/1EtRlJfKgqBY05025M8ljPLYFM-9MYF9z/view" target="_blank" class="custom-btn custom-border-btn btn-blue">Poster</a>
+                                                    <p></p>
+                                                    <a class="image"><img src="images/newfrontiers.png" class="projects-image img-fluid" alt=""></a>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="conference-scroll-item">
+                                                <div class="talks-thumb">
+                                                    <div class="talks-info">
+                                                        <h3 class="projects-title">Cool Stars 22</h3>
+                                                    </div>
+                                                    <a href="https://ui.adsabs.harvard.edu/abs/2024csss.confE..25C/abstract" target="_blank" class="custom-btn custom-border-btn btn-blue">View on ADS</a>
+                                                    <a href="https://coolstars22.github.io/" target="_blank" class="custom-btn custom-border-btn btn-blue">Conference Website</a>
+                                                    <a href="https://cs22splinterbuddysystem.github.io/" target="_blank" class="custom-btn custom-border-btn btn-blue">Splinter Session</a>
+                                                    <a href="https://www.youtube.com/watch?v=ykJSxBGXtsQ&t=2s" target="_blank" class="custom-btn custom-border-btn btn-blue">Recording</a>
+                                                    <p></p>
+                                                    <a class="image"><img src="images/cs22-talk.png" class="projects-image img-fluid" alt=""></a>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="conference-scroll-item">
+                                                <div class="talks-thumb">
+                                                    <div class="talks-info">
+                                                        <h3 class="projects-title">UH Lunch Talk</h3>
+                                                    </div>
+                                                    <a class="image"><img src="images/lunch-talk.png" class="projects-image img-fluid" alt=""></a>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="conference-scroll-item">
+                                                <div class="talks-thumb">
+                                                    <div class="talks-info">
+                                                        <h3 class="projects-title">NAM 2023</h3>
+                                                    </div>
+                                                    <a href="https://nam2023.org/" target="_blank" class="custom-btn custom-border-btn btn-blue">Conference Website</a>
+                                                    <p></p>
+                                                    <a class="image"><img src="images/nam2023-poster.png" class="projects-image img-fluid" alt=""></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="conference-scroll-item">
+                                                <div class="talks-thumb">
+                                                    <div class="talks-info">
+                                                        <h3 class="projects-title">The Imitation Game</h3>
+                                                    </div>
+                                                    <a href="https://sdasrc.wixsite.com/bridgingastronomy" target="_blank" class="custom-btn custom-border-btn btn-blue">Conference Website</a>
+                                                    <a href="https://drive.google.com/file/d/13TrSjFZSdxmC3D-zf-g6C8bSnqM12Sxh/view?usp=drive_link" target="_blank" class="custom-btn custom-border-btn btn-blue">Slides</a>
+                                                    <p></p>
+                                                    <a class="image"><img src="images/imitation-talk.png" class="projects-image img-fluid" alt=""></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="conference-scroll-item">
+                                                <div class="talks-thumb">
+                                                    <div class="talks-info">
+                                                        <h3 class="projects-title">UH Lunch Talk</h3>
+                                                    </div>
+                                                    <a class="image"><img src="images/lunch-talk1.png" class="projects-image img-fluid" alt=""></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="talks-b" class="toggle-section-hidden">
+
+                                <div class="col-lg-10 col-12 mx-auto mt-3">
+                                    <h3 class="papers-title mb-0">Cool Stars 23</h3>
+                                    <div style="float: right; max-width: 380px; text-align: right; margin-left: 20px;">
+                                        <div style="display: block;">
+                                            <a href="https://zenodo.org/records/20181679" target="_blank" class="custom-btn custom-border-btn btn-blue" style="display: inline-block; margin: 4px;">Poster</a>
+                                            <a href="https://coolstars23.github.io/" target="_blank" class="custom-btn custom-border-btn btn-blue" style="display: inline-block; margin: 4px;">Conference Website</a>
+                                        </div>
+                                    </div>
+                                    <div style="display: block;">
+                                        <p style="font-size: 20px; margin-bottom: 40px;"><i>10 New T-Dwarf Wide Companions to Gaia-Detected Primary Stars</i></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-10 col-12 mx-auto mt-3">
+                                    <h3 class="papers-title mb-0">NAOC Student Seminar</h3>
+                                    <div style="float: right; max-width: 380px; text-align: right; margin-left: 20px;">
+                                        <div style="display: block;">
+                                            <a href="files/NAOCpres.pdf" target="_blank" class="custom-btn custom-border-btn btn-blue" style="display: inline-block; margin: 4px;">View Slides</a>
+                                        </div>
+                                    </div>
+                                    <div style="display: block;">
+                                        <p style="font-size: 20px; margin-bottom: 40px;"><i>Classification and Characterisation of Ultracool Dwarfs</i></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-10 col-12 mx-auto mt-3">
+                                    <h3 class="papers-title mb-2">European Astronomical Society Annual Meeting 2025</h3>
+                                    <div style="float: right; max-width: 380px; text-align: right; margin-left: 20px;">
+                                        <div style="display: block;">
+                                            <a href="https://k-poster.kuoni-congress.info/eas-2025/poster/90E99BF5-8ECB-4EC3-BEA0-F574847B2111" target="_blank" class="custom-btn custom-border-btn btn-blue" style="display: inline-block; margin: 4px;">View Poster</a>
+                                            <a href="https://eas.unige.ch/EAS_meeting/" target="_blank" class="custom-btn custom-border-btn btn-blue" style="display: inline-block; margin: 4px;">Conference Website</a>
+                                        </div>
+                                    </div>
+                                    <div style="display: block;">
+                                        <p style="font-size: 20px; margin-bottom: 40px;"><i>Finding T-Dwarf Companions to Gaia Primary Stars</i></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-10 col-12 mx-auto mt-3">
+                                    <h3 class="papers-title mb-2">New Frontiers: a Student-Led GradNet Conference</h3>
+                                    <div style="float: right; max-width: 380px; text-align: right; margin-left: 20px;">
+                                        <div style="display: block;">
+                                            <a href="https://drive.google.com/file/d/1EtRlJfKgqBY05025M8ljPLYFM-9MYF9z/view" target="_blank" class="custom-btn  custom-border-btn  btn-blue" style="display: inline-block; margin: 4px; white-space: nowrap;">View Poster</a>
+                                            <a href="https://sites.google.com/view/gradnetnewfrontiers/home/student-talks#h.kfyjj7gug76z" target="_blank" class="custom-btn  custom-border-btn  btn-blue" style="display: inline-block; margin: 4px; white-space: nowrap;">Talk Abstract</a>
+                                            <a href="https://sites.google.com/view/gradnetnewfrontiers" target="_blank" class="custom-btn  custom-border-btn  btn-blue" style="display: inline-block; margin: 4px; white-space: nowrap;">Conference Website</a>
+                                        </div>
+                                    </div>
+                                    <div style="display: block;">
+                                        <p style="font-size: 20px;  margin-bottom: 80px;"><i>Finding T-Dwarf Companions to Gaia Primary Stars</i></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-10 col-12 mx-auto mt-3">
+                                    <h3 class="papers-title mb-2">Cool Stars 22</h3>
+                                    <div style="float: right; max-width: 380px; text-align: right; margin-left: 20px;">
+                                        <div style="display: block;">
+                                            <a href="https://ui.adsabs.harvard.edu/abs/2024csss.confE..25C/abstract" target="_blank" class="custom-btn custom-border-btn btn-blue" style="display: inline-block; margin: 4px;">View on ADS</a>
+                                            <a href="https://coolstars22.github.io/" target="_blank" class="custom-btn custom-border-btn btn-blue" style="display: inline-block; margin: 4px;">Conference Website</a>
+                                            <a href="https://cs22splinterbuddysystem.github.io/" target="_blank" class="custom-btn custom-border-btn btn-blue" style="display: inline-block; margin: 4px;">Splinter Session</a>
+                                            <a href="https://www.youtube.com/watch?v=ykJSxBGXtsQ&t=2s" target="_blank" class="custom-btn custom-border-btn btn-blue">Watch Recording</a>
+                                        </div>
+                                    </div>
+                                    <div style="display: block;">
+                                        <p style="font-size: 20px; margin-bottom: 80px;"><i>Finding T-Dwarf Companions to Gaia Primary Stars</i></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-10 col-12 mx-auto mt-3">
+                                    <h3 class="papers-title mb-0">University of Hertfordshire Lunch Talk</h3>
+                                    <div style="display: block;">
+                                        <p style="font-size: 20px; margin-bottom: 40px;"><i>Finding T-Dwarf Companions to Gaia Primary Stars</i></p>
+                                    </div>
+                                </div>
+                            
+                                <div class="col-lg-10 col-12 mx-auto mt-3">
+                                    <h3 class="papers-title mb-0">National Astronomy Meeting 2023</h3>
+                                    <div style="float: right; max-width: 380px; text-align: right; margin-left: 20px;">
+                                        <div style="display: block;">
+                                            <a href="https://nam2023.org/" target="_blank" class="custom-btn custom-border-btn btn-blue" style="display: inline-block; margin: 4px;">Conference Website</a>
+                                        </div>
+                                    </div>
+                                    <div style="display: block;">
+                                        <p style="font-size: 20px;  margin-bottom: 40px;"><i>Spectral Types and Properties of 51 Ultracool Dwarf Candidates</i></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-10 col-12 mx-auto mt-3">
+                                    <h3 class="papers-title mb-0">The Imitation Game: a Student-Led GradNet Conference</h3>
+                                    <div style="float: right; max-width: 380px; text-align: right; margin-left: 20px;">
+                                        <div style="display: block;">
+                                            <a href="https://sdasrc.wixsite.com/bridgingastronomy" target="_blank" class="custom-btn custom-border-btn btn-blue" style="display: inline-block; margin: 4px;">Conference Website</a>
+                                        </div>
+                                    </div>
+
+                                                                        <div style="display: block;">
+                                        <p style="font-size: 20px;  margin-bottom: 40px;"><i>Spectroscopic Classification of 50 Gaia Ultracool Dwarfs</i></p>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-10 col-12 mx-auto mt-3">
+                                    <h3 class="papers-title mb-0">University of Hertfordshire Lunch Talk</h3>
+                                    <div style="display: block;">
+                                        <p style="font-size: 20px; margin: 0;"><i>Spectroscopic Classification of 50 Gaia Ultracool Dwarfs</i></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+		
+            <div class="section-divider-wrapper">
+              <div class="section-divider blue-to-green"></div>
+            </div>
+	    
+            <section class="projects coauthors-padding coauthors-bg heading-green" id="coauthors">
+                <div class="container">
+                    <div class="row justify-content-center">
+
+                        <div class="col-lg-10 col-12 mx-auto">
+                            <div class="section-title-wrap d-flex justify-content-center align-items-center mb-4">
+                                <h2 class="text-white ms-4 mb-0">From My Co-Authors</h2>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="col-12 text-center mb-2">
+                            <button id="coauthorsToggle" class="custom-btn custom-border-btn btn-green">
+                                View As List
+                            </button>
+                        </div>
+                        
+                        <div id="coauthors-a" class="row justify-content-center">
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="coauthors-thumb">
+                                    <div class="coauthors-info">
+                                        <h3 class="projects-title">J1250+0455AB an ultracool binary in a hierarchical triple system</h3>
+                                    </div>
+                                    <a href="https://ui.adsabs.harvard.edu/abs/2025MNRAS.542..310B/abstract" target="_blank" class="custom-btn custom-border-btn btn-green">View on ADS</a>
+                                    <p></p>
+                                    <a class="image">
+                                        <img src="images/baig25.png" class="projects-image img-fluid" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="coauthors-thumb">
+                                    <div class="coauthors-info">
+                                        <h3 class="projects-title">Benchmark brown dwarfs - I. A blue M2 + T5 wide binary and a probable young M4 + [T7 + T8] hierarchical triple</h3>
+                                    </div>
+                                    <a href="https://ui.adsabs.harvard.edu/abs/2025MNRAS.542..656Z/abstract" target="_blank" class="custom-btn custom-border-btn btn-green">View on ADS</a>
+                                    <p></p>
+                                    <a class="image">
+                                        <img src="images/zhang25.png" class="projects-image img-fluid" alt="">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-md-6 col-12">
+                                <div class="coauthors-thumb">
+                                    <div class="coauthors-info">
+                                        <h3 class="projects-title">GUCDS V: the ultracool dwarf companion catalogue</h3>
+                                    </div>
+                                    <a href="https://ui.adsabs.harvard.edu/abs/2024MNRAS.533.3784B/abstract" target="_blank" class="custom-btn custom-border-btn btn-green">View on ADS</a>
+                                    <p></p>
+                                    <a class="image">
+                                        <img src="images/gucdsv.png" class="projects-image img-fluid" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="coauthors-b" class="toggle-section-hidden">
+                            <div class="col-lg-10 col-12 mx-auto mt-3">
+                                <h3 class="projects-title mb-0">J1250+0455AB an ultracool binary in a hierarchical triple system</h3>
+                                <div class="row align-items-end gx-3"> 
+                                    <div class="col-lg-10 col-12">
+                                        <p style="font-size: 20px;" class="mb-0">S. Baig, R.L. Smart, H.R.A. Jones, E. Pinna, A. Sozzetti, <strong>G. Cheng</strong>, F. Cusano, F. Rossi, <br>C. Plantet, G. Agapito</p>
+                                        <p style="font-size: 20px;" class="mb-0"><i>2025, Monthly Notices of the Royal Astronomical Society, Volume 542, Issue 1, pp. 310-321</i></p>
+                                    </div>
+                                    <div class="col-lg-2 col-12 text-lg-end">
+                                        <a href="https://ui.adsabs.harvard.edu/abs/2025MNRAS.542..310B/abstract" target="_blank" class="custom-btn custom-border-btn btn-green">View on ADS</a>
+                                    </div>  
+                                </div>
+                            </div>
+
+                            <div class="col-lg-10 col-12 mx-auto mt-3">
+                                <h3 class="projects-title mb-0">Benchmark brown dwarfs - I. A blue M2 + T5 wide binary and a probable young M4 + [T7 + T8] hierarchical triple</h3>
+                                <div class="row align-items-end gx-3"> 
+                                    <div class="col-lg-10 col-12">
+                                        <p style="font-size: 20px;" class="mb-0">Z. H. Zhang, F. Navarete, M.C. Gálvez-Ortiz, H.R.A. Jones, A.J. Burgasser, P. Cruz, F. Marocco, <br>N. Lodieu , Y. Shan, B. Gauza, R. Raddi, M.R. Huang, R.L. Smart, S. Baig, <strong>G. Cheng</strong>, D.J. Pinfield</p>
+                                        <p style="font-size: 20px;" class="mb-0"><i>2025, Monthly Notices of the Royal Astronomical Society, Volume 542, Issue 2, pp. 656-668</i></p>
+                                    </div>
+                                    <div class="col-lg-2 col-12 text-lg-end">
+                                        <a href="https://ui.adsabs.harvard.edu/abs/2025MNRAS.542..656Z/abstract" target="_blank" class="custom-btn custom-border-btn btn-green">View on ADS</a>
+                                    </div>  
+                                </div>
+                            </div>
+
+                            <div class="col-lg-10 col-12 mx-auto mt-3">
+                                <h3 class="projects-title mb-0">GUCDS V: the ultracool dwarf companion catalogue</h3>
+                                <div class="row align-items-end gx-3"> 
+                                    <div class="col-lg-10 col-12">
+                                        <p style="font-size: 20px;" class="mb-0">S. Baig, R.L. Smart, H.R.A. Jones, J. Gagné, D.J. Pinfield, <strong>G. Cheng</strong>, L. Moranta</p>
+                                        <p style="font-size: 20px;" class="mb-0"><i>2024, Monthly Notices of the Royal Astronomical Society, Volume 533, Issue 4, pp.3784-3810</i></p>
+                                    </div>
+                                    <div class="col-lg-2 col-12 text-lg-end">
+                                        <a href="https://ui.adsabs.harvard.edu/abs/2024MNRAS.533.3784B/abstract" target="_blank" class="custom-btn custom-border-btn btn-green">View on ADS</a>
+                                    </div>  
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-12">
+                        <div class="copyright-text-wrap">
+                            <p class="mb-0">
+                                <span class="copyright-text"><a href="mailto:g.j.cheng@herts.ac.uk">Gemma Cheng</a></span>
+                                <span class="copyright-text">Last updated: 13 April 2026</span>
+                                <span class="copyright-text">Design adapted from: <a href="https://templatemo.com" target="_blank">TemplateMo</a></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.sticky.js"></script>
+        <script src="js/click-scroll.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/magnific-popup-options.js"></script>
+        <script src="js/custom.js"></script>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const scrollContainer = document.getElementById("conference-list-wrapper");
+            const conferenceList = document.getElementById("conference-list");
+            const scrollLeftBtn = document.querySelector(".scroll-button-left");
+            const scrollRightBtn = document.querySelector(".scroll-button-right");
+
+            const visibleCount = 3;
+            const originalItems = Array.from(conferenceList.children);
+
+            // Clone first N and last N items for seamless looping
+            for (let i = 0; i < visibleCount; i++) {
+                conferenceList.appendChild(originalItems[i].cloneNode(true));
+                conferenceList.insertBefore(
+                    originalItems[originalItems.length - 1 - i].cloneNode(true),
+                    conferenceList.firstChild
+                );
+            }
+
+            function getItemWidth() {
+                return conferenceList.children[visibleCount].getBoundingClientRect().width;
+            }
+
+            function setInitialScroll() {
+                scrollContainer.scrollLeft = getItemWidth() * visibleCount;
+            }
+
+            setInitialScroll();
+
+            // Helper: Instantly jump to a scroll position (no animation)
+            function jumpTo(pos) {
+                scrollContainer.style.scrollBehavior = "auto";
+                scrollContainer.scrollLeft = pos;
+                setTimeout(() => {
+                    scrollContainer.style.scrollBehavior = "smooth";
+                }, 20);
+            }
+
+            // Helper: Wait for scroll animation to finish
+            function waitForScrollEnd(callback) {
+                let lastPos = null;
+                let sameCount = 0;
+                function check() {
+                    const current = scrollContainer.scrollLeft;
+                    if (current === lastPos) {
+                        sameCount++;
+                        if (sameCount > 2) { // Wait for 2 frames of no movement
+                            callback();
+                            return;
+                        }
+                    } else {
+                        sameCount = 0;
+                        lastPos = current;
+                    }
+                    requestAnimationFrame(check);
+                }
+                requestAnimationFrame(check);
+            }
+
+            // Button navigation with seamless jump after animation
+            scrollRightBtn.addEventListener("click", function () {
+                scrollContainer.scrollBy({ left: getItemWidth(), behavior: "smooth" });
+                waitForScrollEnd(() => {
+                    const itemWidth = getItemWidth();
+                    const totalItems = conferenceList.children.length;
+                    const maxScroll = itemWidth * (totalItems - visibleCount);
+                    const rightLimit = maxScroll - itemWidth * 0.5;
+                    if (scrollContainer.scrollLeft >= rightLimit) {
+                        jumpTo(itemWidth * visibleCount);
+                    }
+                });
+            });
+            scrollLeftBtn.addEventListener("click", function () {
+                scrollContainer.scrollBy({ left: -getItemWidth(), behavior: "smooth" });
+                waitForScrollEnd(() => {
+                    const itemWidth = getItemWidth();
+                    const leftLimit = itemWidth * 0.5;
+                    if (scrollContainer.scrollLeft <= leftLimit) {
+                        jumpTo(itemWidth * (originalItems.length + visibleCount));
+                    }
+                });
+            });
+
+            // For user scroll (drag/trackpad), use debounced scroll event as before
+            let scrollTimeout = null;
+            scrollContainer.addEventListener("scroll", function () {
+                if (scrollTimeout) clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const itemWidth = getItemWidth();
+                    const totalItems = conferenceList.children.length;
+                    const maxScroll = itemWidth * (totalItems - visibleCount);
+                    const leftLimit = itemWidth * 0.5;
+                    const rightLimit = maxScroll - itemWidth * 0.5;
+
+                    if (scrollContainer.scrollLeft <= leftLimit) {
+                        jumpTo(itemWidth * (originalItems.length + visibleCount));
+                    }
+                    else if (scrollContainer.scrollLeft >= rightLimit) {
+                        jumpTo(itemWidth * visibleCount);
+                    }
+                }, 1000);
+            });
+
+            // On resize, reset scroll position
+            window.addEventListener("resize", setInitialScroll);
+        });
+
+          (function () {
+            const navInner = document.querySelector('.navbar .container');
+            if (!navInner) return;
+
+            function updateShadow() {
+              if (window.scrollY === 0) {
+                navInner.classList.add('no-shadow-top');
+              } else {
+                navInner.classList.remove('no-shadow-top');
+              }
+            }
+
+            window.addEventListener('scroll', updateShadow, { passive: true });
+            window.addEventListener('load', updateShadow);
+          })();
+
+            function enableToggle(btnId, sectAId, sectBId) {
+            const btn = document.getElementById(btnId);
+            const sectA = document.getElementById(sectAId);
+            const sectB = document.getElementById(sectBId);
+
+            if (btn && sectA && sectB) {
+                btn.addEventListener('click', function() {
+                    sectA.classList.toggle('toggle-section-hidden');
+                    sectB.classList.toggle('toggle-section-hidden');
+
+                    if (sectA.classList.contains('toggle-section-hidden')) {
+                        btn.textContent = "View As Grid";
+                    } else {
+                        btn.textContent = "View As List";
+                    }
+                });
+            }
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: #f8fafc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+        enableToggle('viewToggleButton', 'content-a', 'content-b'); // Papers
+        enableToggle('talksToggle', 'talks-a', 'talks-b');           // Talks
+        enableToggle('coauthorsToggle', 'coauthors-a', 'coauthors-b'); // Co-authors
+        </script>
 
-        .container {
-            text-align: center;
-            max-width: 550px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 40px 30px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .icon {
-            font-size: 64px;
-            margin-bottom: 20px;
-            display: inline-block;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            letter-spacing: -0.5px;
-            background: linear-gradient(to right, #38bdf8, #818cf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p {
-            color: #94a3b8;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .progress-container {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 100px;
-            height: 8px;
-            width: 100%;
-            margin-bottom: 40px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            background: linear-gradient(to right, #38bdf8, #818cf8);
-            height: 100%;
-            width: 70%;
-            border-radius: 100px;
-            animation: load 1.5s ease-out forwards;
-        }
-
-        .footer {
-            font-size: 0.875rem;
-            color: #64748b;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 20px;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @keyframes load {
-            from { width: 0%; }
-        }
-
-        @media (max-width: 480px) {
-            h1 { font-size: 2rem; }
-            p { font-size: 1rem; }
-            .container { padding: 30px 20px; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <div class="icon">🛠️</div>
-        <h1>Under Construction</h1>
-        <p>Having a little makeover, come back later! :)</p>
-        
-    </div>
-
-</body>
+    </body>
 </html>
